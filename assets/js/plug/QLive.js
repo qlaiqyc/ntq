@@ -68,33 +68,22 @@
 		
 		execuFun.pub = function(){
 			
-			 
-			
 		};
 		
 		execuFun.hash	 = function(){
 			//传统方式 原理  拼接一个a标签  执行点击事件  类似 push 一条记录到 history 中 ,然后删除a标签
 			
-			
-			
-			
-			
 		};
 		execuFun.history = function(){
 			//H5 模式 ，原理， 动态修改History 栈中对象， push  replace 
-			
 		};
 		
 		
 		execuFun.page = function(){
 			// page 栈队处理			
-			
 		};
 		
-		
 		execuFun[data.type]();
-		
-		
 	};
 	
 	
@@ -153,7 +142,7 @@
 				
 				$main.find("div."+id).show();
 			}else{
-				var url = "js/"+FunUtil.common4hash({"type":"js","key":id+".js"});
+				var url = "./"+FunUtil.common4hash({"type":"js","key":id+".js"});
 				FunUtil.common4GetJS({"url":url,"callback":function(data){
 					
 					Router = FunUtil.Global.Page;

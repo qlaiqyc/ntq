@@ -6,11 +6,7 @@ PageInfo.register({"type":"Pub","info":(function(){
 	PageObj.fun = function(){
 		
 		
-		$("div.qlive-foot a").unbind("click").bind("click",function(){
-			$("div.qlive-foot a").removeClass("active");	
-			$(this).addClass("active");
-		});
-		
+		 
 		
 		
 	};
@@ -29,9 +25,9 @@ PageInfo.register({"type":"Router","info":(function(){
 	 	flag:"hash"
 	 };
 	
-	Router.list.push("/components/user");
-	Router.list.push("/components/detail");
-	Router.list.push("/components/article");
+	Router.list.push("/assets/js/components/add");
+	Router.list.push("/assets/js/components/detail");
+	Router.list.push("/assets/js/components/article");
 	
 	return Router;
 })()});
