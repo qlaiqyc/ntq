@@ -23,7 +23,15 @@
    	 		}
    	 		
    	 		
-   	 		
+   	 			
+   	 		#qlive-body{
+   	 			
+   	 			    display: table;
+    width: 1210px;
+    margin: 0 auto;
+    margin-top: 40px;
+   	 			
+   	 		}
    	 	</style>
 	</head>
 	<body>
@@ -31,9 +39,158 @@
 		 <div id="qlive-body">
 		 	
 		 	 
-		 	
+		 		<form class="layui-form" action="">
+  
+
+  
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label class="layui-form-label">招聘电话</label>
+      <div class="layui-input-inline">
+        <input type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">企业名称</label>
+      <div class="layui-input-inline">
+        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">招聘人姓名</label>
+      <div class="layui-input-inline">
+        <input type="tel" name="url" lay-verify="url" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label class="layui-form-label">企业类型</label>
+      <div class="layui-input-inline">
+        <input type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">公司福利</label>
+      <div class="layui-input-inline">
+        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">融资情况</label>
+      <div class="layui-input-inline">
+        <input type="tel" name="url" lay-verify="url" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+  </div>
+  
+  
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label class="layui-form-label">简历投递邮箱</label>
+      <div class="layui-input-inline">
+        <input type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">招聘人微信</label>
+      <div class="layui-input-inline">
+        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">招聘类型</label>
+      <div class="layui-input-inline">
+        <input type="tel" name="url" lay-verify="url" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+  </div>
+  
+  
+  <div class="layui-form-item">
+    <label class="layui-form-label">公司地址</label>
+    <div class="layui-input-block">
+      <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+    </div>
+  </div>
+  
+  
+   <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">公司简介</label>
+    <div class="layui-input-block">
+      <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+    </div>
+  </div>
+  
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label class="layui-form-label">有效期</label>
+      <div class="layui-input-inline">
+        <input type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">职位名称</label>
+      <div class="layui-input-inline">
+        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">薪水范围</label>
+      <div class="layui-input-inline">
+        <input type="tel" name="url" lay-verify="url" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label class="layui-form-label">职位性质</label>
+      <div class="layui-input-inline">
+        <input type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">学历要求</label>
+      <div class="layui-input-inline">
+        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">工作经验</label>
+      <div class="layui-input-inline">
+        <input type="tel" name="url" lay-verify="url" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+  </div>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">工作地址</label>
+    <div class="layui-input-block">
+      <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+    </div>
+  </div>
+
+ <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">职责描述</label>
+    <div class="layui-input-block">
+      <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+    </div>
+  </div>
+   <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">任职要求</label>
+    <div class="layui-input-block">
+      <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+    </div>
+  </div>
+
+</form>
+ 	
 		 </div>
-		
 		
  
 </div>
@@ -42,8 +199,8 @@
 	</body>
 	<script type="text/javascript" src="assets/js/plug/jquery-3.2.0.js" ></script>
 	<script src="assets/js/plug/layui/lay/dest/layui.all.js"></script>
-	<script type="text/javascript" src="assets/js/plug/QLive.js" ></script>
+	<!--<script type="text/javascript" src="assets/js/plug/QLive.js" ></script>
 	<script type="text/javascript" src="assets/js/main.js" ></script>
-	
+	-->
 
 </html>
