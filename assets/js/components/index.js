@@ -32,7 +32,7 @@ PageInfo.register({"type":"Obj","info":function(){
 		buf.push('    </div>')
 		buf.push('    <div class="layui-form-item">')
 		buf.push('        <div class="layui-inline">')
-		buf.push('            <label class="layui-form-label">多规则验证</label>')
+		buf.push('            <label class="layui-form-label">输入验证码</label>')
 		buf.push('            <div class="layui-input-inline">')
 		buf.push('                <input type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input">')
 		buf.push('            </div>')
@@ -87,8 +87,8 @@ PageInfo.register({"type":"Obj","info":function(){
 					        skin: 'layui-layer-demo',
 					        closeBtn: false,
 					        area: '400px',
-					        anim: 2,
-					        shadeClose: false,
+					        anim: 1,
+					        shadeClose: true,
 					        content: HtmUtil.common4input()
 					      });
 					      
