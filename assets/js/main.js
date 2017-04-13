@@ -25,8 +25,8 @@ PageInfo.register({"type":"Router","info":(function(){
 	 	flag:"hash"
 	 };
 	
+	 Router.list.push("/assets/js/components/index");
 	Router.list.push("/assets/js/components/add");
-	Router.list.push("/assets/js/components/detail");
 	Router.list.push("/assets/js/components/article");
 	
 	return Router;
