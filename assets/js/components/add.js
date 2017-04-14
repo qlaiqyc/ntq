@@ -194,13 +194,13 @@ PageInfo.register({"type":"Obj","info":function(){
 		buf.push('    <div class="layui-form-item layui-form-text">                                                                                                                                            ' );
 		buf.push('        <label class="layui-form-label">职责描述</label>                                                                                                                                     ' );
 		buf.push('        <div class="layui-input-block">                                                                                                                                                      ' );
-		buf.push('            <textarea class="layui-textarea layui-hide" name="content" lay-verify="content" id="LAY_demo_editor1"></textarea>                                                                                                               ' );
+		buf.push('            <textarea placeholder="请输入内容" class="layui-textarea"></textarea>                                                                                                               ' );
 		buf.push('        </div>                                                                                                                                                                               ' );
 		buf.push('    </div>                                                                                                                                                                                   ' );
 		buf.push('    <div class="layui-form-item layui-form-text">                                                                                                                                            ' );
 		buf.push('        <label class="layui-form-label">任职要求</label>                                                                                                                                     ' );
 		buf.push('        <div class="layui-input-block">                                                                                                                                                      ' );
-		buf.push('           <textarea class="layui-textarea layui-hide" name="content" lay-verify="content" id="LAY_demo_editor2"></textarea>                                                                                                         ' );
+		buf.push('           <textarea placeholder="请输入内容" class="layui-textarea"></textarea>                                                                                                         ' );
 		buf.push('        </div>                                                                                                                                                                               ' );
 		buf.push('    </div>                                                                                                                                                                                   ' );
 		buf.push('                                                                                                                                                                                             ' );
@@ -251,8 +251,7 @@ PageInfo.register({"type":"Obj","info":function(){
 					  ,laydate = layui.laydate;
 					 	form.render('');
 					  //创建一个编辑器
-					  var editIndex1 = layedit.build('LAY_demo_editor1');
-					  var editIndex2 = layedit.build('LAY_demo_editor2');
+					 
 					  //自定义验证规则
 					  form.verify({
 					    title: function(value){

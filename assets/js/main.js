@@ -25,9 +25,10 @@ PageInfo.register({"type":"Router","info":(function(){
 	 	flag:"hash"
 	 };
 	
-	 Router.list.push("/assets/js/components/index");
+	Router.list.push("/assets/js/components/job");
 	Router.list.push("/assets/js/components/add");
-	Router.list.push("/assets/js/components/article");
+	Router.list.push("/assets/js/components/index");
+ 
 	
 	return Router;
 })()});

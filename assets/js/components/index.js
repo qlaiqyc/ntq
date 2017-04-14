@@ -83,13 +83,11 @@ PageInfo.register({"type":"Obj","info":function(){
 			    	
 			    	$has.unbind("click").bind("click",function(){
 			    		  layer.open({
+					        
 					        type: 1,
-					        skin: 'layui-layer-demo',
-					        closeBtn: false,
-					        area: '400px',
-					        anim: 1,
-					        shadeClose: true,
-					        content: HtmUtil.common4input()
+							skin: 'layui-layer-demo',
+							area: ['420px', '240px'], //宽高
+							content: HtmUtil.common4input()
 					      });
 					      
 					      
