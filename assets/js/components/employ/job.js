@@ -7,8 +7,8 @@ PageInfo.register({"type":"Obj","info":function(){
 		
 		var buf = [];
 	 	
-		buf.push('<div id="ntq-job">');
-		buf.push('	<div id="ntq-job-search" class="common-box">                                                                                                                             ');
+		buf.push('<div id="ntq-employ-job">');
+		buf.push('	<div id="ntq-employ-job-search" class="common-box">                                                                                                                             ');
 		buf.push('		<form class="layui-form" action="">                                                                                                                                  ');
 		buf.push('			<div class="layui-form-item">                                                                                                                                    ');
 		buf.push('				<div class="layui-inline"> <label class="layui-form-label">职位名称</label>                                                                                  ');
@@ -31,7 +31,7 @@ PageInfo.register({"type":"Obj","info":function(){
 		buf.push('			</div>                                                                                                                                                           ');
 		buf.push('		</form>                                                                                                                                                              ');
 		buf.push('	</div>                                                                                                                                                                   ');
-		buf.push('	<div id="ntq-job-condition" class="common-box"> <button class="layui-btn layui-btn-normal" id="ntq-job-condition-add">新增职位</button> <button class="layui-btn layui-btn-warm" id="ntq-job-condition-update">重新发布</button>    <button class="layui-btn layui-btn-danger">下架</button>');
+		buf.push('	<div id="ntq-employ-job-condition" class="common-box"> <button class="layui-btn layui-btn-normal" id="ntq-employ-job-condition-add">新增职位</button> <button class="layui-btn layui-btn-warm" id="ntq-employ-job-condition-update">重新发布</button>    <button class="layui-btn layui-btn-danger">下架</button>');
 		buf.push('		<table class="layui-table" lay-even="" lay-skin="row">                                                                                                               ');
 		buf.push('			<colgroup>                                                                                                                                                       ');
 		buf.push('				<col width="150">                                                                                                                                            ');
@@ -53,7 +53,7 @@ PageInfo.register({"type":"Obj","info":function(){
 		buf.push('					<td>1000110</td>                                                                                                                                         ');
 		buf.push('					<td>高级JAVA</td>                                                                                                                                        ');
 		buf.push('					<td>20170301</td>                                                                                                                                        ');
-		buf.push('					<td><span class="ntq-job-condition-num">20</span></td>                                                                                                   ');
+		buf.push('					<td><span class="ntq-employ-job-condition-num">20</span></td>                                                                                                   ');
 		buf.push('					<td>待审核</td>                                                                                                                                          ');
 		buf.push('					<td>20170301</td>                                                                                                                                        ');
 		buf.push('				</tr>                                                                                                                                                        ');
@@ -61,7 +61,7 @@ PageInfo.register({"type":"Obj","info":function(){
 		buf.push('					<td>1000110</td>                                                                                                                                         ');
 		buf.push('					<td>高级JAVA</td>                                                                                                                                        ');
 		buf.push('					<td>20170301</td>                                                                                                                                        ');
-		buf.push('					<td><span class="ntq-job-condition-num">20</span></td>                                                                                                   ');
+		buf.push('					<td><span class="ntq-employ-job-condition-num">20</span></td>                                                                                                   ');
 		buf.push('					<td>待审核</td>                                                                                                                                          ');
 		buf.push('					<td>20170301</td>                                                                                                                                        ');
 		buf.push('				</tr>                                                                                                                                                        ');
@@ -69,7 +69,7 @@ PageInfo.register({"type":"Obj","info":function(){
 		buf.push('					<td>1000110</td>                                                                                                                                         ');
 		buf.push('					<td>高级JAVA</td>                                                                                                                                        ');
 		buf.push('					<td>20170301</td>                                                                                                                                        ');
-		buf.push('					<td><span class="ntq-job-condition-num">20</span></td>                                                                                                   ');
+		buf.push('					<td><span class="ntq-employ-job-condition-num">20</span></td>                                                                                                   ');
 		buf.push('					<td>待审核</td>                                                                                                                                          ');
 		buf.push('					<td>20170301</td>                                                                                                                                        ');
 		buf.push('				</tr>                                                                                                                                                        ');
@@ -77,7 +77,7 @@ PageInfo.register({"type":"Obj","info":function(){
 		buf.push('					<td>1000110</td>                                                                                                                                         ');
 		buf.push('					<td>高级JAVA</td>                                                                                                                                        ');
 		buf.push('					<td>20170301</td>                                                                                                                                        ');
-		buf.push('					<td><span class="ntq-job-condition-num">20</span></td>                                                                                                   ');
+		buf.push('					<td><span class="ntq-employ-job-condition-num">20</span></td>                                                                                                   ');
 		buf.push('					<td>待审核</td>                                                                                                                                          ');
 		buf.push('					<td>20170301</td>                                                                                                                                        ');
 		buf.push('				</tr>                                                                                                                                                        ');
@@ -85,13 +85,13 @@ PageInfo.register({"type":"Obj","info":function(){
 		buf.push('					<td>1000110</td>                                                                                                                                         ');
 		buf.push('					<td>高级JAVA</td>                                                                                                                                        ');
 		buf.push('					<td>20170301</td>                                                                                                                                        ');
-		buf.push('					<td><span class="ntq-job-condition-num">20</span></td>                                                                                                   ');
+		buf.push('					<td><span class="ntq-employ-job-condition-num">20</span></td>                                                                                                   ');
 		buf.push('					<td>待审核</td>                                                                                                                                          ');
 		buf.push('					<td>20170301</td>                                                                                                                                        ');
 		buf.push('				</tr>                                                                                                                                                        ');
 		buf.push('			</tbody>                                                                                                                                                         ');
 		buf.push('		</table>                                                                                                                                                             ');
-		buf.push('		<div id="ntq-job-condition-pag"></div>                                                                                                                               ');
+		buf.push('		<div id="ntq-employ-job-condition-pag"></div>                                                                                                                               ');
 		buf.push('	</div>                                                                                                                                                                   ');
 		buf.push('</div>																									');																																
 		 
@@ -101,7 +101,7 @@ PageInfo.register({"type":"Obj","info":function(){
 	
 	HtmUtil.common4num = function(){
 		var buf = [];
-		buf.push('<div id="ntq-job-num">');
+		buf.push('<div id="ntq-employ-job-num">');
 		
 		buf.push('<table class="layui-table" lay-even="" lay-skin="row">');
 		buf.push('	<thead>');
@@ -132,8 +132,10 @@ PageInfo.register({"type":"Obj","info":function(){
 	HtmUtil.common4update  = function(data){
 		
 		var buf = [];
-	 	buf.push('<div id="ntq-job-update">');
+	 	buf.push('<div id="ntq-employ-job-update">');
+	 	
 		buf.push('<form class="layui-form"  >');
+		if(data.type == "update") buf.push('<div class="layui-form-item"> <label class="layui-form-label">职位编号</label> <div class="layui-input-inline"> <input type="text" disabled="" name="title" lay-verify="title" autocomplete="off" value="100010" class="layui-input"></div> </div>');
 		buf.push('    <div class="layui-form-item">                                                                                                                                                            ' );
 		buf.push('        <div class="layui-inline">                                                                                                                                                           ' );
 		buf.push('            <label class="layui-form-label">有效期</label>                                                                                                                                   ' );
@@ -275,7 +277,7 @@ PageInfo.register({"type":"Obj","info":function(){
 					 	form.render('');
 					 	
 					 	laypage({
-							cont: 'ntq-job-condition-pag',
+							cont: 'ntq-employ-job-condition-pag',
 							pages: 100,
 							skip: true
 						});
@@ -283,7 +285,7 @@ PageInfo.register({"type":"Obj","info":function(){
 					});
 					
 					
-					$("span.ntq-job-condition-num").unbind("click").bind("click",function(){
+					$("span.ntq-employ-job-condition-num").unbind("click").bind("click",function(){
 		
 						layer.open({
 							type: 1,
@@ -293,12 +295,12 @@ PageInfo.register({"type":"Obj","info":function(){
 						});
 					});
 					
-					$("#ntq-job-condition-update").unbind("click").bind("click",function(){
+					$("#ntq-employ-job-condition-update").unbind("click").bind("click",function(){
 		
 					  layer.open({
 						  type: 1,
 						  content: HtmUtil.common4update({"type":"update"}),
-						  area: ['1080px', '511px'], //宽高
+						  area: ['1080px', '578px'], //宽高
 						  skin: 'layui-layer-demo',
 						  success:function(){
 						  	
@@ -319,7 +321,7 @@ PageInfo.register({"type":"Obj","info":function(){
 					});
 					
 					
-					$("#ntq-job-condition-add").unbind("click").bind("click",function(){
+					$("#ntq-employ-job-condition-add").unbind("click").bind("click",function(){
 		
 					  layer.open({
 						  type: 1,
@@ -343,7 +345,6 @@ PageInfo.register({"type":"Obj","info":function(){
 						});
 						 
 					});
-					
 					
 			    },
 			    hide(){

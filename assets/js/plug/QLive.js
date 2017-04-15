@@ -45,6 +45,28 @@
 		return execuFun[data.type]();
 	};
 	
+	
+	FunUtil.common4openUrl   = function(data){
+ 		var url = data.url;
+ 		
+ 		if(!String.HasText(url))  return;
+  		
+ 		var id4url = "until-open-url";
+ 		var $url   = $("#"+id4url);
+ 			 
+ 			
+ 		if( $url.length <= 0)  $("body").append('<a style="color: #f6f6f6;"><span id="'+id4url+'" >a</span></a>');
+ 			
+ 			$url  = $("#"+id4url);
+ 		var $this = $url.closest("a");
+ 		$this.attr("href",url).attr("target","_self");
+ 		
+ 		$url.click();
+ 		setTimeout(function(){
+ 			$this.remove();
+ 		},300);
+ 	};
+	
 	FunUtil.init();
 	/*
 	 * 全局对象属性
@@ -172,7 +194,7 @@
 				FunUtil.Global.Router[nid] = Npage;
 				$main.find("div."+Npage.id).show();
 			}else{
-				var url = "js/"+FunUtil.common4hash({"type":"js","key":id+".js"});
+				var url = "./"+FunUtil.common4hash({"type":"js","key":id+".js"});
 				FunUtil.common4GetJS({"url":url,"callback":function(data){
 					
 					Router = FunUtil.Global.Page;

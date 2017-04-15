@@ -10,102 +10,169 @@
 		<meta name="author" content="">
 		<title></title>
 		<link rel="stylesheet" href="assets/js/plug/layui/css/layui.css" />
-		<style type="text/css">
-			body {
-				background-color: #f6f6f6;
-			}
-			
-			.ntq-add {
-				display: table;
-				margin: 0 auto;
-				margin-top: 40px;
-			}
-			
-			#qlive-body {
-				display: table;
-				margin: 0 auto;
-				padding-top: 40px;
-				background-color: #f6f6f6;
-				width: 1080px;
-			}
-			
-			.layui-input-block {
-				width: 87%;
-			}
-			
-			.common-l-btn {
-				background-color: #1E9FFF;
-				float: left;
-				width: 200px;
-				height: 100px;
-				border-radius: 2px;
-				margin: 20px;
-				text-align: center;
-				color: white;
-				font-size: 20px;
-				line-height: 95px;
-				cursor: pointer;
-			}
-			
-			#ntq-index-form {
-				overflow: hidden;
-				margin-top: 20px;
-			}
-			
-			#ntq-index-form-code {
-				font-size: 12px;
-				color: #1E9FFF;
-				padding: 0;
-				line-height: 38px;
-				text-align: left;
-			}
-			
-			#ntq-job-condition {
-				padding: 25px;
-			}
-			
-			.common-box {
-				border: 1px solid #c9c9c9;
-				border-radius: 1px;
-				box-shadow: 0 1px 2px #d3d3d3;
-				background-color: #fcfcfc;
-			}
-			
-			#ntq-job-search {
-				margin: 20px auto;
-				padding-top: 21px;
-			}
-			
-			.ntq-job-condition-num {
-				color: #1E9FFF;
-				text-decoration: underline;
-				cursor: pointer;
-			}
-			
-			#ntq-job-num {
-				margin-top: -11px;
-			}
-			#ntq-job-update{
-				padding-top: 15px;
-			}
-		</style>
+		 <link rel="stylesheet" type="text/css" href="assets/css/common.css"/>
 	</head>
 
 	<body>
 		<div id="qlive-body">
- 
-
-		</div>
+			<div id="ntq-admin-index"  class="common-box">
+    <div id="ntq-admin-index-search">
+        <form class="layui-form" action="">
+        	    <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">公司名称</label>
+                    <div class="layui-input-inline">
+                    	   <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">职位名称</label>
+                    <div class="layui-input-inline">
+                    	   <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                    </div>
+                </div>
+                
+                 <div class="layui-inline">
+                    <label class="layui-form-label">处理状态</label>
+                    <div class="layui-input-inline">
+                    	<select name="interest" lay-filter="aihao">
+                            <option value=""></option>
+                            <option value="0">写作</option>
+                            <option value="1" selected="">阅读</option>
+                            <option value="2">游戏</option>
+                            <option value="3">音乐</option>
+                            <option value="4">旅行</option>
+                        </select>
+                    </div>
+                </div>
+             </div>
+        
+        	
+            <div class="layui-form-item">
+                
+                
+                <div class="layui-inline">
+			      <label class="layui-form-label">发布时间</label>
+			      <div class="layui-input-inline" style="width: 85px;">
+			      	<input type="text" name="date" id="date" style="padding: 3px;" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})"> 
+                    	
+			      </div>
+			      <div class="layui-form-mid">-</div>
+			      <div class="layui-input-inline" style="width: 85px;">
+			      	<input type="text" name="date" id="date" style="padding: 3px;" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})"> 
+                    	
+			      </div>
+			    </div>
+                
+                
+                <div class="layui-inline">
+			      <label class="layui-form-label">创建时间</label>
+			      <div class="layui-input-inline" style="width: 85px;">
+			      	<input type="text" name="date" id="date" style="padding: 3px;" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})"> 
+                    	
+			      </div>
+			      <div class="layui-form-mid">-</div>
+			      <div class="layui-input-inline" style="width: 85px;">
+			      	<input type="text" name="date" id="date" style="padding: 3px;" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})"> 
+                    	
+			      </div>
+			    </div>
+            <div class="layui-inline">
+                    <label class="layui-form-label"><button class="layui-btn" lay-submit="" lay-filter="demo1">搜索</button></label>
+                    <div class="layui-input-inline">
+                    	
+                    </div>
+                </div>
+            
+            </div>
+        </form>
+    </div>
+    <div id="ntq-admin-index-condition"  >
+    	
+    	<button class="layui-btn layui-btn-normal" id="ntq-admin-job-condition-add">导出</button> 
+<button class="layui-btn layui-btn-warm" id="ntq-admin-job-condition-update">发布</button>   
+ <button class="layui-btn layui-btn-danger">拒绝</button>
+        
+        <table class="layui-table" lay-even="" lay-skin="row">
+            <colgroup>
+                <col width="150">
+                    <col width="150">
+                        <col width="200">
+                            <col>
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>公司名称</th>
+                    <th>职位名称</th>
+                    <th>职位编号</th>
+                    <th>处理状态</th>
+                    <th>备注</th>
+                    <th>创建时间</th>
+                    <th>发布时间</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1000110</td>
+                    <td>1000110</td>
+                    <td>1000110</td>
+                    <td>1000110</td>
+                    <td>1000110</td>
+                    <td>1000110</td>
+                    <td>1000110</td>
+                </tr>
+                <tr>
+                    <td>1000110</td>
+                    <td>1000110</td>
+                    <td>1000110</td>
+                    <td>1000110</td>
+                    <td>1000110</td>
+                    <td>1000110</td>
+                    <td>1000110</td>
+                </tr>
+                <tr>
+                    <td>1000110</td>
+                    <td>1000110</td>
+                    <td>1000110</td>
+                    <td>1000110</td>
+                    <td>1000110</td>
+                    <td>1000110</td>
+                    <td>1000110</td>
+                </tr>
+                <tr>
+                    <td>1000110</td>
+                    <td>1000110</td>
+                    <td>1000110</td>
+                    <td>1000110</td>
+                    <td>1000110</td>
+                    <td>1000110</td>
+                    <td>1000110</td>
+                </tr>
+                <tr>
+                    <td>1000110</td>
+                    <td>1000110</td>
+                    <td>1000110</td>
+                    <td>1000110</td>
+                    <td>1000110</td>
+                    <td>1000110</td>
+                    <td>1000110</td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="ntq-admin-index-condition-pag">
+            <div class="layui-box layui-laypage layui-laypage-default" id="layui-laypage-0"><span class="layui-laypage-curr"><em class="layui-laypage-em"></em><em>1</em></span><a href="javascript:;" data-page="2">2</a><a href="javascript:;" data-page="3">3</a><a href="javascript:;" data-page="4">4</a><a href="javascript:;" data-page="5">5</a><span>…</span><a href="javascript:;" class="layui-laypage-last" title="尾页" data-page="100">末页</a><a href="javascript:;" class="layui-laypage-next" data-page="2">下一页</a><span class="layui-laypage-total">到第 <input type="number" min="1" onkeyup="this.value=this.value.replace(/\D/, '');" value="1" class="layui-laypage-skip"> 页 <button type="button" class="layui-laypage-btn">确定</button></span></div>
+        </div>
+    </div>
+</div>
 		
-	
+</div>
 	</body>
 	<script type="text/javascript" src="assets/js/plug/jquery-3.2.0.js"></script>
 	<script src="assets/js/plug/layui/lay/dest/layui.all.js"></script>
- <script type="text/javascript" src="assets/js/plug/QLive.js"></script>
-	<script type="text/javascript" src="assets/js/main.js"></script>  
+  	<!-- <script type="text/javascript" src="assets/js/plug/QLive.js"></script>
+	<script src="assets/js/main.js"></script> --> 
 	<script>
 	 
-	
-	 
+		
 	</script>
 </html>
