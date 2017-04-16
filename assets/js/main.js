@@ -24,12 +24,14 @@ PageInfo.register({"type":"Router","info":(function(){
 	 	list:[],
 	 	flag:"hash"
 	 };
-	 
+	
+	
 	Router.list.push("/assets/js/components/index");
+	Router.list.push("/assets/js/components/admin/handle");
+	Router.list.push("/assets/js/components/admin/add");
 	Router.list.push("/assets/js/components/apply/job");
 	Router.list.push("/assets/js/components/apply/add");
 	Router.list.push("/assets/js/components/apply/index");
-	
 	Router.list.push("/assets/js/components/employ/job");
 	Router.list.push("/assets/js/components/employ/add");
 	Router.list.push("/assets/js/components/employ/index");

@@ -6,8 +6,8 @@ PageInfo.register({"type":"Obj","info":function(){
 	HtmUtil.layout   = function(){
 		
 		var buf = [];
-	 	 
-		buf.push('<form class="layui-form" action="">');
+	 	buf.push('<div id="ntq-employ-add" class="common-box">            ');
+		buf.push('<form class="layui-form" action=""  >');
 		buf.push('    <div class="layui-form-item">                                                                                                                                                            ' );
 		buf.push('        <div class="layui-inline">                                                                                                                                                           ' );
 		buf.push('            <label class="layui-form-label">招聘电话</label>                                                                                                                                 ' );
@@ -212,6 +212,7 @@ PageInfo.register({"type":"Obj","info":function(){
 		buf.push('      </div>                                                                                                                                                                                 ');
 		buf.push('    </div>                                                                                                                                                                                   ');
 		buf.push('</form>																																														');	
+		buf.push('</div>																																														');	
 		
 		return buf.join("");
 		

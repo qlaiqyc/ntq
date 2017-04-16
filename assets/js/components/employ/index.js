@@ -40,7 +40,7 @@ PageInfo.register({"type":"Obj","info":function(){
 		buf.push('    </div>')
 		buf.push('    <div class="layui-form-item">')
 		buf.push('        <div class="layui-input-block">')
-		buf.push('            <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>')
+		buf.push('            <button id="ntq-employ-index-form-btn" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>')
 		buf.push('            <button type="reset" class="layui-btn layui-btn-primary">重置</button>')
 		buf.push('        </div>')
 		buf.push('    </div>')
@@ -80,6 +80,9 @@ PageInfo.register({"type":"Obj","info":function(){
 			    	var $no = $("#ntq-employ-index-btn-no");
 			    	var $has = $("#ntq-employ-index-btn-has");
 			    	
+			    	$no.unbind("click").bind("click",function(){
+			    		PageInfo.FunUtil.common4openUrl({"url":'#/assets/js/components/employ/add'});
+			    	});
 			    	
 			    	$has.unbind("click").bind("click",function(){
 			    		  layer.open({
@@ -87,7 +90,13 @@ PageInfo.register({"type":"Obj","info":function(){
 					        type: 1,
 							skin: 'layui-layer-demo',
 							area: ['420px', '240px'], //宽高
-							content: HtmUtil.common4input()
+							content: HtmUtil.common4input(),
+							success:function(){
+								$("#ntq-employ-index-form-btn").unbind("click").bind("click",function(){
+									layer.closeAll()
+									PageInfo.FunUtil.common4openUrl({"url":'#/assets/js/components/employ/job'});
+								});
+							}
 					      });
 					      
 					      
