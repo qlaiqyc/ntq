@@ -6,8 +6,6 @@ PageInfo.register({"type":"Pub","info":(function(){
 	PageObj.fun = function(){
 		
 		
-		 
-		
 		
 	};
 
