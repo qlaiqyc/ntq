@@ -7,7 +7,7 @@ PageInfo.register({"type":"Obj","info":function(){
 		
 		var buf = [];
 	 	 
-		buf.push('<div id="ntq-apply-index" >');
+		buf.push('<div id="ntq-apply-index" class="common-box" >');
 		buf.push('  <div class="common-l-btn" id="ntq-apply-index-btn-no">第一次投递简历</div>');
 	 	buf.push('  <div class="common-l-btn" id="ntq-apply-index-btn-has">已投递过职位</div>')
 		buf.push('</div>');
