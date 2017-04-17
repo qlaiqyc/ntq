@@ -77,12 +77,67 @@
 	 *    state:页面状态
 	 * 2. Page   : 新注册的对象 通过page对象中转到Router中
 	 * 3.id: 页面对象 外包围id
+	 * 
+	 * 注意：刷新页面
 	 * */
-	FunUtil.Global = {
-		"Router":[],
-		"Page":{},
-		"id":""
-	};
+	
+	FunUtil.Global = new Proxy({}, {
+		"get": function (obj, sKey) {
+			var sobj = sessionStorage.getItem("Qlive");
+			if(String.HasText(sobj)) {sobj = JSON.parse(sobj);/*console.log(sobj);*/}
+		 
+		  	return obj[sKey] || undefined;
+		},
+		"set": function(obj, prop, newval) {
+		    var oldval = obj[prop];
+		
+		    if (prop === 'selected') {
+		      if (oldval) {
+		        oldval.setAttribute('aria-selected', 'false');
+		      }
+		      if (newval) {
+		        newval.setAttribute('aria-selected', 'true');
+		      }
+		    };
+	    
+	   		obj[prop] = newval;
+	   		
+	   		var copy = Object.assign({}, obj);//copy 對象
+	   		//
+	   		
+	   		
+	   		if(prop == "Page") {
+	   			console.log("==1="+(JSON.stringify(obj[prop])));
+	   			
+	   			var list  = obj.Router;
+	   			var len	  = list.length;
+	   			var nlist = [];
+	   			
+	   			for (var i =0;i<len;i++) {
+	   				var sobj  = list[i];
+	   			//	sobj.page = String.HasText(sobj.page) ? Object.getPrototypeOf(sobj.page) : "";
+	   				
+	   				 String.HasText(sobj.page) ? console.log(Object.getPrototypeOf(sobj.page)) : "";
+	   				
+	   				
+	   			//	nlist.push(sobj);
+	   				
+	   			}
+	   			
+	   			copy.Router =  nlist;
+	   			
+	   			sessionStorage.setItem("Qlive",JSON.stringify(copy));
+	   		}
+	   		
+   			
+
+	  } 
+	});
+	
+	/*   测试 */
+ 	FunUtil.Global.Router = []; 
+	FunUtil.Global.Page   = {}; 
+	FunUtil.Global.id 	  = ""; 
 	
 	//栈队数组管理
 	FunUtil.common4Stack = function(data){
@@ -220,8 +275,15 @@
 	FunUtil.register4Evet = function(data){
 		var execuFun = {};
 		
-		execuFun.hash = function(){
+		execuFun.pub = function(){
+			//刷新页面
 			
+			
+			  
+		};
+		
+		execuFun.hash = function(){
+			execuFun.pub();
 			var defid = FunUtil.common4hash({"type":"decode","key":FunUtil.Global.Router[0].id});
 			
 			window.onhashchange = function(e){
@@ -231,7 +293,7 @@
 			};
 			
 			FunUtil.common4Page({"id":FunUtil.common4hash({"type":"encode","key":(String.HasText(location.hash) ? location.hash :(defid))})});//触发hash 事件
-	
+		
 		};
 		
 		
@@ -354,6 +416,8 @@
 	
 	
 	PageInfo.init4Global = function(data){
+		
+		
 		
 		
 	};
