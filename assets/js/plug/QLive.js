@@ -13,7 +13,8 @@
 	 * destory 主要是因为DOM 有长度限制销毁 dom 关系链较长的dom  类似微信的打开多个tab限制， （初版暂时不做）
 	 * */
 	
-	var FunUtil = {};
+	var FunUtil		= {};
+	var PageInfo 	= {};
 	
 	FunUtil.init = function(){
 		String.HasText  = function(str){
@@ -44,7 +45,83 @@
 		
 		return execuFun[data.type]();
 	};
-	
+	FunUtil.common4class = function(data){
+		
+		/*
+		 * POBJ  根类 ，进行数据底层封装
+		 * COBJ  模型类，类似与一个管道，作为注入类，和根类的桥接   (负责一级中转,当init 时拼接div  当 show 时 show , 当hide时hide)
+		 * IOBJ  注入类，根据数据注入进行
+		 * */
+		
+		
+		var IOBJ = data.info();
+		
+		class POBJ {
+			constructor(arg) {
+			}
+			data(){
+				 
+			}
+			
+			init(){
+				//console.log("init");
+			}
+			update(){} 
+			show(){} 
+			hide(){} 
+			destory(){} 
+		};
+	 
+		class COBJ extends POBJ {
+			constructor(arg) {
+				super(arg);
+			}
+			data(){
+				super.data();
+				
+				//这里有个策略当页面间传参时记录 上一页的数据
+				
+				if(FunUtil.common4Prop({"type":"isIN","in":"data","obj":IOBJ}))  return IOBJ.data();
+			}
+			init(){
+				super.init();
+				
+				if(FunUtil.common4Prop({"type":"isIN","in":"init","obj":IOBJ}))  IOBJ.init();
+			}
+			update(){
+				super.update();
+				
+				if(FunUtil.common4Prop({"type":"isIN","in":"update","obj":IOBJ}))  IOBJ.update();
+			} 
+			show(){
+				super.show();
+				
+				if(FunUtil.common4Prop({"type":"isIN","in":"show","obj":IOBJ}))  IOBJ.show();
+			} 
+			hide(){
+				super.hide();
+				
+				if(FunUtil.common4Prop({"type":"isIN","in":"hide","obj":IOBJ}))  IOBJ.hide();
+			} 
+			destory(){
+				super.destory();
+				
+				if(FunUtil.common4Prop({"type":"isIN","in":"destory","obj":IOBJ}))  IOBJ.destory();
+			} 
+		};
+		
+		
+		/*
+		 *  返回初始类  +监听模块状态进行修改 执行方法
+		 * */
+		
+		 /*异步请求 成功后  注册对象到 全局变量 */
+		
+		var b = new COBJ();
+		
+		return b;
+		
+	};
 	
 	FunUtil.common4openUrl   = function(data){
  		var url = data.url;
@@ -64,10 +141,34 @@
  		$url.click();
  		setTimeout(function(){
  			$this.remove();
- 		},300);
+ 		},200);
  	};
 	
 	FunUtil.init();
+	
+	/*
+	 * common 4 缓存
+	 * */
+	
+	FunUtil.common4cache = function(data){
+		var  execuFun = {};
+		var key = data.key;
+		var value = data.value;
+		execuFun.setItem = function(){
+			
+			sessionStorage.setItem(key,value);
+		};
+		
+		
+		execuFun.getItem = function(){
+			var str = sessionStorage.getItem(key);
+			if(String.HasText(str)) str = JSON.parse(str);
+			return	str;
+		};
+		
+		return	execuFun[data.type+"Item"]();
+	};
+	
 	/*
 	 * 全局对象属性
 	 * 
@@ -77,67 +178,59 @@
 	 *    state:页面状态
 	 * 2. Page   : 新注册的对象 通过page对象中转到Router中
 	 * 3.id: 页面对象 外包围id
-	 * 
+	 * 4.Objs: 记录当前页面数据集合
+	 * 5.Obj :记录传递的对象
 	 * 注意：刷新页面
 	 * */
 	
 	FunUtil.Global = new Proxy({}, {
 		"get": function (obj, sKey) {
-			var sobj = sessionStorage.getItem("Qlive");
-			if(String.HasText(sobj)) {sobj = JSON.parse(sobj);/*console.log(sobj);*/}
-		 
+   			
 		  	return obj[sKey] || undefined;
 		},
 		"set": function(obj, prop, newval) {
-		    var oldval = obj[prop];
-		
-		    if (prop === 'selected') {
-		      if (oldval) {
-		        oldval.setAttribute('aria-selected', 'false');
-		      }
-		      if (newval) {
-		        newval.setAttribute('aria-selected', 'true');
-		      }
-		    };
 	    
 	   		obj[prop] = newval;
 	   		
-	   		var copy = Object.assign({}, obj);//copy 對象
-	   		//
-	   		
-	   		
-	   		if(prop == "Page") {
-	   			console.log("==1="+(JSON.stringify(obj[prop])));
-	   			
-	   			var list  = obj.Router;
-	   			var len	  = list.length;
-	   			var nlist = [];
-	   			
-	   			for (var i =0;i<len;i++) {
-	   				var sobj  = list[i];
-	   			//	sobj.page = String.HasText(sobj.page) ? Object.getPrototypeOf(sobj.page) : "";
-	   				
-	   				 String.HasText(sobj.page) ? console.log(Object.getPrototypeOf(sobj.page)) : "";
-	   				
-	   				
-	   			//	nlist.push(sobj);
-	   				
-	   			}
-	   			
-	   			copy.Router =  nlist;
-	   			
-	   			sessionStorage.setItem("Qlive",JSON.stringify(copy));
-	   		}
-	   		
-   			
-
+	   		FunUtil.common4cache({"type":"set","key":"Qlive","value":JSON.stringify(obj)})
 	  } 
 	});
 	
 	/*   测试 */
- 	FunUtil.Global.Router = []; 
-	FunUtil.Global.Page   = {}; 
-	FunUtil.Global.id 	  = ""; 
+	
+	FunUtil.GlobalInit = function(){
+		var execuFun = {};
+		var type = "pub";
+		var json = FunUtil.common4cache({"type":"get","key":"Qlive"});
+		
+		execuFun.pub = function(){
+			FunUtil.Global.Router	= []; //必须
+			FunUtil.Global.Page		= {}; 
+			FunUtil.Global.id		= ""; //必须
+			FunUtil.Global.Objs		= []; //必须
+			FunUtil.Global.Obj		= {}; 
+		};
+		
+		execuFun.hasData = function(){
+			console.log("=======================")
+			console.log(json);
+			
+			var rlist = json.Objs;
+			var rlen  = rlist.length;
+			
+			for (var i =0;i<rlen;i++) {
+				json.Router[i].page = FunUtil.common4class({"info":function(){ return rlist[i]; }})
+			}
+			
+			FunUtil.Global.Router = json.Router;
+			FunUtil.Global.Objs	  = json.Objs;
+			
+		};
+		
+		if(String.HasText(json)) type = "hasData";
+		execuFun[type]();
+	};
+	FunUtil.GlobalInit();
 	
 	//栈队数组管理
 	FunUtil.common4Stack = function(data){
@@ -162,6 +255,7 @@
 		
 		execuFun[data.type]();
 	};
+	
 	
 	
 	/*
@@ -224,6 +318,8 @@
 					
 					Router = FunUtil.Global.Page;
 					FunUtil.Global.Router[nid] = {"id":id,"page":Router,"state":"show"};
+					FunUtil.Global.Objs[nid] = FunUtil.Global.Obj;
+					
 					$main.append('<div class="'+id+'">'+Router.data().HtmUtil.layout()+'</div').show();
 					Router.init();
 					Router.show();
@@ -255,6 +351,8 @@
 					Router = FunUtil.Global.Page;
 					
 					FunUtil.Global.Router[nid] = {"id":id,"page":Router,"state":"show"};
+					FunUtil.Global.Objs[nid] = FunUtil.Global.Obj;
+					
 					$main.append('<div class="'+id+'">'+Router.data().HtmUtil.layout()+'</div').show();
 					Router.init();
 					
@@ -285,7 +383,7 @@
 		execuFun.hash = function(){
 			execuFun.pub();
 			var defid = FunUtil.common4hash({"type":"decode","key":FunUtil.Global.Router[0].id});
-			
+			 
 			window.onhashchange = function(e){
 				//通过hash 值进行判断
 				
@@ -335,83 +433,12 @@
 	 
  
 	
-	var PageInfo = {};
+	
 	
 	PageInfo.init4Obj = function(data){
 		
-		/*
-		 * POBJ  根类 ，进行数据底层封装
-		 * COBJ  模型类，类似与一个管道，作为注入类，和根类的桥接   (负责一级中转,当init 时拼接div  当 show 时 show , 当hide时hide)
-		 * IOBJ  注入类，根据数据注入进行
-		 * */
-		
-		
-		var IOBJ = data.info();
-		
-		class POBJ {
-			constructor(arg) {
-			}
-			data(){
-				 
-			}
-			
-			init(){
-				console.log("init");
-			}
-			update(){} 
-			show(){} 
-			hide(){} 
-			destory(){} 
-		};
-	 
-		class COBJ extends POBJ {
-			constructor(arg) {
-				super(arg);
-			}
-			data(){
-				super.data();
-				
-				//这里有个策略当页面间传参时记录 上一页的数据
-				
-				if(FunUtil.common4Prop({"type":"isIN","in":"data","obj":IOBJ}))  return IOBJ.data();
-			}
-			init(){
-				super.init();
-				
-				if(FunUtil.common4Prop({"type":"isIN","in":"init","obj":IOBJ}))  IOBJ.init();
-			}
-			update(){
-				super.update();
-				
-				if(FunUtil.common4Prop({"type":"isIN","in":"update","obj":IOBJ}))  IOBJ.update();
-			} 
-			show(){
-				super.show();
-				
-				if(FunUtil.common4Prop({"type":"isIN","in":"show","obj":IOBJ}))  IOBJ.show();
-			} 
-			hide(){
-				super.hide();
-				
-				if(FunUtil.common4Prop({"type":"isIN","in":"hide","obj":IOBJ}))  IOBJ.hide();
-			} 
-			destory(){
-				super.destory();
-				
-				if(FunUtil.common4Prop({"type":"isIN","in":"destory","obj":IOBJ}))  IOBJ.destory();
-			} 
-		};
-		
-		
-		/*
-		 *  返回初始类  +监听模块状态进行修改 执行方法
-		 * */
-		
-		 /*异步请求 成功后  注册对象到 全局变量 */
-		
-		var b = new COBJ();
-		
-		FunUtil.Global.Page = b;
+		FunUtil.Global.Page = FunUtil.common4class(data);
+		FunUtil.Global.Obj  = data.info();
 	};
 	
 	
@@ -430,12 +457,18 @@
 		var flag 	= router.flag;
 		
 		var nlist = [];
+		var list = [];
 		
 		if(flag == "hash"){
-			for (var  i =0 ;i<len;i++) nlist.push({"id":FunUtil.common4hash({"type":"encode","key":("#"+router.list[i])}),"page":"","state":""});
+			for (var  i =0 ;i<len;i++){
+				nlist.push({"id":FunUtil.common4hash({"type":"encode","key":("#"+router.list[i])}),"page":"","state":""});
+				list.push("");
+			}
+				
 		}
 		
 		FunUtil.Global.Router = nlist;
+		FunUtil.Global.Objs = list;
 		
 		FunUtil.register4Evet({"type":flag});
 		

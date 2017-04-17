@@ -52,7 +52,7 @@ PageInfo.register({"type":"Obj","info":function(){
 	
 	FunUtil.Global = {
 		"child":{
-			"id":123
+			"id":9999
 		}
 	};//传参对象
 	
@@ -111,7 +111,7 @@ PageInfo.register({"type":"Obj","info":function(){
 			    	
 			    },
 			    hide(){
-			    	console.log("==add==hide")
+			    	//console.log("==add==hide")
 			    },   
 			    destory(){
 			        
