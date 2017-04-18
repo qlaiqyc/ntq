@@ -137,7 +137,7 @@ PageInfo.register({"type":"Obj","info":function(){
 			    	 
 			    	var $this = this;
 			    	
-			    	 
+			    	 console.log($this.data().FunUtil.Global.parent);
 			    	layui.use(['form', 'layedit', 'laydate',"upload"], function(){
 					  var form = layui.form()
 					  ,layer = layui.layer
@@ -163,7 +163,7 @@ PageInfo.register({"type":"Obj","info":function(){
 					});
 			    },
 			    hide(){
-			    	console.log("==add==hide")
+			    	//console.log("==add==hide")
 			    },   
 			    destory(){
 			        

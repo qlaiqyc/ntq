@@ -76,6 +76,7 @@ PageInfo.register({"type":"Obj","info":function(){
 			    	 
 			    	var $this = this;
 			    	
+			    	//alert($this.data().FunUtil.Global.parent);
 			    	 
 			    	var $no = $("#ntq-employ-index-btn-no");
 			    	var $has = $("#ntq-employ-index-btn-has");
@@ -114,7 +115,7 @@ PageInfo.register({"type":"Obj","info":function(){
 			    	
 			    },
 			    hide(){
-			    	console.log("==add==hide")
+			    	//console.log("==add==hide")
 			    },   
 			    destory(){
 			        

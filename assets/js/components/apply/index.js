@@ -52,7 +52,7 @@ PageInfo.register({"type":"Obj","info":function(){
 	
 	FunUtil.Global = {
 		"child":{
-			"id":123
+			"id":9999
 		}
 	};//传参对象
 	
@@ -75,8 +75,8 @@ PageInfo.register({"type":"Obj","info":function(){
 			    show(){
 			    	 
 			    	var $this = this;
-			    	
 			    	 
+			    	alert(PageInfo.FunUtil.common4getUrlParam()["uuid"]);
 			    	var $no = $("#ntq-apply-index-btn-no");
 			    	var $has = $("#ntq-apply-index-btn-has");
 			    	
@@ -111,7 +111,7 @@ PageInfo.register({"type":"Obj","info":function(){
 			    	
 			    },
 			    hide(){
-			    	console.log("==add==hide")
+			    	//console.log("==add==hide")
 			    },   
 			    destory(){
 			        

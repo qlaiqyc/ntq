@@ -184,7 +184,7 @@ PageInfo.register({"type":"Obj","info":function(){
 					});
 			    },
 			    hide(){
-			    	console.log("==add==hide")
+			    	//console.log("==add==hide")
 			    },   
 			    destory(){
 			        

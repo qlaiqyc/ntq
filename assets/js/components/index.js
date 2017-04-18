@@ -21,7 +21,7 @@ PageInfo.register({"type":"Obj","info":function(){
 	 
 	FunUtil.Global = {
 		"child":{
-			"id":123
+			"id":456
 		}
 	};//传参对象
 	
@@ -36,7 +36,7 @@ PageInfo.register({"type":"Obj","info":function(){
 			        return param;
 			    },
 			    init(){
-			        console.log("==add==init")
+			       // console.log("==add==init")
 			    },
 			    update(){
 			        
@@ -49,7 +49,7 @@ PageInfo.register({"type":"Obj","info":function(){
 			    	var $btn4employ = $("div.ntq-index-employ-btn");
 			    	
 			    	$btn4apply.unbind("click").bind("click",function(){
-			    		PageInfo.FunUtil.common4openUrl({"url":'#/assets/js/components/apply/index'});
+			    		PageInfo.FunUtil.common4openUrl({"url":'#/assets/js/components/apply/index?uuid=123'});
 			    	});
 			    	
 			    	$btn4employ.unbind("click").bind("click",function(){
@@ -58,7 +58,7 @@ PageInfo.register({"type":"Obj","info":function(){
 			    	 
 			    },
 			    hide(){
-			    	console.log("==add==hide")
+			    	//console.log("==add==hide")
 			    },   
 			    destory(){
 			        

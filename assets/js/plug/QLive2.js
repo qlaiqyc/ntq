@@ -29,23 +29,10 @@
 			return true;
 		};
 	};
-	FunUtil.init();
-	
-	FunUtil.common4getUrlParam = function() { 
-		var url = location.href; //获取url中"?"符后的字串 
-		var theRequest = {}; 
-		if (url.indexOf("?") != -1) { 
-			var str = url.split("?")[1];
-			strs = str.split("&"); 
-			for(var i = 0; i < strs.length; i ++) { 
-				theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]); 
-			} 
-		} 
-		return theRequest; 
-	} 
 	
 	/*
 	 * 常用判断工具类
+	 * 
 	 * 1.isIN	判断对象是否有这个属性
 	 * */
 	FunUtil.common4Prop = function(data){
@@ -203,12 +190,61 @@
 		"set": function(obj, prop, newval) {
 	    
 	   		obj[prop] = newval;
+	   	 
+	   		if(prop == "Obj"){
+	   			FunUtil.common4cache({"type":"set","key":"Qlive","value":JSON.stringify(obj)})
+	   		}
 	  } 
 	});
 	
 	/*   测试 */
 	
-	 
+	FunUtil.GlobalInit = function(){
+		var execuFun = {};
+		var type = "pub";
+		var json = FunUtil.common4cache({"type":"get","key":"Qlive"});
+		
+		execuFun.pub = function(){
+			FunUtil.Global.Router	= []; //必须
+			FunUtil.Global.Page		= {}; 
+			FunUtil.Global.id		= ""; //必须
+			FunUtil.Global.Objs		= []; //必须
+			FunUtil.Global.Obj		= {}; 
+		};
+		
+		execuFun.hasData = function(){
+			console.log("===========hasData============")
+			console.log(JSON.stringify(json));
+			
+			var rlist = json.Objs;
+			var rlen  = rlist.length;
+			
+			for (var i =0;i<rlen;i++) {
+				var opage = rlist[i];
+				var npage = {};
+				if(!String.HasText(opage)) continue;
+				
+				npage.data 	 = 	function(){return opage.data;};
+				npage.init 	 = eval(opage.init.replace("init()","init=function()"));
+				npage.show 	 = eval(opage.show.replace("show()","show =function()") 	);
+				npage.hide 	 = eval(opage.hide.replace("hide()","hide=function() ") 	);
+				npage.update = eval(opage.update.replace("update()","update=function()")  );
+				npage.destory= eval(opage.destory.replace("destory()","destory=function()") );
+				
+		 
+				json.Router[i].page = FunUtil.common4class({"info":function(){ return npage; }})
+				
+			}
+		 	
+			FunUtil.Global.Router = json.Router;
+			FunUtil.Global.Objs	  = json.Objs; 
+			
+		};
+		
+		if(String.HasText(json)) type = "hasData";
+		execuFun[type]();
+	};
+	
 	//栈队数组管理
 	FunUtil.common4Stack = function(data){
 		var  execuFun = {};
@@ -267,8 +303,6 @@
 	 * 2. 隐藏  当前展示对象  （存在 ？ 执行当前对象的 hide 方法， :  不做操作  ）
 	 * */
 	FunUtil.common4Page = function(data){
-		data.id = data.id.split("?")[0];
-		
 		var $main	= $("#"+FunUtil.Global.id);
 		var Router	= FunUtil.Global.Router;
 		Router.unshift({});
@@ -297,6 +331,7 @@
 					
 					Router = FunUtil.Global.Page;
 					FunUtil.Global.Router[nid] = {"id":id,"page":Router,"state":"show"};
+					FunUtil.Global.Objs[nid] = FunUtil.Global.Obj;
 					
 					$main.append('<div class="'+id+'">'+Router.data().HtmUtil.layout()+'</div').show();
 					Router.init();
@@ -329,6 +364,7 @@
 					Router = FunUtil.Global.Page;
 					
 					FunUtil.Global.Router[nid] = {"id":id,"page":Router,"state":"show"};
+					FunUtil.Global.Objs[nid] = FunUtil.Global.Obj;
 					
 					$main.append('<div class="'+id+'">'+Router.data().HtmUtil.layout()+'</div').show();
 					Router.init();
@@ -352,6 +388,8 @@
 		
 		execuFun.pub = function(){
 			//刷新页面
+			
+			
 			  
 		};
 		
@@ -409,6 +447,20 @@
 	PageInfo.init4Obj = function(data){
 		
 		FunUtil.Global.Page = FunUtil.common4class(data);
+		
+		
+		var nobj = {};
+		nobj.data = data.info().data();
+		nobj.init = data.info().init.toString();
+		nobj.show = data.info().show.toString();
+		nobj.hide = data.info().hide.toString();
+		/*nobj.share = data.info().share.toString();*/
+		nobj.update = data.info().update.toString();
+		nobj.destory = data.info().destory.toString();
+		
+		 
+	 
+		FunUtil.Global.Obj  = nobj;
 	};
 	
 	PageInfo.init4Global = function(data){
@@ -425,19 +477,24 @@
 		var flag 	= router.flag;
 		
 		var nlist = [];
+		var list = [];
 		
 		if(flag == "hash"){
-			for (var  i =0 ;i<len;i++) nlist.push({"id":FunUtil.common4hash({"type":"encode","key":("#"+router.list[i])}),"page":"","state":""});
+			for (var  i =0 ;i<len;i++){
+				nlist.push({"id":FunUtil.common4hash({"type":"encode","key":("#"+router.list[i])}),"page":"","state":""});
+				list.push("");
+			}
+				
 		}
 		
 		FunUtil.Global.Router = nlist;
+		FunUtil.Global.Objs = list;
 		
 		FunUtil.register4Evet({"type":flag});
 		
 	};
 	
 	PageInfo.init4Pub = function(data){
-		
 		//根据设置默认请求  加载JS 数目
 		FunUtil.Global.id = data.info.id;
 		
@@ -445,7 +502,8 @@
 		
 	};
 	
-	
+	FunUtil.init();
+	FunUtil.GlobalInit();
 	PageInfo.register = function(data){
 		
 		
