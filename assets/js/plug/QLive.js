@@ -149,7 +149,7 @@
  			
  			$url  = $("#"+id4url);
  		var $this = $url.closest("a");
- 		$this.attr("href",url).attr("target","_self");
+ 		$this.attr("href","#"+url.substr(22)).attr("target","_self");
  		
  		$url.click();
  		setTimeout(function(){
@@ -362,10 +362,10 @@
 			window.onhashchange = function(e){
 				//通过hash 值进行判断
 				
-				FunUtil.common4Page({"id":FunUtil.common4hash({"type":"encode","key":(String.HasText(location.hash) ? location.hash :(defid))})});//触发hash 事件
+				FunUtil.common4Page({"id":FunUtil.common4hash({"type":"encode","key":(String.HasText(location.hash) ? ("#/assets/js/components/"+location.hash.substr(2)) :(defid))})});//触发hash 事件
 			};
 			
-			FunUtil.common4Page({"id":FunUtil.common4hash({"type":"encode","key":(String.HasText(location.hash) ? location.hash :(defid))})});//触发hash 事件
+			FunUtil.common4Page({"id":FunUtil.common4hash({"type":"encode","key":(String.HasText(location.hash) ? ("#/assets/js/components/"+location.hash.substr(2)) :(defid))})});//触发hash 事件
 		
 		};
 		
