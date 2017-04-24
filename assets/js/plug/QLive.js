@@ -413,9 +413,7 @@
 	
 	PageInfo.init4Global = function(data){
 		
-		
-		
-		
+		FunUtil.Global.API = data.info;
 	};
 	
 	PageInfo.init4Router = function(data){
