@@ -12,19 +12,19 @@ PageInfo.register({"type":"Obj","info":function(){
 		buf.push('        <div class="layui-inline">                                                                                                                                                           ' );
 		buf.push('            <label class="layui-form-label">招聘电话</label>                                                                                                                                 ' );
 		buf.push('            <div class="layui-input-inline">                                                                                                                                                 ' );
-		buf.push('                <input type="tel" name="phone" lay-verify="phone" autocomplete="off" class="layui-input">                                                                                       ' );
+		buf.push('                <input type="tel" name="companyPhone" lay-verify="phone" autocomplete="off" class="layui-input">                                                                                       ' );
 		buf.push('            </div>                                                                                                                                                                           ' );
 		buf.push('        </div>                                                                                                                                                                               ' );
 		buf.push('        <div class="layui-inline">                                                                                                                                                           ' );
 		buf.push('            <label class="layui-form-label">企业名称</label>                                                                                                                                 ' );
 		buf.push('            <div class="layui-input-inline">                                                                                                                                                 ' );
-		buf.push('                <input type="text" name="username" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">                                                        ' );
+		buf.push('                <input type="text" name="companyName" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">                                                        ' );
 		buf.push('            </div>                                                                                                                                                                           ' );
 		buf.push('        </div>                                                                                                                                                                               ' );
 		buf.push('        <div class="layui-inline">                                                                                                                                                           ' );
 		buf.push('            <label class="layui-form-label">招聘人姓名</label>                                                                                                                               ' );
 		buf.push('            <div class="layui-input-inline">                                                                                                                                                 ' );
-		buf.push('                <input type="text" name="username" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">                                                        ' );
+		buf.push('                <input type="text" name="recruiterName" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">                                                        ' );
 		buf.push('            </div>                                                                                                                                                                           ' );
 		buf.push('        </div>                                                                                                                                                                               ' );
 		buf.push('    </div>                                                                                                                                                                                   ' );
@@ -33,40 +33,31 @@ PageInfo.register({"type":"Obj","info":function(){
 		buf.push('        <div class="layui-inline">                                                                                                                                                           ' );
 		buf.push('            <label class="layui-form-label">企业类型</label>                                                                                                                                 ' );
 		buf.push('            <div class="layui-input-inline">                                                                                                                                                 ' );
-		buf.push('                <select name="interest" lay-filter="aihao">                                                                                                                                  ' );
+		buf.push('                <select name="companyType" lay-filter="aihao">                                                                                                                                  ' );
 		buf.push('                    <option value=""></option>                                                                                                                                               ' );
-		buf.push('                    <option value="0">写作</option>                                                                                                                                          ' );
-		buf.push('                    <option value="1" selected="">阅读</option>                                                                                                                              ' );
-		buf.push('                    <option value="2">游戏</option>                                                                                                                                          ' );
-		buf.push('                    <option value="3">音乐</option>                                                                                                                                          ' );
-		buf.push('                    <option value="4">旅行</option>                                                                                                                                          ' );
+		buf.push('                    <option value="1">民营</option>                                                                                                                                          ' );
+		buf.push('                    <option value="2" selected="">国企</option>                                                                                                                              ' );
+		buf.push('                    <option value="3">外企</option>                                                                                                                                          ' );
 		buf.push('                </select>                                                                                                                                                                    ' );
 		buf.push('            </div>                                                                                                                                                                           ' );
 		buf.push('        </div>                                                                                                                                                                               ' );
 		buf.push('        <div class="layui-inline">                                                                                                                                                           ' );
 		buf.push('            <label class="layui-form-label">公司福利</label>                                                                                                                                 ' );
 		buf.push('            <div class="layui-input-inline">                                                                                                                                                 ' );
-		buf.push('                                                                                                                                                                                             ' );
 		buf.push('                <select name="interest" lay-filter="aihao">                                                                                                                                  ' );
 		buf.push('                    <option value=""></option>                                                                                                                                               ' );
 		buf.push('                    <option value="0">写作</option>                                                                                                                                          ' );
 		buf.push('                    <option value="1" selected="">阅读</option>                                                                                                                              ' );
-		buf.push('                    <option value="2">游戏</option>                                                                                                                                          ' );
-		buf.push('                    <option value="3">音乐</option>                                                                                                                                          ' );
-		buf.push('                    <option value="4">旅行</option>                                                                                                                                          ' );
 		buf.push('                </select>                                                                                                                                                                    ' );
 		buf.push('            </div>                                                                                                                                                                           ' );
 		buf.push('        </div>                                                                                                                                                                               ' );
 		buf.push('        <div class="layui-inline">                                                                                                                                                           ' );
 		buf.push('            <label class="layui-form-label">融资情况</label>                                                                                                                                 ' );
 		buf.push('            <div class="layui-input-inline">                                                                                                                                                 ' );
-		buf.push('                <select name="interest" lay-filter="aihao">                                                                                                                                  ' );
+		buf.push('                <select name="financingType" lay-filter="aihao">                                                                                                                                  ' );
 		buf.push('                    <option value=""></option>                                                                                                                                               ' );
-		buf.push('                    <option value="0">写作</option>                                                                                                                                          ' );
-		buf.push('                    <option value="1" selected="">阅读</option>                                                                                                                              ' );
-		buf.push('                    <option value="2">游戏</option>                                                                                                                                          ' );
-		buf.push('                    <option value="3">音乐</option>                                                                                                                                          ' );
-		buf.push('                    <option value="4">旅行</option>                                                                                                                                          ' );
+		buf.push('                    <option value="1" selected="">是</option>                                                                                                                              ' );
+		buf.push('                    <option value="2">否</option>                                                                                                                                          ' );
 		buf.push('                </select>                                                                                                                                                                    ' );
 		buf.push('            </div>                                                                                                                                                                           ' );
 		buf.push('        </div>                                                                                                                                                                               ' );
@@ -76,25 +67,23 @@ PageInfo.register({"type":"Obj","info":function(){
 		buf.push('        <div class="layui-inline">                                                                                                                                                           ' );
 		buf.push('            <label class="layui-form-label">简历投递邮箱</label>                                                                                                                             ' );
 		buf.push('            <div class="layui-input-inline">                                                                                                                                                 ' );
-		buf.push('                <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">                                                                                   ' );
+		buf.push('                <input type="text" name="resumeMail" lay-verify="email" autocomplete="off" class="layui-input">                                                                                   ' );
 		buf.push('            </div>                                                                                                                                                                           ' );
 		buf.push('        </div>                                                                                                                                                                               ' );
 		buf.push('        <div class="layui-inline">                                                                                                                                                           ' );
 		buf.push('            <label class="layui-form-label">招聘人微信</label>                                                                                                                               ' );
 		buf.push('            <div class="layui-input-inline">                                                                                                                                                 ' );
-		buf.push('                <input type="text" name="title" lay-verify="required" autocomplete="off" placeholder="请输入标题" class="layui-input">                                                          ' );
+		buf.push('                <input type="text" name="contactWeixinId" lay-verify="required" autocomplete="off" placeholder="" class="layui-input">                                                          ' );
 		buf.push('            </div>                                                                                                                                                                           ' );
 		buf.push('        </div>                                                                                                                                                                               ' );
 		buf.push('        <div class="layui-inline">                                                                                                                                                           ' );
 		buf.push('            <label class="layui-form-label">招聘类型</label>                                                                                                                                 ' );
 		buf.push('            <div class="layui-input-inline">                                                                                                                                                 ' );
-		buf.push('                <select name="interest" lay-filter="aihao">                                                                                                                                  ' );
+		buf.push('                <select name="recruitType" lay-filter="aihao">                                                                                                                                  ' );
 		buf.push('                    <option value=""></option>                                                                                                                                               ' );
 		buf.push('                    <option value="0">写作</option>                                                                                                                                          ' );
-		buf.push('                    <option value="1" selected="">阅读</option>                                                                                                                              ' );
-		buf.push('                    <option value="2">游戏</option>                                                                                                                                          ' );
-		buf.push('                    <option value="3">音乐</option>                                                                                                                                          ' );
-		buf.push('                    <option value="4">旅行</option>                                                                                                                                          ' );
+		buf.push('                    <option value="1" selected="">内推</option>                                                                                                                              ' );
+		buf.push('                    <option value="2">HR招聘</option>                                                                                                                                    ' );
 		buf.push('                </select>                                                                                                                                                                    ' );
 		buf.push('            </div>                                                                                                                                                                           ' );
 		buf.push('        </div>                                                                                                                                                                               ' );
@@ -103,14 +92,14 @@ PageInfo.register({"type":"Obj","info":function(){
 		buf.push('    <div class="layui-form-item">                                                                                                                                                            ' );
 		buf.push('        <label class="layui-form-label">公司地址</label>                                                                                                                                     ' );
 		buf.push('        <div class="layui-input-block">                                                                                                                                                      ' );
-		buf.push('            <input type="text" name="title" lay-verify="required" autocomplete="off" placeholder="请输入标题" class="layui-input">                                                              ' );
+		buf.push('            <input type="text" name="title" lay-verify="required" autocomplete="off" placeholder="" class="layui-input">                                                              ' );
 		buf.push('        </div>                                                                                                                                                                               ' );
 		buf.push('    </div>                                                                                                                                                                                   ' );
 		buf.push('                                                                                                                                                                                             ' );
 		buf.push('    <div class="layui-form-item layui-form-text">                                                                                                                                            ' );
 		buf.push('        <label class="layui-form-label">公司简介</label>                                                                                                                                     ' );
 		buf.push('        <div class="layui-input-block">                                                                                                                                                      ' );
-		buf.push('            <textarea placeholder="请输入内容" class="layui-textarea"></textarea>                                                                                                            ' );
+		buf.push('            <textarea placeholder="" name="companySynopsis" class="layui-textarea"></textarea>                                                                                                            ' );
 		buf.push('        </div>                                                                                                                                                                               ' );
 		buf.push('    </div>                                                                                                                                                                                   ' );
 		buf.push('                                                                                                                                                                                             ' );
@@ -118,25 +107,25 @@ PageInfo.register({"type":"Obj","info":function(){
 		buf.push('        <div class="layui-inline">                                                                                                                                                           ' );
 		buf.push('            <label class="layui-form-label">有效期</label>                                                                                                                                   ' );
 		buf.push('            <div class="layui-input-inline">                                                                                                                                                 ' );
-		buf.push('                <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">            ' );
+		buf.push('                <input type="text" name="deadline" id="date" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">            ' );
 		buf.push('            </div>                                                                                                                                                                           ' );
 		buf.push('        </div>                                                                                                                                                                               ' );
 		buf.push('        <div class="layui-inline">                                                                                                                                                           ' );
 		buf.push('            <label class="layui-form-label">职位名称</label>                                                                                                                                 ' );
 		buf.push('            <div class="layui-input-inline">                                                                                                                                                 ' );
-		buf.push('                <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">                                                          ' );
+		buf.push('                <input type="text" name="positionName" lay-verify="title" autocomplete="off" placeholder="" class="layui-input">                                                          ' );
 		buf.push('            </div>                                                                                                                                                                           ' );
 		buf.push('        </div>                                                                                                                                                                               ' );
 		buf.push('        <div class="layui-inline">                                                                                                                                                           ' );
 		buf.push('            <label class="layui-form-label">薪水范围(k)</label>                                                                                                                                 ' );
 		buf.push('            <div class="layui-input-inline" style="width: 32px;">                                                                                                                            ' );
-		buf.push('                <input type="text" name="price_min" placeholder="￥" autocomplete="off" class="layui-input">                                                                                 ' );
+		buf.push('                <input type="text" name="highSalary" placeholder="￥" autocomplete="off" class="layui-input">                                                                                 ' );
 		buf.push('            </div>                                                                                                                                                                           ' );
 		buf.push('            <div class="layui-form-mid">-</div>                                                                                                                                              ' );
 		buf.push('            <div class="layui-input-inline" style="width: 32px;">                                                                                                                            ' );
-		buf.push('                <input type="text" name="price_max" placeholder="￥" autocomplete="off" class="layui-input">                                                                                 ' );
+		buf.push('                <input type="text" name="lowSalary" placeholder="￥" autocomplete="off" class="layui-input">                                                                                 ' );
 		buf.push('            </div>                                                                                                                                                                           ' );
-		buf.push('            <div class="layui-input-inline" style="width: 32px;">                                                                                                                            ' );
+		buf.push('            <div class="layui-input-inline" style="width: 32px;" data-name="isDiscussPersonally">                                                                                                                            ' );
 		buf.push('                <input type="checkbox" name="like[write]" title="面议">                                                                                                                      ' );
 		buf.push('            </div>                                                                                                                                                                           ' );
 		buf.push('        </div>                                                                                                                                                                               ' );
@@ -148,11 +137,9 @@ PageInfo.register({"type":"Obj","info":function(){
 		buf.push('            <div class="layui-input-inline">                                                                                                                                                 ' );
 		buf.push('                <select name="interest" lay-filter="aihao">                                                                                                                                  ' );
 		buf.push('                    <option value=""></option>                                                                                                                                               ' );
-		buf.push('                    <option value="0">写作</option>                                                                                                                                          ' );
-		buf.push('                    <option value="1" selected="">阅读</option>                                                                                                                              ' );
-		buf.push('                    <option value="2">游戏</option>                                                                                                                                          ' );
-		buf.push('                    <option value="3">音乐</option>                                                                                                                                          ' );
-		buf.push('                    <option value="4">旅行</option>                                                                                                                                          ' );
+		buf.push('                    <option value="1">全职</option>                                                                                                                                          ' );
+		buf.push('                    <option value="2" selected="">兼职</option>                                                                                                                              ' );
+		buf.push('                    <option value="3">实习 </option>                                                                                                                                          ' );
 		buf.push('                </select>                                                                                                                                                                    ' );
 		buf.push('            </div>                                                                                                                                                                           ' );
 		buf.push('        </div>                                                                                                                                                                               ' );
@@ -162,52 +149,53 @@ PageInfo.register({"type":"Obj","info":function(){
 		buf.push('                <select name="interest" lay-filter="aihao">                                                                                                                                  ' );
 		buf.push('                    <option value=""></option>                                                                                                                                               ' );
 		buf.push('                    <option value="0">写作</option>                                                                                                                                          ' );
-		buf.push('                    <option value="1" selected="">阅读</option>                                                                                                                              ' );
-		buf.push('                    <option value="2">游戏</option>                                                                                                                                          ' );
-		buf.push('                    <option value="3">音乐</option>                                                                                                                                          ' );
-		buf.push('                    <option value="4">旅行</option>                                                                                                                                          ' );
+		buf.push('                    <option value="1" selected="">高中</option>                                                                                                                              ' );
+		buf.push('                    <option value="2">高中</option>                                                                                                                                          ' );
+		buf.push('                    <option value="3">本科</option>                                                                                                                                          ' );
+		buf.push('                    <option value="4">硕士</option>                                                                                                                                          ' );
+		buf.push('                    <option value="5">博士</option>                                                                                                                                          ' );
+		buf.push('                    <option value="6">其他</option>                                                                                                                                          ' );
+		buf.push('                    <option value="7">不限</option>                                                                                                                                          ' );
 		buf.push('                </select>                                                                                                                                                                    ' );
 		buf.push('            </div>                                                                                                                                                                           ' );
 		buf.push('        </div>                                                                                                                                                                               ' );
 		buf.push('        <div class="layui-inline">                                                                                                                                                           ' );
-		buf.push('            <label class="layui-form-label">工作经验</label>                                                                                                                                 ' );
-		buf.push('            <div class="layui-input-inline">                                                                                                                                                 ' );
-		buf.push('                <select name="interest" lay-filter="aihao">                                                                                                                                  ' );
-		buf.push('                    <option value=""></option>                                                                                                                                               ' );
-		buf.push('                    <option value="0">写作</option>                                                                                                                                          ' );
-		buf.push('                    <option value="1" selected="">阅读</option>                                                                                                                              ' );
-		buf.push('                    <option value="2">游戏</option>                                                                                                                                          ' );
-		buf.push('                    <option value="3">音乐</option>                                                                                                                                          ' );
-		buf.push('                    <option value="4">旅行</option>                                                                                                                                          ' );
-		buf.push('                </select>                                                                                                                                                                    ' );
+		buf.push('            <label class="layui-form-label">工作经验(年)</label>                                                                                                                                 ' );
+		buf.push('             <div class="layui-input-inline" style="width: 75px;">                                                                                                                            ' );
+		buf.push('                <input type="number" name="lowWorkingLife" placeholder="最低" autocomplete="off" class="layui-input">                                                                                 ' );
 		buf.push('            </div>                                                                                                                                                                           ' );
+		buf.push('            <div class="layui-form-mid">-</div>                                                                                                                                              ' );
+		buf.push('            <div class="layui-input-inline" style="width: 75px;">                                                                                                                            ' );
+		buf.push('                <input type="number" name="highWorkingLife" placeholder="最高" autocomplete="off" class="layui-input">                                                                                 ' );
+		buf.push('            </div>                                                                                                                                                                           ' );
+		
 		buf.push('        </div>                                                                                                                                                                               ' );
 		buf.push('    </div>                                                                                                                                                                                   ' );
 		buf.push('                                                                                                                                                                                             ' );
 		buf.push('    <div class="layui-form-item">                                                                                                                                                            ' );
 		buf.push('        <label class="layui-form-label">工作地址</label>                                                                                                                                     ' );
 		buf.push('        <div class="layui-input-block">                                                                                                                                                      ' );
-		buf.push('            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">                                                              ' );
+		buf.push('            <input type="text" name="workAddress" lay-verify="title" autocomplete="off" placeholder="" class="layui-input">                                                              ' );
 		buf.push('        </div>                                                                                                                                                                               ' );
 		buf.push('    </div>                                                                                                                                                                                   ' );
 		buf.push('                                                                                                                                                                                             ' );
 		buf.push('    <div class="layui-form-item layui-form-text">                                                                                                                                            ' );
 		buf.push('        <label class="layui-form-label">职责描述</label>                                                                                                                                     ' );
 		buf.push('        <div class="layui-input-block">                                                                                                                                                      ' );
-		buf.push('            <textarea placeholder="请输入内容" class="layui-textarea"></textarea>                                                                                                               ' );
+		buf.push('            <textarea placeholder="" name="positionDesc" class="layui-textarea"></textarea>                                                                                                               ' );
 		buf.push('        </div>                                                                                                                                                                               ' );
 		buf.push('    </div>                                                                                                                                                                                   ' );
 		buf.push('    <div class="layui-form-item layui-form-text">                                                                                                                                            ' );
 		buf.push('        <label class="layui-form-label">任职要求</label>                                                                                                                                     ' );
 		buf.push('        <div class="layui-input-block">                                                                                                                                                      ' );
-		buf.push('           <textarea placeholder="请输入内容" class="layui-textarea"></textarea>                                                                                                         ' );
+		buf.push('           <textarea placeholder="" name="positionRequirements" class="layui-textarea"></textarea>                                                                                                         ' );
 		buf.push('        </div>                                                                                                                                                                               ' );
 		buf.push('    </div>                                                                                                                                                                                   ' );
 		buf.push('                                                                                                                                                                                             ' );
 		
 		buf.push('    <div class="layui-form-item">                                                                                                                                                            ');
 		buf.push('      <div class="layui-input-block">                                                                                                                                                        ');
-		buf.push('        <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>                                                                                                         ');
+		buf.push('        <button class="layui-btn" lay-submit lay-filter="ntq-employ-add-btn">立即提交</button>                                                                                                         ');
 		buf.push('        <button type="reset" class="layui-btn layui-btn-primary">重置</button>                                                                                                               ');
 		buf.push('      </div>                                                                                                                                                                                 ');
 		buf.push('    </div>                                                                                                                                                                                   ');
@@ -243,6 +231,8 @@ PageInfo.register({"type":"Obj","info":function(){
 			    show(){
 			    	 
 			    	var $this = this;
+			    	var request = PageInfo.FunUtil.Global.API;
+			    	
 			    	
 			    	 
 			    	layui.use(['form', 'layedit', 'laydate'], function(){
@@ -251,7 +241,6 @@ PageInfo.register({"type":"Obj","info":function(){
 					  ,layedit = layui.layedit
 					  ,laydate = layui.laydate;
 					 	form.render('');
-					  //创建一个编辑器
 					 
 					  //自定义验证规则
 					  form.verify({
@@ -275,10 +264,12 @@ PageInfo.register({"type":"Obj","info":function(){
 					  });
 					  
 					  //监听提交
-					  form.on('submit(demo1)', function(data){
-					    layer.alert(JSON.stringify(data.field), {
-					      title: '最终的提交信息'
-					    })
+					  form.on('submit(ntq-employ-add-btn)', function(data){
+					    
+					    
+					    console.log(data);
+					    
+					    
 					    return false;
 					  });
 					});
