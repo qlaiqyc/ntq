@@ -46,15 +46,15 @@ module.exports = function (grunt) {
 	
 	
 
-    // 构建任务配置
+    // 鏋勫缓浠诲姟閰嶇疆
     grunt.initConfig({
 
-        //读取package.json的内容，形成个json数据
+        //璇诲彇package.json鐨勫唴瀹癸紝褰㈡垚涓猨son鏁版嵁
         pkg: grunt.file.readJSON('package.json'),
         clean: ["dist"],
-        //压缩js
+        //鍘嬬缉js
         uglify: {
-            //文件头部输出信息
+            //鏂囦欢澶撮儴杈撳嚭淇℃伅
             options: {
                 banner: '/*! <%= pkg.name %> QL <%= grunt.template.today("yyyy-mm-dd HH:mm:ss") %> */\n'
             },
@@ -62,7 +62,7 @@ module.exports = function (grunt) {
                 files: [
                     {
                         expand: true,
-                        //相对路径
+                        //鐩稿璺緞
                         cwd: FunUtil.Global.dist+'/tmp/',
                         src: '**/*.js',
                         dist:FunUtil.Global.dist+'/tmp/'
@@ -70,12 +70,12 @@ module.exports = function (grunt) {
                 ]
             }
         },
-        //压缩css
+        //鍘嬬缉css
         cssmin: {
-            //文件头部输出信息
+            //鏂囦欢澶撮儴杈撳嚭淇℃伅
             options: {
                 banner: '/*! <%= pkg.name %> QL <%= grunt.template.today("yyyy-mm-dd HH:mm:ss") %> */\n',
-                //美化代码
+                //缇庡寲浠ｇ爜
                 beautify: {
                    
                     ascii_only: true
@@ -85,7 +85,7 @@ module.exports = function (grunt) {
                 files: [
                     {
                         expand: true,
-                        //相对路径
+                        //鐩稿璺緞
                         cwd: FunUtil.Global.assets+'/',
                         src: '**/*.css',
                         dist: FunUtil.Global.dist+'/build/assets/'
