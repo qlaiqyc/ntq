@@ -36,8 +36,7 @@ module.exports = function (grunt) {
 		   
 		   if(isFile) FunUtil.Global.files[p] = abspath;
 		   
-		});
-		grunt.file.mkdir(FunUtil.Global.dist+"/build/assets/");
+		}); 
 	};
 	
 	
@@ -46,15 +45,15 @@ module.exports = function (grunt) {
 	
 	
 
-    // 鏋勫缓浠诲姟閰嶇疆
+    // 构建任务配置
     grunt.initConfig({
 
-        //璇诲彇package.json鐨勫唴瀹癸紝褰㈡垚涓猨son鏁版嵁
+        //读取package.json的内容，形成个json数据
         pkg: grunt.file.readJSON('package.json'),
         clean: ["dist"],
-        //鍘嬬缉js
+        //压缩js
         uglify: {
-            //鏂囦欢澶撮儴杈撳嚭淇℃伅
+            //文件头部输出信息
             options: {
                 banner: '/*! <%= pkg.name %> QL <%= grunt.template.today("yyyy-mm-dd HH:mm:ss") %> */\n'
             },
@@ -62,20 +61,21 @@ module.exports = function (grunt) {
                 files: [
                     {
                         expand: true,
-                        //鐩稿璺緞
-                        cwd: FunUtil.Global.dist+'/tmp/',
-                        src: '**/*.js',
-                        dist:FunUtil.Global.dist+'/tmp/'
+						cwd:FunUtil.Global.dist+ '/tmp/',
+						src: '**/*.js',
+						dest: FunUtil.Global.dist+'/build/assets/js'
+						
+						 
                     }
                 ]
             }
         },
-        //鍘嬬缉css
+        //压缩css
         cssmin: {
-            //鏂囦欢澶撮儴杈撳嚭淇℃伅
+            //文件头部输出信息
             options: {
                 banner: '/*! <%= pkg.name %> QL <%= grunt.template.today("yyyy-mm-dd HH:mm:ss") %> */\n',
-                //缇庡寲浠ｇ爜
+                //美化代码
                 beautify: {
                    
                     ascii_only: true
@@ -84,34 +84,17 @@ module.exports = function (grunt) {
             my_target: {
                 files: [
                     {
-                        expand: true,
-                        //鐩稿璺緞
-                        cwd: FunUtil.Global.assets+'/',
-                        src: '**/*.css',
-                        dist: FunUtil.Global.dist+'/build/assets/'
+                         
+						
+						expand: true,
+						cwd: FunUtil.Global.assets+'/css/',
+						src: ['*.css'],
+						dest: FunUtil.Global.dist+'/build/assets/css/',
                     } 
                 ]
             }
         },
-
-        copy: {
-            main: {
-                files: [
-                    // includes files within path
-//                    {expand: true, src: ['static/*'], dist: 'build/src', filter: 'isFile'},
-
-                    // includes files within path and its sub-directories
-
-                    {   expand: true,
-                        src: ['html/**'],
-                        dist: 'dist/build/',
-                        filter: "isFile"
-                    },
-                
-					 
-                ]
-            },
-		},
+ 
 		 babel: {
 				options: {
 					sourceMap: true,
@@ -122,12 +105,6 @@ module.exports = function (grunt) {
 				}
 			}		
 		 
-        
-	
-	
- 
-
- 
     });
 	
 	grunt.registerTask("bable4getFiles", "", function() {
@@ -140,9 +117,9 @@ module.exports = function (grunt) {
 	
     require('load-grunt-tasks')(grunt);
  
-  //  grunt.registerTask('default', ["clean",'bable4getFiles','babel','bable4delmap','uglify']);
+    grunt.registerTask('default', ["clean",'bable4getFiles','babel','bable4delmap','uglify']);
  
-	grunt.registerTask('default', ['cssmin']);
+	//grunt.registerTask('default', ['uglify']);
  
 
  
