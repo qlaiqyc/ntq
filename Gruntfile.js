@@ -7,17 +7,18 @@ module.exports = function (grunt) {
 	FunUtil.Global = {
 		"files":{},
 		"assets":"assets",
-		"dist":"dist/build",
+		"dist":"dist",
+		
 	};
 	
 	
-	FunUtil.bable4del = function(){
+	FunUtil.bable4delmap = function(){
 		
-		grunt.file.recurse(rootdir, function callback(abspath, rootdir, subdir, filename) {
+		grunt.file.recurse(FunUtil.Global.dist, function callback(abspath, rootdir, subdir, filename) {
 		   var isFile = true;
 		   if(filename.indexOf(".map") < 0) isFile = false;
 		   
-		   //if(isFile) grunt.file.delete(abspath)
+		   if(isFile) grunt.file.delete(abspath)
 		   
 		});
 		
@@ -25,18 +26,18 @@ module.exports = function (grunt) {
 	
 	
 	FunUtil.bable4getFiles = function(){
-		
-		grunt.file.recurse(rootdir, function callback(abspath, rootdir, subdir, filename) {
+		//grunt.file.mkdir(FunUtil.Global.dist);
+		grunt.file.recurse(FunUtil.Global.assets+"/js/", function callback(abspath, rootdir, subdir, filename) {
 		   var isFile = true;
 		   if(filename.indexOf(".js") < 0) isFile = false;
-		   if(abspath.indexOf("plug/Qlive") > 0 ) isFile = true;
+		   if(abspath.indexOf("plug/Qlive") >= 0 ) isFile = true;
 		   
-		   var p = FunUtil.Global.dist+"/"+abspath.split(FunUtil.Global.assets)[1];
+		   var p = FunUtil.Global.dist+"/tmp/"+abspath.split(FunUtil.Global.assets)[1];
 		   
 		   if(isFile) FunUtil.Global.files[p] = abspath;
 		   
 		});
-		
+		grunt.file.mkdir(FunUtil.Global.dist+"/build/assets/");
 	};
 	
 	
@@ -45,38 +46,38 @@ module.exports = function (grunt) {
 	
 	
 
-    // æ„å»ºä»»åŠ¡é…ç½®
+    // ¹¹½¨ÈÎÎñÅäÖÃ
     grunt.initConfig({
 
-        //è¯»å–package.jsonçš„å†…å®¹ï¼Œå½¢æˆä¸ªjsonæ•°æ®
+        //¶ÁÈ¡package.jsonµÄÄÚÈİ£¬ĞÎ³É¸öjsonÊı¾İ
         pkg: grunt.file.readJSON('package.json'),
-        clean: [buildDir],
-        //å‹ç¼©js
+        clean: ["dist"],
+        //Ñ¹Ëõjs
         uglify: {
-            //æ–‡ä»¶å¤´éƒ¨è¾“å‡ºä¿¡æ¯
+            //ÎÄ¼şÍ·²¿Êä³öĞÅÏ¢
             options: {
-                banner: '/*! <%= pkg.name %> QL<%= grunt.template.today("yyyy-mm-dd") %> */\n'
+                banner: '/*! <%= pkg.name %> QL <%= grunt.template.today("yyyy-mm-dd HH:mm:ss") %> */\n'
             },
             my_target: {
                 files: [
                     {
                         expand: true,
-                        //ç›¸å¯¹è·¯å¾„
-                        cwd: FunUtil.Global.dist+'/assets/js/,
+                        //Ïà¶ÔÂ·¾¶
+                        cwd: FunUtil.Global.dist+'/tmp/',
                         src: '**/*.js',
-                        dist: FunUtil.Global.dist+'/assets/js/
+                        dist:FunUtil.Global.dist+'/tmp/'
                     }
                 ]
             }
         },
-        //å‹ç¼©css
+        //Ñ¹Ëõcss
         cssmin: {
-            //æ–‡ä»¶å¤´éƒ¨è¾“å‡ºä¿¡æ¯
+            //ÎÄ¼şÍ·²¿Êä³öĞÅÏ¢
             options: {
-                banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
-                //ç¾åŒ–ä»£ç 
+                banner: '/*! <%= pkg.name %> QL <%= grunt.template.today("yyyy-mm-dd HH:mm:ss") %> */\n',
+                //ÃÀ»¯´úÂë
                 beautify: {
-                    //ä¸­æ–‡asciiåŒ–ï¼Œéå¸¸æœ‰ç”¨ï¼é˜²æ­¢ä¸­æ–‡ä¹±ç çš„ç¥é…ç½®
+                   
                     ascii_only: true
                 }
             },
@@ -84,10 +85,10 @@ module.exports = function (grunt) {
                 files: [
                     {
                         expand: true,
-                        //ç›¸å¯¹è·¯å¾„
+                        //Ïà¶ÔÂ·¾¶
                         cwd: FunUtil.Global.assets+'/',
                         src: '**/*.css',
-                        dist: FunUtil.Global.dist+'/assets/'
+                        dist: FunUtil.Global.dist+'/build/assets/'
                     } 
                 ]
             }
@@ -133,15 +134,16 @@ module.exports = function (grunt) {
 		FunUtil.bable4getFiles();
 	});
 	
-	grunt.registerTask("bable4del", "", function() {
-		FunUtil.bable4del();
+	grunt.registerTask("bable4delmap", "", function() {
+		FunUtil.bable4delmap();
 	});
 	
     require('load-grunt-tasks')(grunt);
  
-    grunt.registerTask('default', ['bable4getFiles',"babel","bable4del", 'cssmin']);
+  //  grunt.registerTask('default', ["clean",'bable4getFiles','babel','bable4delmap','uglify']);
  
-
+	grunt.registerTask('default', ['cssmin']);
+ 
 
  
   
