@@ -1,4 +1,8 @@
 PageInfo.register({"type":"Pub","info":(function(){
+	var require = PageInfo.FunUtil.common4require;
+				 require("jquery");
+	
+	
 	
 	var PageObj	= {};
 	PageObj.id	= "qlive-body";

@@ -9,8 +9,13 @@
 	 * hide: 页面hide  时每次执行
 	 * share:页面 show 时每次执行
 	 * update  (其他页 ：主要是为了用户体验  预先执行请求判断) +（ 当前模块页面 发生  交互 ，数据变换时触发 Update 动作  自己调用自己，触发执行） 
-	 * 
 	 * destory 主要是因为DOM 有长度限制销毁 dom 关系链较长的dom  类似微信的打开多个tab限制， （初版暂时不做）
+	 * 
+	 * 
+	 * 
+	 * ========配置信息==========
+	 * config
+	 * 
 	 * */
 	
 	var FunUtil		= {};
@@ -58,6 +63,7 @@
 		
 		return execuFun[data.type]();
 	};
+	
 	FunUtil.common4class = function(data){
 		
 		/*
@@ -156,7 +162,6 @@
  			$this.remove();
  		},200);
  	};
-	
 	
 	/*
 	 * common 4 缓存
@@ -382,32 +387,73 @@
  
 	};
 	
-	
 	//按需加载异步请求js
 	FunUtil.common4GetJS = function(data){
 		var script	= document.createElement("script");
 		script.type	= "text/javascript";
 		script.src	= data.url;
-		script.async= "async";
-		document.body.appendChild(script);
-　　　　if(script.readyState){ 
-　　　　　　script.onreadystatechange=function(){
-　　　　　　　　if(script.readyState=='complete'||script.readyState=='loaded'){
-　　　　　　　　　　script.onreadystatechange=null;
-　　　　　　　　　　data.callback();
-				   script.remove();
-　　　　　　　　}
-　　　　　　}
-　　　　}else{     
-　　　　　　 script.onload=function(){
-				data.callback();
-				script.remove();
-			}
-　　　　}
+		String.HasText(data.async) ? data.async: (script.async="async");
+		if(String.HasText(data.type) && data.type == "head") {
+			document.head.appendChild(script);
+		}else{
+			document.body.appendChild(script);
+		}
+	　　　　if(script.readyState){ 
+	　　　　　　script.onreadystatechange=function(){
+	　　　　　　　　if(script.readyState=='complete'||script.readyState=='loaded'){
+	　　　　　　　　　　	script.onreadystatechange=null;
+	　　　　　　　　　　	data.callback();
+					//script.remove();
+	　　　　　　　　}
+	　　　　　　}
+	　　　　}else{     
+	　　　　　　 script.onload=function(){
+					data.callback();
+					//script.remove();
+				}
+	　　　　};
 	};
 	
-	PageInfo.init4Obj = function(data){
+	FunUtil.common4require = function(str){
+		/**
+		 *思路:
+		 *001  判断是否在config 中存在这个别名? 请求 加载,  顶部
+		 *002  判断是否是/开始,若是者引用当前模块 项目上下的的 js  底部
+ 		 *
+		 */
 		
+		var path = FunUtil.Global.config().paths;
+		var type = "foot";
+		
+		var loadJS = window.location.origin+str;
+		
+		if(FunUtil.common4Prop({"type":"isIN","in":str,"obj":path}))  {loadJS = path[str]; type="head"}
+		
+		var execuFun = {};
+		
+		execuFun.head = function(){
+			FunUtil.common4GetJS({"url":loadJS,"async":"async","type":"head","callback":function(data){
+				console.log("加载成功==="+loadJS);
+			}});
+		};
+		
+		/*默认是foot */
+		execuFun.foot = function(){
+			FunUtil.common4GetJS({"url":loadJS,"async":"async","callback":function(data){
+				console.log("加载成功==="+loadJS);
+			}});
+		};
+		
+		execuFun[type]();
+		
+		
+		
+		
+		
+	};
+	
+	
+	PageInfo.init4Obj = function(data){
 		FunUtil.Global.Page = FunUtil.common4class(data);
 	};
 	
@@ -435,12 +481,22 @@
 	};
 	
 	PageInfo.init4Pub = function(data){
+		FunUtil.common4require("jquery");
+		
 		
 		//根据设置默认请求  加载JS 数目
 		FunUtil.Global.id = data.info.id;
 		
 		data.info.fun();
 		
+	};
+	
+	
+	PageInfo.init4config = function(data){
+		//加载配置信息丢入全局变量  (由于第一版是基于 Jquery 而言,所以会预加载Jquery)
+		
+		FunUtil.Global.config = data.info;
+		 
 	};
 	
 	
