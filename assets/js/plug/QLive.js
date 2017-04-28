@@ -414,7 +414,7 @@
 	　　　　};
 	};
 	
-	FunUtil.common4require = function(str){
+	FunUtil.common4require = function(str,callback){
 		/**
 		 *思路:
 		 *001  判断是否在config 中存在这个别名? 请求 加载,  顶部
@@ -433,14 +433,14 @@
 		
 		execuFun.head = function(){
 			FunUtil.common4GetJS({"url":loadJS,"async":"async","type":"head","callback":function(data){
-				console.log("加载成功==="+loadJS);
+				if(String.HasText(callback))  callback();
 			}});
 		};
 		
 		/*默认是foot */
 		execuFun.foot = function(){
 			FunUtil.common4GetJS({"url":loadJS,"async":"async","callback":function(data){
-				console.log("加载成功==="+loadJS);
+				if(String.HasText(callback))  callback();
 			}});
 		};
 		
@@ -481,14 +481,11 @@
 	};
 	
 	PageInfo.init4Pub = function(data){
-		FunUtil.common4require("jquery");
-		
-		
-		//根据设置默认请求  加载JS 数目
-		FunUtil.Global.id = data.info.id;
-		
-		data.info.fun();
-		
+		FunUtil.common4require("jquery",function(){
+			//根据设置默认请求  加载JS 数目
+			FunUtil.Global.id = data.info.id;
+			data.info.fun();
+		});
 	};
 	
 	
