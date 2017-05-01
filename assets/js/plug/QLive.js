@@ -11,8 +11,6 @@
 	 * update  (其他页 ：主要是为了用户体验  预先执行请求判断) +（ 当前模块页面 发生  交互 ，数据变换时触发 Update 动作  自己调用自己，触发执行） 
 	 * destory 主要是因为DOM 有长度限制销毁 dom 关系链较长的dom  类似微信的打开多个tab限制， （初版暂时不做）
 	 * 
-	 * 
-	 * 
 	 * ========配置信息==========
 	 * config
 	 * 
@@ -34,6 +32,7 @@
 			return true;
 		};
 	};
+	
 	FunUtil.init();
 	
 	FunUtil.common4getUrlParam = function() { 
@@ -73,7 +72,7 @@
 		 * */
 		
 		
-		var IOBJ = data.info();
+		var IOBJ = data;
 		
 		class POBJ {
 			constructor(arg) {
@@ -189,14 +188,17 @@
 	/*
 	 * 全局对象属性
 	 * 
-	 * 1. Router : 页面路由管理 ｛id,page,state｝
+	 * 1.Router : 页面路由管理 ｛id,page,state｝
 	 * 	  id:路由
 	 *    page:页面对象
 	 *    state:页面状态
-	 * 2. Page   : 新注册的对象 通过page对象中转到Router中
-	 * 3.id: 页面对象 外包围id
-	 * 4.Objs: 记录当前页面数据集合
-	 * 5.Obj :记录传递的对象
+	 * 2.Page : 新注册的对象 通过page对象中转到Router中
+	 * 3.plug： 引入插件是的传参 
+	 * 4.id: 页面对象 外包围id
+	 * 5.name:项目名称
+	 * 
+	 * ---一般情况公用----
+	 * 6.config,基础配置信息（一般指的是，常用cdn 或者插件）  
 	 * 注意：刷新页面
 	 * */
 	
@@ -214,7 +216,7 @@
 	/*   测试 */
 	
 	 
-	//栈队数组管理
+	//栈队数组管
 	FunUtil.common4Stack = function(data){
 		var  execuFun = {};
 		
@@ -237,7 +239,6 @@
 		
 		execuFun[data.type]();
 	};
-	
 	
 	
 	/*
@@ -287,7 +288,49 @@
 		
 		var execuFun = {};
 		
-		execuFun.noPre = function(){
+		execuFun.pub = function(data){
+			var futil ={};
+			
+			var url ="/ntq"+ FunUtil.common4hash({"type":"js","key":id+".js"});
+	 	
+			futil.getJs = async function(){
+				/**
+				 * 第一步加载所需JS  成功后 输出对象  require 加载， 然后执行 相应方法
+				 * */
+				var param = await FunUtil.common4require(url);
+				
+				var require = param.require;
+				var keys = Object.keys(require);
+				var vals = Object.values(require);
+				var len = keys.length;
+				
+				
+				eval('var '+keys.join(",") +";");// 这个实在是没有办法
+				
+				for(var i =0 ;i<len;i++){  //加载异步 所包含JS
+					 keys[i] = await FunUtil.common4require(vals[i]);
+				}
+				
+				delete FunUtil.Global.Page.require;
+				
+			 	Router = param;
+				
+				FunUtil.Global.Router[nid] = {"id":id,"page":Router,"state":"show"};
+				
+				$main.append('<div class="'+id+'">'+Router.data().HtmUtil.layout()+'</div').show();
+				Router.init();
+				Router.show();
+			 	
+			};
+			
+			
+			futil.getJs()
+			
+			
+			
+		};
+		
+		execuFun.noPre =  function(){
 		 
 			//判断对象是否加载，加载？ 执行 show : 请求JS 成功后回调 执行init
 			if(String.HasText(Npage.page)) {
@@ -297,16 +340,7 @@
 				
 				$main.find("div."+id).show();
 			}else{
-				var url = "./"+FunUtil.common4hash({"type":"js","key":id+".js"});
-				FunUtil.common4GetJS({"url":url,"callback":function(data){
-					
-					Router = FunUtil.Global.Page;
-					FunUtil.Global.Router[nid] = {"id":id,"page":Router,"state":"show"};
-					
-					$main.append('<div class="'+id+'">'+Router.data().HtmUtil.layout()+'</div').show();
-					Router.init();
-					Router.show();
-				}});
+				execuFun.pub();				
 			}
 				 
 		};
@@ -328,19 +362,7 @@
 				FunUtil.Global.Router[nid] = Npage;
 				$main.find("div."+Npage.id).show();
 			}else{
-				var url = "./"+FunUtil.common4hash({"type":"js","key":id+".js"});
-				FunUtil.common4GetJS({"url":url,"callback":function(data){
-					
-					Router = FunUtil.Global.Page;
-					
-					FunUtil.Global.Router[nid] = {"id":id,"page":Router,"state":"show"};
-					
-					$main.append('<div class="'+id+'">'+Router.data().HtmUtil.layout()+'</div').show();
-					Router.init();
-					
-					Router.data().FunUtil.Global.parent = Opage.page.data().FunUtil.Global.child;
-					Router.show();
-				}});
+			  	execuFun.pub();		
 			}
 			
 			
@@ -387,8 +409,13 @@
  
 	};
 	
-	//按需加载异步请求js
-	FunUtil.common4GetJS = function(data){
+	/**
+	 * 
+	 * 按需加载异步请求js
+	
+	 * 
+	 */
+	FunUtil.common4GetJS =   function(data){
 		var script	= document.createElement("script");
 		script.type	= "text/javascript";
 		script.src	= data.url;
@@ -403,68 +430,69 @@
 	　　　　　　　　if(script.readyState=='complete'||script.readyState=='loaded'){
 	　　　　　　　　　　	script.onreadystatechange=null;
 	　　　　　　　　　　	data.callback();
-					//script.remove();
+					script.remove();
 	　　　　　　　　}
 	　　　　　　}
 	　　　　}else{     
 	　　　　　　 script.onload=function(){
 					data.callback();
-					//script.remove();
+					script.remove();
 				}
 	　　　　};
 	};
 	
-	FunUtil.common4require = function(str,callback){
+	FunUtil.common4require = function(str){
 		/**
 		 *思路:
 		 *001  判断是否在config 中存在这个别名? 请求 加载,  顶部
 		 *002  判断是否是/开始,若是者引用当前模块 项目上下的的 js  底部
+		 *003: 是否同时并发异步 加载请求 多个 各自无强相关的js （适用于 各级不关的JS）
+	 	 *004: 是否同步 单线程 加载（适用于 各级相关的JS） (占时单个进行)
  		 *
 		 */
 		
-		var path = FunUtil.Global.config().paths;
-		var type = "foot";
 		
-		var loadJS = window.location.origin+str;
-		
-		if(FunUtil.common4Prop({"type":"isIN","in":str,"obj":path}))  {loadJS = path[str]; type="head"}
-		
-		var execuFun = {};
-		
-		execuFun.head = function(){
-			FunUtil.common4GetJS({"url":loadJS,"async":"async","type":"head","callback":function(data){
-				if(String.HasText(callback))  callback();
+		var result = new Promise(resolve => {
+		     
+		    var path = FunUtil.Global.config().paths;
+			var type = "foot";
+			
+			var loadJS = window.location.origin+str;
+			
+			if(FunUtil.common4Prop({"type":"isIN","in":str,"obj":path}))  {loadJS = path[str]; type="head"}
+			
+			var execuFun = {};
+		     
+		     
+		    var data = {"url":loadJS};
+			execuFun.head =   function(){
+				FunUtil.common4GetJS({"url":loadJS,"async":"async","callback":function(data){
+				
+				resolve(FunUtil.Global.plug);
 			}});
-		};
+				 
+			};
+			
+			execuFun.foot = function(){
+				FunUtil.common4GetJS({"url":loadJS,"async":"async","callback":function(data){
+					resolve(FunUtil.Global.Page);
+				}});
+			};
+			  
+			  
+			execuFun[type]();
+		     
+		     
+		     
+		});
 		
-		/*默认是foot */
-		execuFun.foot = function(){
-			FunUtil.common4GetJS({"url":loadJS,"async":"async","callback":function(data){
-				if(String.HasText(callback))  callback();
-			}});
-		};
 		
-		execuFun[type]();
-		
-		
-		
-		
-		
+		return result;
 	};
 	
-	
-	PageInfo.init4Obj = function(data){
-		FunUtil.Global.Page = FunUtil.common4class(data);
-	};
-	
-	PageInfo.init4Global = function(data){
-		
-		FunUtil.Global.API = data.info;
-	};
-	
-	PageInfo.init4Router = function(data){
+	FunUtil.common4Router  = function(data){
 		//初始化 设置路由 信息
-		var router	= data.info;
+		var router	= data;
 		var len		= router.list.length;
 		var flag 	= router.flag;
 		
@@ -480,14 +508,60 @@
 		
 	};
 	
-	PageInfo.init4Pub = function(data){
-		FunUtil.common4require("jquery",function(){
-			//根据设置默认请求  加载JS 数目
-			FunUtil.Global.id = data.info.id;
-			data.info.fun();
-		});
+	FunUtil.common4Pub     = function(data){
+		FunUtil.Global.API = data;
 	};
 	
+	FunUtil.common4Global  = function(data){
+		FunUtil.Global.id = data.id;
+		FunUtil.Global.name = data.name;
+		
+	};
+	
+	
+	
+	PageInfo.init4plug = function(data){
+		 
+		FunUtil.Global.plug = data.info(); 
+	};
+	
+	PageInfo.init4Obj = function(data){
+		var obj = data.info();
+		
+		 FunUtil.Global.Page = FunUtil.common4class(obj.page);
+		 FunUtil.Global.Page.require = obj.require;
+	};
+ 
+	PageInfo.init4Start = function(data){
+		 //对外暴漏 require 方法 应该是个数组对象  迭代请求结束后,再执行下面的方法
+	 	
+	 	var futil ={};
+	 	
+		futil.getJs = async function(param){
+			var require = param.require;
+			var keys = Object.keys(require);
+			var vals = Object.values(require);
+			var len = keys.length;
+			
+			
+			eval('var '+keys.join(",") +";");// 这个实在是没有办法
+			
+			for(var i =0 ;i<len;i++){
+				 keys[i] = await FunUtil.common4require(vals[i]);
+			}
+			
+			FunUtil.common4Global(param.Global);
+			FunUtil.common4Router(param.Router);
+			FunUtil.common4Pub(param.Pub);
+			
+		 	
+		};
+		
+		
+		futil.getJs(data.info())
+		
+		
+	};
 	
 	PageInfo.init4config = function(data){
 		//加载配置信息丢入全局变量  (由于第一版是基于 Jquery 而言,所以会预加载Jquery)
@@ -499,10 +573,18 @@
 	
 	PageInfo.register = function(data){
 		
+		//在执行 之前 判断是否有require  如果有则 等待 require  全部结束后再执行
 		
 		//所有对象都通过注册进来
 		
-		PageInfo["init4"+data.type](data);
+		if(data.type == "Start"){
+			PageInfo["init4"+data.type](data);			
+		}else{
+			
+			PageInfo["init4"+data.type](data);
+		}
+		
+		
 	};
 	PageInfo.FunUtil = FunUtil;
 	

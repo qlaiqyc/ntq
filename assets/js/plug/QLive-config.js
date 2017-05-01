@@ -9,7 +9,8 @@ PageInfo.register({"type":"config","info":function(){
 	 var result = {
 	 	
 	 	paths:{
-	 		"jquery":"https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"
+	 		"jquery":"../assets/js/plug/jquery-3.2.0.js",
+	 		"layui":"../assets/js/plug/layui/layui.js"
 	 	}
 	 };
 	 

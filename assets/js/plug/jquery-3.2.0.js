@@ -1,3 +1,9 @@
+
+PageInfo.register({"type":"plug","info":(function(){
+	
+	 
+
+
 /*!
  * jQuery JavaScript Library v3.2.0
  * https://jquery.com/
@@ -10236,9 +10242,14 @@ jQuery.noConflict = function( deep ) {
 if ( !noGlobal ) {
 	window.jQuery = window.$ = jQuery;
 }
-
-
+ 
+	
+	
+	
+	return jQuery;
+	} );
 
 
 return jQuery;
-} );
+
+})()});

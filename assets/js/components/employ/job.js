@@ -1,6 +1,7 @@
 PageInfo.register({"type":"Obj","info":function(){
 	var FunUtil = {};
     var HtmUtil = {};
+    var PageObj = {};
 	
 	
 	HtmUtil.layout   = function(){
@@ -127,8 +128,6 @@ PageInfo.register({"type":"Obj","info":function(){
 
 	};
 	
-	
-	
 	HtmUtil.common4update  = function(data){
 		
 		var buf = [];
@@ -246,8 +245,12 @@ PageInfo.register({"type":"Obj","info":function(){
 		}
 	};//传参对象
 	
+	PageObj.require = {
+		"$":"jquery",
+		"layui":"layui"
+	};
 	
-	var page = {
+	PageObj.page = {
 			    data(){
 			        var param = {};
 			        
@@ -356,6 +359,6 @@ PageInfo.register({"type":"Obj","info":function(){
 			
 			};
 	
-	return page;
+	return PageObj;
 }});
 
