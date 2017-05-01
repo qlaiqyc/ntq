@@ -188,10 +188,12 @@
 	/*
 	 * 全局对象属性
 	 * 
-	 * 1.Router : 页面路由管理 ｛id,page,state｝
-	 * 	  id:路由
+	 * 1.Router : 页面路由管理 
+	 * 	  id:路由 
+	 * 	  jid: 模块js 路径
 	 *    page:页面对象
 	 *    state:页面状态
+	 *  1.1:  Jids : 路由映射 id: jid
 	 * 2.Page : 新注册的对象 通过page对象中转到Router中
 	 * 3.plug： 引入插件是的传参 
 	 * 4.id: 页面对象 外包围id
@@ -273,13 +275,13 @@
 	 * 2. 隐藏  当前展示对象  （存在 ？ 执行当前对象的 hide 方法， :  不做操作  ）
 	 * */
 	FunUtil.common4Page = function(data){
-		data.id = data.id.split("?")[0];
+		data.jid = data.jid.split("?")[0];
 		
 		var $main	= $("#"+FunUtil.Global.id);
 		var Router	= FunUtil.Global.Router;
 		Router.unshift({});
-		var id		= data.id;
-		var nid		= Router.findIndex(function(value, index, arr){	if(value.id == id) return index;  }) -1;
+		var id		= data.jid;
+		var nid		= Router.findIndex(function(value, index, arr){	if(value.jid == id) return index;  }) -1;
 		var oid		= Router.findIndex(function(value, index, arr){ if(value.state == "show") return index; })-1;
 		Router.shift();
 		
@@ -291,7 +293,7 @@
 		execuFun.pub = function(data){
 			var futil ={};
 			
-			var url ="/ntq"+ FunUtil.common4hash({"type":"js","key":id+".js"});
+			var url ="/"+FunUtil.Global.name+ FunUtil.common4hash({"type":"js","key":id+".js"});
 	 	
 			futil.getJs = async function(){
 				/**
@@ -315,7 +317,9 @@
 				
 			 	Router = param;
 				
-				FunUtil.Global.Router[nid] = {"id":id,"page":Router,"state":"show"};
+				FunUtil.Global.Router[nid].page = Router;
+				FunUtil.Global.Router[nid].state = "show";
+				
 				
 				$main.append('<div class="'+id+'">'+Router.data().HtmUtil.layout()+'</div').show();
 				Router.init();
@@ -383,17 +387,31 @@
 		};
 		
 		execuFun.hash = function(){
-			execuFun.pub();
-			var defid = FunUtil.common4hash({"type":"decode","key":FunUtil.Global.Router[0].id});
+			
+			
+			var ecfun = function(){
+				var defid = FunUtil.common4hash({"type":"decode","key":FunUtil.Global.Router[0].jid});
+				var key = defid;
+				var hash = location.hash;
+				if(String.HasText(location.hash))  {
+					//判断是否合法  ？ 映射JS ,否，进入主页
+					var ids = hash.split("?")[0];
+				
+					ids = ids.substring(2);
+					var jid = FunUtil.Global.Jids[ids];
+					
+					if(String.HasText(jid)) key = "#"+jid;
+					
+				}
+				FunUtil.common4Page({"jid":FunUtil.common4hash({"type":"encode","key":key})});//触发hash 事件
+			};
 			 
 			window.onhashchange = function(e){
 				//通过hash 值进行判断
+				ecfun();
 				
-				FunUtil.common4Page({"id":FunUtil.common4hash({"type":"encode","key":(String.HasText(location.hash) ? ("#/assets/js/components/"+location.hash.substr(2)) :(defid))})});//触发hash 事件
 			};
-			
-			FunUtil.common4Page({"id":FunUtil.common4hash({"type":"encode","key":(String.HasText(location.hash) ? ("#/assets/js/components/"+location.hash.substr(2)) :(defid))})});//触发hash 事件
-		
+			ecfun();
 		};
 		
 		
@@ -493,16 +511,22 @@
 	FunUtil.common4Router  = function(data){
 		//初始化 设置路由 信息
 		var router	= data;
-		var len		= router.list.length;
+		
 		var flag 	= router.flag;
+		
+		var keys  = Object.keys(router.list);
+		var valus = Object.values(router.list);
+		var len	  = keys.length;
+		
 		
 		var nlist = [];
 		
 		if(flag == "hash"){
-			for (var  i =0 ;i<len;i++) nlist.push({"id":FunUtil.common4hash({"type":"encode","key":("#"+router.list[i])}),"page":"","state":""});
+			for (var  i =0 ;i<len;i++) nlist.push({"id":FunUtil.common4hash({"type":"encode","key":(keys[i])}),"jid":FunUtil.common4hash({"type":"encode","key":("#"+valus[i])}), "page":"","state":""});
 		}
 		
 		FunUtil.Global.Router = nlist;
+		FunUtil.Global.Jids	  = router.list;
 		
 		FunUtil.register4Evet({"type":flag});
 		

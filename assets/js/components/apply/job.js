@@ -308,8 +308,6 @@ PageInfo.register({"type":"Obj","info":function(){
 			    show(){
 			    	 
 			    	var $this = this;
-			    	
-			    	 
 			    	layui.use(['form', 'layedit', 'laydate','laypage', 'layer'], function(){
 					  var form = layui.form()
 					  ,layer = layui.layer
@@ -324,11 +322,9 @@ PageInfo.register({"type":"Obj","info":function(){
 							pages: 100,
 							skip: true
 						});
-					  
-					});
-					
-					
-					$("span.ntq-apply-job-condition-num").unbind("click").bind("click",function(){
+						
+						
+						$("span.ntq-apply-job-condition-num").unbind("click").bind("click",function(){
 		
 						layer.open({
 							type: 1,
@@ -387,6 +383,9 @@ PageInfo.register({"type":"Obj","info":function(){
 						  }
 						});
 						 
+					});
+					
+					  
 					});
 					
 			    },

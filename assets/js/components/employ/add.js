@@ -220,6 +220,7 @@ PageInfo.register({"type":"Obj","info":function(){
 		"$":"jquery",
 		"layui":"layui"
 	};
+	
 	PageObj.page = {
 			    data(){
 			        var param = {};
