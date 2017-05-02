@@ -20,7 +20,6 @@ PageInfo.register({"type":"Obj","info":function(){
 		
 	};
 	
-	console.log("===go====")
 	 
 	FunUtil.Global = {
 		"child":{
@@ -42,7 +41,7 @@ PageInfo.register({"type":"Obj","info":function(){
 			        return param;
 			    },
 			    init(){
-			       // console.log("==add==init")
+			       //  
 			    },
 			    update(){
 			        

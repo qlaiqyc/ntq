@@ -70,7 +70,7 @@ PageInfo.register({"type":"Obj","info":function(){
 			        return param;
 			    },
 			    init(){
-			        console.log("==add==init")
+			         
 			    },
 			    update(){
 			        

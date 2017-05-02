@@ -83,10 +83,16 @@
 			
 			init(){
 				//console.log("init");
+				
+				console.log("init");
 			}
 			update(){} 
-			show(){} 
-			hide(){} 
+			show(){
+				console.log("show");
+			}
+			hide(){
+				console.log("hide");
+			}
 			destory(){} 
 		};
 	 
@@ -98,7 +104,7 @@
 				super.data();
 				
 				//这里有个策略当页面间传参时记录 上一页的数据
-				
+			
 				if(FunUtil.common4Prop({"type":"isIN","in":"data","obj":IOBJ}))  return IOBJ.data();
 			}
 			init(){
@@ -127,7 +133,6 @@
 				if(FunUtil.common4Prop({"type":"isIN","in":"destory","obj":IOBJ}))  IOBJ.destory();
 			} 
 		};
-		
 		
 		/*
 		 *  返回初始类  +监听模块状态进行修改 执行方法
@@ -321,6 +326,8 @@
 				
 				
 				$main.append('<div class="'+id+'">'+Router.data().HtmUtil.layout()+'</div').show();
+				console.log(FunUtil.Global.Router[nid].jid);
+				
 				Router.init();
 				Router.show();
 			 	
@@ -348,7 +355,7 @@
 		execuFun.hasPre = function(){
 			//这种情况下 oid 一定存在
 			var Opage = Router[oid];
-			
+			console.log(Opage.jid);
 			Opage.page.hide();
 			Opage.state = "hide";
 			FunUtil.Global.Router[oid] = Opage;
@@ -356,10 +363,15 @@
 			$main.find("div."+Opage.jid).hide();
 			
 			if(String.HasText(Npage.page)) {
+				
+				console.log(Npage.jid);
+				
 				Npage.page.show();
 				Npage.state = "show";
 				Npage.page.data().FunUtil.Global.parent = Opage.page.data().FunUtil.Global.child;
 				FunUtil.Global.Router[nid] = Npage;
+				
+				
 				$main.find("div."+Npage.jid).show();
 			}else{
 			  	execuFun.pub();		
@@ -548,7 +560,6 @@
 	PageInfo.init4Obj = function(data){
 		var obj = data.info();
 		
-		console.log("==obj==")
 		 FunUtil.Global.Page = FunUtil.common4class(obj.page);
 		 FunUtil.Global.Page.require = obj.require;
 	};
