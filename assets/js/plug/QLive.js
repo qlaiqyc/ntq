@@ -154,11 +154,11 @@
  			
  			$url  = $("#"+id4url);
  		var $this = $url.closest("a");
- 		$this.attr("href","#"+url.substr(22)).attr("target","_self");
+ 		$this.attr("href","#/"+url).attr("target","_self");
  		
  		$url.click();
  		setTimeout(function(){
- 			$this.remove();
+ 			//$this.remove();
  		},200);
  	};
 	
@@ -300,7 +300,6 @@
 				 * 第一步加载所需JS  成功后 输出对象  require 加载， 然后执行 相应方法
 				 * */
 				var param = await FunUtil.common4require(url);
-				
 				var require = param.require;
 				var keys = Object.keys(require);
 				var vals = Object.values(require);
@@ -327,10 +326,7 @@
 			 	
 			};
 			
-			
 			futil.getJs()
-			
-			
 			
 		};
 		
@@ -357,14 +353,14 @@
 			Opage.state = "hide";
 			FunUtil.Global.Router[oid] = Opage;
 			
-			$main.find("div."+Opage.id).hide();
+			$main.find("div."+Opage.jid).hide();
 			
 			if(String.HasText(Npage.page)) {
 				Npage.page.show();
 				Npage.state = "show";
 				Npage.page.data().FunUtil.Global.parent = Opage.page.data().FunUtil.Global.child;
 				FunUtil.Global.Router[nid] = Npage;
-				$main.find("div."+Npage.id).show();
+				$main.find("div."+Npage.jid).show();
 			}else{
 			  	execuFun.pub();		
 			}
@@ -552,6 +548,7 @@
 	PageInfo.init4Obj = function(data){
 		var obj = data.info();
 		
+		console.log("==obj==")
 		 FunUtil.Global.Page = FunUtil.common4class(obj.page);
 		 FunUtil.Global.Page.require = obj.require;
 	};

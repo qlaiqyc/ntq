@@ -86,7 +86,7 @@ PageInfo.register({"type":"Obj","info":function(){
 			    	var $has = $("#ntq-apply-index-btn-has");
 			    	
 			    	$no.unbind("click").bind("click",function(){
-			    		PageInfo.FunUtil.common4openUrl({"url":'#/assets/js/components/apply/add'});
+			    		PageInfo.FunUtil.common4openUrl({"url":'apply/add'});
 			    		
 			    	});
 			    	
@@ -100,7 +100,7 @@ PageInfo.register({"type":"Obj","info":function(){
 							success:function(){
 								$("#ntq-apply-index-form-btn").unbind("click").bind("click",function(){
 									layer.closeAll()
-									PageInfo.FunUtil.common4openUrl({"url":'#/assets/js/components/apply/job'});
+									PageInfo.FunUtil.common4openUrl({"url":'apply/job'});
 								});
 							}
 					      });

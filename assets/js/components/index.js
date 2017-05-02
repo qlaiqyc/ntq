@@ -19,6 +19,8 @@ PageInfo.register({"type":"Obj","info":function(){
 		return buf.join("");
 		
 	};
+	
+	console.log("===go====")
 	 
 	FunUtil.Global = {
 		"child":{
@@ -53,11 +55,11 @@ PageInfo.register({"type":"Obj","info":function(){
 			    	var $btn4employ = $("div.ntq-index-employ-btn");
 			    	
 			    	$btn4apply.unbind("click").bind("click",function(){
-			    		PageInfo.FunUtil.common4openUrl({"url":'#/assets/js/components/apply/index?uuid=123'});
+			    		PageInfo.FunUtil.common4openUrl({"url":'apply/index?uuid=123'});
 			    	});
 			    	
 			    	$btn4employ.unbind("click").bind("click",function(){
-			    		PageInfo.FunUtil.common4openUrl({"url":'#/assets/js/components/employ/index'});
+			    		PageInfo.FunUtil.common4openUrl({"url":'employ/index'});
 			    	});
 			    	 
 			    },

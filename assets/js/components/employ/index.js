@@ -15,7 +15,6 @@ PageInfo.register({"type":"Obj","info":function(){
 		
 	};
 	
-	
 	HtmUtil.common4input   = function(){
 		
 		var buf = [];
@@ -86,7 +85,7 @@ PageInfo.register({"type":"Obj","info":function(){
 			    	var $has = $("#ntq-employ-index-btn-has");
 			    	
 			    	$no.unbind("click").bind("click",function(){
-			    		PageInfo.FunUtil.common4openUrl({"url":'#/assets/js/components/employ/add'});
+			    		PageInfo.FunUtil.common4openUrl({"url":'employ/add'});
 			    	});
 			    	
 			    	$has.unbind("click").bind("click",function(){
@@ -99,7 +98,7 @@ PageInfo.register({"type":"Obj","info":function(){
 							success:function(){
 								$("#ntq-employ-index-form-btn").unbind("click").bind("click",function(){
 									layer.closeAll()
-									PageInfo.FunUtil.common4openUrl({"url":'#/assets/js/components/employ/job'});
+									PageInfo.FunUtil.common4openUrl({"url":'employ/job'});
 								});
 							}
 					      });
@@ -126,7 +125,6 @@ PageInfo.register({"type":"Obj","info":function(){
 			    }
 			
 			};
-	
 	
 	return PageObj;
 }});
