@@ -103,7 +103,15 @@ module.exports = function (grunt) {
 				dist: {
 					files:FunUtil.Global.files
 				}
-			}		
+			},
+		html2js: {
+			options: {
+			  encoding:"utf8"//文件编码，默认为utf8 
+			},
+			files: {
+			  'dist/': FunUtil.Global.assets+'/html/tmp/*.html',
+			},
+		  }			
 		 
     });
 	
@@ -117,9 +125,10 @@ module.exports = function (grunt) {
 	
     require('load-grunt-tasks')(grunt);
  
-    grunt.registerTask('default', ["clean",'bable4getFiles','babel','bable4delmap','uglify']);
+   // grunt.registerTask('default', ["clean",'bable4getFiles','babel','bable4delmap','uglify']);
  
 	//grunt.registerTask('default', ['uglify']);
+ grunt.registerTask('default', ['html2js']);
  
 
  
