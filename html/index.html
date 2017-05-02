@@ -13,16 +13,24 @@
 		<link rel="stylesheet" type="text/css" href="../assets/css/common.css"/>
 	</head>
 
-	<body>
-		<div id="qlive-body">
-			 
-			
-		</div>
-	</body>
+	<body> <div id="qlive-body"> </div> </body>
 	
  
-  	<script type="text/javascript" src="../assets/js/plug/QLive.js"></script>
+  	<!--<script type="text/javascript" src="../assets/js/plug/QLive.js"></script>
   	<script type="text/javascript" src="../assets/js/plug/QLive-config.js"></script>
-	<script src="../assets/js/main.js"></script> 
+	<script src="../assets/js/main.js"></script> -->
+	<script type="text/javascript">
+		var REG_BODY = /<body[^>]*>([\s\S]*)<\/body>/;
+
+        function getBody(content){
+            var result = REG_BODY.exec(content);
+            if(result && result.length === 2)
+                return result[1];
+            return content;
+        }
+        
+     	var b =   getBody('<body> <div id="qlive-body"> </div> </body>');
+     	console.log(b);
+	</script>
  
 </html>

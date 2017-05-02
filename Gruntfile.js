@@ -39,21 +39,63 @@ module.exports = function (grunt) {
 		}); 
 	};
 	
-	
+	FunUtil.concathtml = function(){
+		//grunt.file.mkdir(FunUtil.Global.dist);
+	 
+		grunt.file.recurse("html/tmp/", function callback(abspath, rootdir, subdir, filename) {
+			 /**
+			 *1. 璇诲彇鏂囦欢鍐呭
+			 *2. 鍚堝苟 鏂囦欢
+			 **/
+			 
+			 //if(filename == "index.html") continue;
+			 
+			var html = grunt.file.read(abspath);
+			 
+			var REG_BODY = /<body[^>]*>([\s\S]*)<\/body>/;
+            
+			var result = REG_BODY.exec(html);
+             if(result && result.length === 2) {
+			 	result = result[1];
+			 }else{
+			 	result = html;
+			 }
+			//grunt.log.writeln(result);
+			
+			grunt.log.writeln(filename);
+			
+			//====================
+			var url = "assets/js/components/" +filename.replace(/-/g,"/").replace(/html/g,"js")
+			grunt.log.writeln(url);
+			var page = grunt.file.read(url);
+			
+			page = page.split("Page.show");
+			//grunt.log.writeln(page);
+			
+			
+            
+			
+			
+			
+			
+			
+			
+		}); 
+	};
 	
 	
 	
 	
 
-    // 构建任务配置
+    // 鏋勫缓浠诲姟閰嶇疆
     grunt.initConfig({
 
-        //读取package.json的内容，形成个json数据
+        //璇诲彇package.json鐨勫唴瀹癸紝褰㈡垚涓猨son鏁版嵁
         pkg: grunt.file.readJSON('package.json'),
         clean: ["dist"],
-        //压缩js
+        //鍘嬬缉js
         uglify: {
-            //文件头部输出信息
+            //鏂囦欢澶撮儴杈撳嚭淇℃伅
             options: {
                 banner: '/*! <%= pkg.name %> QL <%= grunt.template.today("yyyy-mm-dd HH:mm:ss") %> */\n'
             },
@@ -70,12 +112,12 @@ module.exports = function (grunt) {
                 ]
             }
         },
-        //压缩css
+        //鍘嬬缉css
         cssmin: {
-            //文件头部输出信息
+            //鏂囦欢澶撮儴杈撳嚭淇℃伅
             options: {
                 banner: '/*! <%= pkg.name %> QL <%= grunt.template.today("yyyy-mm-dd HH:mm:ss") %> */\n',
-                //美化代码
+                //缇庡寲浠ｇ爜
                 beautify: {
                    
                     ascii_only: true
@@ -103,15 +145,7 @@ module.exports = function (grunt) {
 				dist: {
 					files:FunUtil.Global.files
 				}
-			},
-		html2js: {
-			options: {
-			  encoding:"utf8"//文件编码，默认为utf8 
-			},
-			files: {
-			  'dist/': FunUtil.Global.assets+'/html/tmp/*.html',
-			},
-		  }			
+			} 	
 		 
     });
 	
@@ -123,12 +157,18 @@ module.exports = function (grunt) {
 		FunUtil.bable4delmap();
 	});
 	
+	grunt.registerTask("concathtml", "", function() {
+		FunUtil.concathtml();
+	});
+	
+	
+	
     require('load-grunt-tasks')(grunt);
  
    // grunt.registerTask('default', ["clean",'bable4getFiles','babel','bable4delmap','uglify']);
  
 	//grunt.registerTask('default', ['uglify']);
- grunt.registerTask('default', ['html2js']);
+ grunt.registerTask('default', ['concathtml']);
  
 
  
