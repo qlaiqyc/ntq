@@ -159,11 +159,27 @@
  			
  			$url  = $("#"+id4url);
  		var $this = $url.closest("a");
- 		$this.attr("href","#/"+url).attr("target","_self");
+ 		
+ 		if(FunUtil.Global.Router) {
+ 			$this.attr("href","#/"+url).attr("target","_self");
+ 		}else{
+ 			url = url.replace(/\//g,"-");
+ 			var list = url.split("?");
+ 			
+ 			if(list.length == 1){
+ 				url = list[0]+".html";
+ 			}else{
+ 				url = list[0]+".html?"+list[1];
+ 			}
+ 			
+ 			$this.attr("href",url).attr("target","_self");
+ 		}
+ 		
+ 		
  		
  		$url.click();
  		setTimeout(function(){
- 			//$this.remove();
+ 			$this.remove();
  		},200);
  	};
 	
@@ -278,37 +294,34 @@
 	 * 
 	 * 1. 判断  当前是否存在这个新对象  ， （存在 ？  执行这个对象的show 方法 ： 执行这个对象的 init 方法 ）
 	 * 2. 隐藏  当前展示对象  （存在 ？ 执行当前对象的 hide 方法， :  不做操作  ）
+	 * 
+	 * =======开启单页调试===  没有路由注入 ============
+	 * 3.
+	 * 
 	 * */
 	FunUtil.common4Page = function(data){
-		data.jid = data.jid.split("?")[0];
 		
-		var $main	= $("#"+FunUtil.Global.id);
-		var Router	= FunUtil.Global.Router;
-		Router.unshift({});
-		var id		= data.jid;
-		var nid		= Router.findIndex(function(value, index, arr){	if(value.jid == id) return index;  }) -1;
-		var oid		= Router.findIndex(function(value, index, arr){ if(value.state == "show") return index; })-1;
-		Router.shift();
+		var fun4help = {
+			"global":{
+				"type":"single"
+			}
+		};
 		
-		var Npage	= Router[nid];
-		var type 	= "noPre";
 		
-		var execuFun = {};
 		
-		execuFun.pub = function(data){
-			var futil ={};
+		fun4help.single = function(){
 			
-			var url ="/"+FunUtil.Global.name+ FunUtil.common4hash({"type":"js","key":id+".js"});
-	 	
+			var futil   = {};
+			
 			futil.getJs = async function(){
 				/**
 				 * 第一步加载所需JS  成功后 输出对象  require 加载， 然后执行 相应方法
 				 * */
-				var param = await FunUtil.common4require(url);
+				var param 	= FunUtil.Global.Page;
 				var require = param.require;
-				var keys = Object.keys(require);
-				var vals = Object.values(require);
-				var len = keys.length;
+				var keys 	= Object.keys(require);
+				var vals 	= Object.values(require);
+				var len 	= keys.length;
 				
 				
 				eval('var '+keys.join(",") +";");// 这个实在是没有办法
@@ -321,13 +334,6 @@
 				
 			 	Router = param;
 				
-				FunUtil.Global.Router[nid].page = Router;
-				FunUtil.Global.Router[nid].state = "show";
-				
-				
-				$main.append('<div class="'+id+'">'+Router.data().HtmUtil.layout()+'</div').show();
-				console.log(FunUtil.Global.Router[nid].jid);
-				
 				Router.init();
 				Router.show();
 			 	
@@ -335,54 +341,128 @@
 			
 			futil.getJs()
 			
+			
+			console.log(FunUtil.Global.Page);
 		};
 		
-		execuFun.noPre =  function(){
-		 
-			//判断对象是否加载，加载？ 执行 show : 请求JS 成功后回调 执行init
-			if(String.HasText(Npage.page)) {
-				Npage.page.show();
-				Npage.state = "show";
-				FunUtil.Global.Router[nid] = Npage;
+		
+		fun4help.model = function(){
+			
+			data.jid = data.jid.split("?")[0];
+		
+			var $main	= $("#"+FunUtil.Global.id);
+			var Router	= FunUtil.Global.Router;
+			Router.unshift({});
+			var id		= data.jid;
+			var nid		= Router.findIndex(function(value, index, arr){	if(value.jid == id) return index;  }) -1;
+			var oid		= Router.findIndex(function(value, index, arr){ if(value.state == "show") return index; })-1;
+			Router.shift();
+			
+			var Npage	= Router[nid];
+			var type 	= "noPre";
+			
+			var execuFun = {};
+			
+			execuFun.pub = function(data){
+				var futil ={};
 				
-				$main.find("div."+id).show();
-			}else{
-				execuFun.pub();				
-			}
-				 
+				var url ="/"+FunUtil.Global.name+ FunUtil.common4hash({"type":"js","key":id+".js"});
+		 	
+				futil.getJs = async function(){
+					/**
+					 * 第一步加载所需JS  成功后 输出对象  require 加载， 然后执行 相应方法
+					 * */
+					var param = await FunUtil.common4require(url);
+					var require = param.require;
+					var keys = Object.keys(require);
+					var vals = Object.values(require);
+					var len = keys.length;
+					
+					
+					eval('var '+keys.join(",") +";");// 这个实在是没有办法
+					
+					for(var i =0 ;i<len;i++){  //加载异步 所包含JS
+						 keys[i] = await FunUtil.common4require(vals[i]);
+					}
+					
+					delete FunUtil.Global.Page.require;
+					
+				 	Router = param;
+					
+					FunUtil.Global.Router[nid].page = Router;
+					FunUtil.Global.Router[nid].state = "show";
+					
+					
+					$main.append('<div class="'+id+'">'+Router.data().HtmUtil.layout()+'</div').show();
+					console.log(FunUtil.Global.Router[nid].jid);
+					
+					Router.init();
+					Router.show();
+				 	
+				};
+				
+				futil.getJs()
+				
+			};
+			
+			execuFun.noPre =  function(){
+			 
+				//判断对象是否加载，加载？ 执行 show : 请求JS 成功后回调 执行init
+				if(String.HasText(Npage.page)) {
+					Npage.page.show();
+					Npage.state = "show";
+					FunUtil.Global.Router[nid] = Npage;
+					
+					$main.find("div."+id).show();
+				}else{
+					execuFun.pub();				
+				}
+					 
+			};
+			
+			execuFun.hasPre = function(){
+				//这种情况下 oid 一定存在
+				var Opage = Router[oid];
+				console.log(Opage.jid);
+				Opage.page.hide();
+				Opage.state = "hide";
+				FunUtil.Global.Router[oid] = Opage;
+				
+				$main.find("div."+Opage.jid).hide();
+				
+				if(String.HasText(Npage.page)) {
+					
+					console.log(Npage.jid);
+					
+					Npage.page.show();
+					Npage.state = "show";
+					Npage.page.data().FunUtil.Global.parent = Opage.page.data().FunUtil.Global.child;
+					FunUtil.Global.Router[nid] = Npage;
+					
+					
+					$main.find("div."+Npage.jid).show();
+				}else{
+				  	execuFun.pub();		
+				}
+				
+				
+			};
+			
+			if(String.HasText(oid) && oid > -1)  type = "hasPre";
+			
+			execuFun[type]();
+			
+			
+			
+			
 		};
 		
-		execuFun.hasPre = function(){
-			//这种情况下 oid 一定存在
-			var Opage = Router[oid];
-			console.log(Opage.jid);
-			Opage.page.hide();
-			Opage.state = "hide";
-			FunUtil.Global.Router[oid] = Opage;
-			
-			$main.find("div."+Opage.jid).hide();
-			
-			if(String.HasText(Npage.page)) {
-				
-				console.log(Npage.jid);
-				
-				Npage.page.show();
-				Npage.state = "show";
-				Npage.page.data().FunUtil.Global.parent = Opage.page.data().FunUtil.Global.child;
-				FunUtil.Global.Router[nid] = Npage;
-				
-				
-				$main.find("div."+Npage.jid).show();
-			}else{
-			  	execuFun.pub();		
-			}
-			
-			
-		};
+		if(String.HasText(FunUtil.Global.Router)) fun4help.global.type = "model";
 		
-		if(String.HasText(oid) && oid > -1)  type = "hasPre";
 		
-		execuFun[type]();
+		fun4help[fun4help.global.type]();
+		
+	
 	};
 	
 	//监听对象
@@ -398,6 +478,7 @@
 			
 			
 			var ecfun = function(){
+				
 				var defid = FunUtil.common4hash({"type":"decode","key":FunUtil.Global.Router[0].jid});
 				var key = defid;
 				var hash = location.hash;
@@ -419,7 +500,8 @@
 				ecfun();
 				
 			};
-			ecfun();
+			
+			if(String.HasText(FunUtil.Global.Router))	ecfun();
 		};
 		
 		
@@ -560,8 +642,11 @@
 	PageInfo.init4Obj = function(data){
 		var obj = data.info();
 		
-		 FunUtil.Global.Page = FunUtil.common4class(obj.page);
-		 FunUtil.Global.Page.require = obj.require;
+		FunUtil.Global.Page = FunUtil.common4class(obj.page);
+		FunUtil.Global.Page.require = obj.require;
+		
+		if(!String.HasText(FunUtil.Global.Router))  FunUtil.common4Page();
+		
 	};
  
 	PageInfo.init4Start = function(data){
