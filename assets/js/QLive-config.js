@@ -7,9 +7,9 @@ PageInfo.register({"type":"config","info":function(){
 	* */
 		
 		
-	 //var baseURL = location.origin+"/"+location.pathname.split("/")[1]
+	 var baseURL = location.origin+"/"+location.pathname.split("/")[1]
 	
-	 var baseURL = "http://192.168.2.178:8020/ntq";
+	// var baseURL = "http://192.168.2.178:8020/ntq";
 	
 	 var result = {
 	 	

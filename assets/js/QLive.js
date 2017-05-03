@@ -40,7 +40,7 @@
 		var theRequest = {}; 
 		if (url.indexOf("?") != -1) { 
 			var str = url.split("?")[1];
-			strs = str.split("&"); 
+			var strs = str.split("&"); 
 			for(var i = 0; i < strs.length; i ++) { 
 				theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]); 
 			} 
@@ -413,7 +413,6 @@
 						
 						
 						
-					  console.log(value); // "Success"
 					}, function(value) {
 					  // 不会被调用
 					}); 
@@ -459,7 +458,7 @@
 					
 					Npage.page.show();
 					Npage.state = "show";
-					Npage.page.data().FunUtil.Global.parent = Opage.page.data().FunUtil.Global.child;
+				//	Npage.page.data().FunUtil.Global.parent = Opage.page.data().FunUtil.Global.child;
 					FunUtil.Global.Router[nid] = Npage;
 					
 					

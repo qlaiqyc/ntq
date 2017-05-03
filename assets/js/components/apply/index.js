@@ -1,85 +1,55 @@
 PageInfo.register({"type":"Obj","info":function(){
-	var FunUtil = {};
-    var HtmUtil = {};
-    var PageObj = {};
 	
-	
-	HtmUtil.layout   = function(){
-		
-		var buf = [];
-	 	 
-		buf.push('<div id="ntq-apply-index" class="common-box" >');
-		buf.push('  <div class="common-l-btn" id="ntq-apply-index-btn-no">第一次投递简历</div>');
-	 	buf.push('  <div class="common-l-btn" id="ntq-apply-index-btn-has">已投递过职位</div>')
-		buf.push('</div>');
-		return buf.join("");
-		
-	};
-	
-	
-	HtmUtil.common4input   = function(){
-		
-		var buf = [];
-	 	 
-		buf.push('<form class="layui-form" action="" id="ntq-apply-index-form">')
-		buf.push('    <div class="layui-form-item">')
-		buf.push('        <div class="layui-inline">')
-		buf.push('            <label class="layui-form-label">验证手机</label>')
-		buf.push('            <div class="layui-input-inline">')
-		buf.push('                <input type="tel" name="phone" lay-verify="phone" autocomplete="off" class="layui-input">')
-		buf.push('            </div>')
-		buf.push('            <label class="layui-form-label" id="ntq-apply-index-form-code">获取验证码</label>')
-		buf.push('        </div>')
-		buf.push('    </div>')
-		buf.push('    <div class="layui-form-item">')
-		buf.push('        <div class="layui-inline">')
-		buf.push('            <label class="layui-form-label">输入验证码</label>')
-		buf.push('            <div class="layui-input-inline">')
-		buf.push('                <input type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input">')
-		buf.push('            </div>')
-		buf.push('        </div>')
-		buf.push('    </div>')
-		buf.push('    <div class="layui-form-item">')
-		buf.push('        <div class="layui-input-block">')
-		buf.push('            <button class="layui-btn" lay-submit="" lay-filter="demo1" id="ntq-apply-index-form-btn">立即提交</button>')
-		buf.push('            <button type="reset" class="layui-btn layui-btn-primary">重置</button>')
-		buf.push('        </div>')
-		buf.push('    </div>')
-		buf.push('</form>')
-		
-		return buf.join("");
-		
-	};
-	
-	FunUtil.Global = {
-		"child":{
-			"id":9999
-		}
-	};//传参对象
-	
+	var PageObj = {};
+	 
 	PageObj.require = {
 		"$":"jquery",
 		"layui":"layui"
 	};
 	
-	PageObj.page = {
-			    data(){
-			        var param = {};
-			        
-			        param.HtmUtil = HtmUtil;
-			        param.FunUtil = FunUtil;
-			        
-			        return param;
-			    },
-			    init(){
-			         
-			    },
-			    update(){
-			        
-			    },
-			    show(){
-			    	 
-			    	var $this = this;
+	 
+	PageObj.page = (function(){
+		
+		var FunUtil = {};
+	    var HtmUtil = {};
+    	var Page 	= {};
+	
+		HtmUtil.common4input   = function(){
+		
+			var buf = [];
+		 	 
+			buf.push('<form class="layui-form" action="" id="ntq-apply-index-form">')
+			buf.push('    <div class="layui-form-item">')
+			buf.push('        <div class="layui-inline">')
+			buf.push('            <label class="layui-form-label">验证手机</label>')
+			buf.push('            <div class="layui-input-inline">')
+			buf.push('                <input type="tel" name="phone" lay-verify="phone" autocomplete="off" class="layui-input">')
+			buf.push('            </div>')
+			buf.push('            <label class="layui-form-label" id="ntq-apply-index-form-code">获取验证码</label>')
+			buf.push('        </div>')
+			buf.push('    </div>')
+			buf.push('    <div class="layui-form-item">')
+			buf.push('        <div class="layui-inline">')
+			buf.push('            <label class="layui-form-label">输入验证码</label>')
+			buf.push('            <div class="layui-input-inline">')
+			buf.push('                <input type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input">')
+			buf.push('            </div>')
+			buf.push('        </div>')
+			buf.push('    </div>')
+			buf.push('    <div class="layui-form-item">')
+			buf.push('        <div class="layui-input-block">')
+			buf.push('            <button class="layui-btn" lay-submit="" lay-filter="demo1" id="ntq-apply-index-form-btn">立即提交</button>')
+			buf.push('            <button type="reset" class="layui-btn layui-btn-primary">重置</button>')
+			buf.push('        </div>')
+			buf.push('    </div>')
+			buf.push('</form>')
+			
+			return buf.join("");
+			
+		};
+	
+		Page.show = function(){
+			 var $this = this;
 			    	 
 			    	alert(PageInfo.FunUtil.common4getUrlParam()["uuid"]);
 			    	var $no = $("#ntq-apply-index-btn-no");
@@ -113,16 +83,13 @@ PageInfo.register({"type":"Obj","info":function(){
 							 	form.render('');
 					      });
 			    	});
-			    	
-			    },
-			    hide(){
-			    	//console.log("==add==hide")
-			    },   
-			    destory(){
-			        
-			    }
-			
-			};
+			 
+		 };
+		
+		return Page;
+		
+	}());
+	
 	
 	return PageObj;
 }});

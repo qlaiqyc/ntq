@@ -10,7 +10,9 @@ PageInfo.register({"type":"Obj","info":function(){
 	
 	PageObj.page = (function(){
 		
-		var Page = {};
+		var FunUtil = {};
+	    var HtmUtil = {};
+    	var Page 	= {};
 		
 		Page.show = function(){
 			

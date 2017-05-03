@@ -67,8 +67,8 @@ module.exports = function (grunt) {
 	 
 		grunt.file.recurse("dist/tmp/html/", function callback(abspath, rootdir, subdir, filename) {
 			 /**
-			 *1. ¶ÁÈ¡ÎÄ¼þÄÚÈÝ
-			 *2. ºÏ²¢ ÎÄ¼þ
+			 *1. ï¿½ï¿½È¡ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½
+			 *2. ï¿½Ï²ï¿½ ï¿½Ä¼ï¿½
 			 **/
 			 
 			
@@ -98,7 +98,7 @@ module.exports = function (grunt) {
 		 
 			
 			nhtml += page[0];
-			nhtml += ("HtmUtil.layout = '"+result.toString()+"'; \n \n");
+			nhtml += ("HtmUtil.layout = function(){ var result='"+result+"'; return result;} \n \n");
 			
 			nhtml += ("Page.data = function(){ var param = {}; param.HtmUtil = HtmUtil; return param;}; \n \n ");
 			
@@ -106,7 +106,7 @@ module.exports = function (grunt) {
 			
 			
 			 
-			grunt.log.writeln("=======²åÈëlayout========="+url);
+			grunt.log.writeln("=======ï¿½ï¿½ï¿½ï¿½layout========="+url);
 			 
 			
 		 
@@ -120,15 +120,15 @@ module.exports = function (grunt) {
 	
 	
 
-    // ¹¹½¨ÈÎÎñÅäÖÃ
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     grunt.initConfig({
 
-        //¶ÁÈ¡package.jsonµÄÄÚÈÝ£¬ÐÎ³É¸öjsonÊý¾Ý
+        //ï¿½ï¿½È¡package.jsonï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½Î³É¸ï¿½jsonï¿½ï¿½ï¿½
         pkg: grunt.file.readJSON('package.json'),
         clean: ["dist"],
-        //Ñ¹Ëõjs
+        //Ñ¹ï¿½ï¿½js
         uglify: {
-            //ÎÄ¼þÍ·²¿Êä³öÐÅÏ¢
+            //ï¿½Ä¼ï¿½Í·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
             options: {
                 banner: '/*! <%= pkg.name %> QL <%= grunt.template.today("yyyy-mm-dd HH:mm:ss") %> */\n'
             },
@@ -145,12 +145,12 @@ module.exports = function (grunt) {
                 ]
             }
         },
-        //Ñ¹Ëõcss
+        //Ñ¹ï¿½ï¿½css
         cssmin: {
-            //ÎÄ¼þÍ·²¿Êä³öÐÅÏ¢
+            //ï¿½Ä¼ï¿½Í·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
             options: {
                 banner: '/*! <%= pkg.name %> QL <%= grunt.template.today("yyyy-mm-dd HH:mm:ss") %> */\n',
-                //ÃÀ»¯´úÂë
+                //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 beautify: {
                    
                     ascii_only: true
