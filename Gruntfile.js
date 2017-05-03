@@ -1,6 +1,8 @@
  
 module.exports = function (grunt) {
-	var es2015 = require('babel-preset-es2015');
+	//var es2015 = require('babel-preset-es2015');
+	
+	  
 	
 	var FunUtil = {};
 	
@@ -22,19 +24,40 @@ module.exports = function (grunt) {
 		   
 		});
 		
+		 grunt.file.delete("dist/assets")
+		
 	};
 	
 	
 	FunUtil.bable4getFiles = function(){
 		//grunt.file.mkdir(FunUtil.Global.dist);
 		grunt.file.recurse(FunUtil.Global.assets+"/js/", function callback(abspath, rootdir, subdir, filename) {
-		   var isFile = true;
+		   var isFile = false;
 		   if(filename.indexOf(".js") < 0) isFile = false;
-		   if(abspath.indexOf("plug/Qlive") >= 0 ) isFile = true;
+		   if(abspath.indexOf("QLive") >= 0 || abspath.indexOf("main") >= 0 ) isFile = true;
 		   
-		   var p = FunUtil.Global.dist+"/tmp/"+abspath.split(FunUtil.Global.assets)[1];
+		   var p = FunUtil.Global.dist+"/tmp"+abspath.split(FunUtil.Global.assets)[1];
 		   
-		   if(isFile) FunUtil.Global.files[p] = abspath;
+		   if(isFile) {
+			 //  grunt.log.writeln(p);
+			   FunUtil.Global.files[p] = abspath;
+//			   grunt.log.writeln(abspath);
+		   }
+		   
+		  
+		   
+		}); 
+		
+		
+		grunt.file.recurse("dist/"+FunUtil.Global.assets+"/js/", function callback(abspath, rootdir, subdir, filename) {
+ 
+		   
+			var p = FunUtil.Global.dist+"/tmp"+abspath.split(FunUtil.Global.assets)[1];
+		   
+			 
+			FunUtil.Global.files[p] = abspath;
+		   
+		  
 		   
 		}); 
 	};
@@ -42,13 +65,15 @@ module.exports = function (grunt) {
 	FunUtil.concathtml = function(){
 		//grunt.file.mkdir(FunUtil.Global.dist);
 	 
-		grunt.file.recurse("html/tmp/", function callback(abspath, rootdir, subdir, filename) {
+		grunt.file.recurse("dist/tmp/html/", function callback(abspath, rootdir, subdir, filename) {
 			 /**
-			 *1. 璇诲彇鏂囦欢鍐呭
-			 *2. 鍚堝苟 鏂囦欢
+			 *1. 读取文件内容
+			 *2. 合并 文件
 			 **/
 			 
-			 //if(filename == "index.html") continue;
+			
+			var nhtml = "";
+			
 			 
 			var html = grunt.file.read(abspath);
 			 
@@ -70,15 +95,23 @@ module.exports = function (grunt) {
 			var page = grunt.file.read(url);
 			
 			page = page.split("Page.show");
-			//grunt.log.writeln(page);
+		 
+			
+			nhtml += page[0];
+			nhtml += ("HtmUtil.layout = '"+result.toString()+"'; \n \n");
+			
+			nhtml += ("Page.data = function(){ var param = {}; param.HtmUtil = HtmUtil; return param;}; \n \n ");
+			
+			nhtml += ("Page.show "+page[1]);
 			
 			
-            
+			 
+			grunt.log.writeln("=======插入layout========="+url);
+			 
 			
+		 
 			
-			
-			
-			
+			grunt.file.write("dist/"+url, nhtml)
 			
 		}); 
 	};
@@ -87,15 +120,15 @@ module.exports = function (grunt) {
 	
 	
 
-    // 鏋勫缓浠诲姟閰嶇疆
+    // 构建任务配置
     grunt.initConfig({
 
-        //璇诲彇package.json鐨勫唴瀹癸紝褰㈡垚涓猨son鏁版嵁
+        //读取package.json的内容，形成个json数据
         pkg: grunt.file.readJSON('package.json'),
         clean: ["dist"],
-        //鍘嬬缉js
+        //压缩js
         uglify: {
-            //鏂囦欢澶撮儴杈撳嚭淇℃伅
+            //文件头部输出信息
             options: {
                 banner: '/*! <%= pkg.name %> QL <%= grunt.template.today("yyyy-mm-dd HH:mm:ss") %> */\n'
             },
@@ -112,12 +145,12 @@ module.exports = function (grunt) {
                 ]
             }
         },
-        //鍘嬬缉css
+        //压缩css
         cssmin: {
-            //鏂囦欢澶撮儴杈撳嚭淇℃伅
+            //文件头部输出信息
             options: {
                 banner: '/*! <%= pkg.name %> QL <%= grunt.template.today("yyyy-mm-dd HH:mm:ss") %> */\n',
-                //缇庡寲浠ｇ爜
+                //美化代码
                 beautify: {
                    
                     ascii_only: true
@@ -139,13 +172,69 @@ module.exports = function (grunt) {
  
 		 babel: {
 				options: {
-					sourceMap: true,
-					presets: [es2015]
+					sourceMap:true
+					 
 				},
 				dist: {
 					files:FunUtil.Global.files
 				}
-			} 	
+			},
+		
+		htmlmin: {                                     // Task 
+			dist: {                                      // Target 
+			  options: {                                 // Target options 
+				removeComments: true,
+				collapseWhitespace: true
+			  },
+			  files: [{
+				  expand: true,
+				  cwd: 'html',
+				  src: ['tmp/*.html'],
+				  dest: 'dist/tmp/html/'
+			  }]
+			}
+			 
+		  },
+		copy: {
+		  main: {
+			expand: true,
+			expand: true,
+			cwd: 'assets/js/plug',
+			src: ['**/*.*', '*.*'],
+			dest: 'dist/assets/js/plug'
+			 
+		  },
+		  js: { 
+			expand: true,
+			cwd: 'dist/tmp/js',
+			src: ['**/*.js', '*.js'],
+			dest: 'dist/assets/js'
+		  },
+		  
+		  html: { 
+			expand: true,
+			cwd: 'html',
+			src: ['index.html'],
+			dest: 'dist/html'
+		  },
+		  
+		   css: { 
+				expand: true,
+			cwd: 'assets/css',
+			src: ['**/*.*'],
+			dest: 'dist/assets/css'
+		  },
+		  
+		   img: { 
+			expand: true,
+			cwd: 'assets/img',
+			src: ['**/*.*'],
+			dest: 'dist/assets/img'
+		}
+		  
+		  
+		  
+		},
 		 
     });
 	
@@ -167,8 +256,8 @@ module.exports = function (grunt) {
  
    // grunt.registerTask('default', ["clean",'bable4getFiles','babel','bable4delmap','uglify']);
  
-	//grunt.registerTask('default', ['uglify']);
- grunt.registerTask('default', ['concathtml']);
+//	grunt.registerTask('default', ['htmlmin']);
+ grunt.registerTask('default', ["clean",'htmlmin','concathtml','bable4getFiles','babel','bable4delmap',"copy"]);
  
 
  

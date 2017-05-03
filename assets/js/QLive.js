@@ -225,7 +225,7 @@
 	 * 注意：刷新页面
 	 * */
 	
-	FunUtil.Global = new Proxy({}, {
+/*	FunUtil.Global = new Proxy({}, {
 		"get": function (obj, sKey) {
    			
 		  	return obj[sKey] || undefined;
@@ -234,8 +234,9 @@
 	    
 	   		obj[prop] = newval;
 	  } 
-	});
+	});*/
 	
+	FunUtil.Global = {};
 	/*   测试 */
 	
 	 
@@ -313,7 +314,7 @@
 			
 			var futil   = {};
 			
-			futil.getJs = async function(){
+			futil.getJs = function(){
 				/**
 				 * 第一步加载所需JS  成功后 输出对象  require 加载， 然后执行 相应方法
 				 * */
@@ -323,26 +324,30 @@
 				var vals 	= Object.values(require);
 				var len 	= keys.length;
 				
+				var list = [];
 				
 				eval('var '+keys.join(",") +";");// 这个实在是没有办法
 				
-				for(var i =0 ;i<len;i++){  //加载异步 所包含JS
-					 keys[i] = await FunUtil.common4require(vals[i]);
-				}
+				for(var i =0 ;i<len;i++) list.push(FunUtil.common4require(vals[i]));
+				 
+				Promise.all(list).then(values => { 
+				  
+					for(var i =0 ;i<len;i++)  keys[i] = values[i];
+					
+					delete FunUtil.Global.Page.require;
 				
-				delete FunUtil.Global.Page.require;
-				
-			 	Router = param;
-				
-				Router.init();
-				Router.show();
-			 	
+				 	Router = param;
+					
+					Router.init();
+					Router.show();
+				});
+				console.log(FunUtil.Global.Page);
 			};
 			
 			futil.getJs()
 			
 			
-			console.log(FunUtil.Global.Page);
+			
 		};
 		
 		
@@ -368,36 +373,54 @@
 				
 				var url ="/"+FunUtil.Global.name+ FunUtil.common4hash({"type":"js","key":id+".js"});
 		 	
-				futil.getJs = async function(){
+				futil.getJs =  function(){
 					/**
 					 * 第一步加载所需JS  成功后 输出对象  require 加载， 然后执行 相应方法
 					 * */
-					var param = await FunUtil.common4require(url);
-					var require = param.require;
-					var keys = Object.keys(require);
-					var vals = Object.values(require);
-					var len = keys.length;
+				 Promise.resolve(FunUtil.common4require(url)).then(function(param) {
+						
+						 
+						var require = param.require;
+						var keys = Object.keys(require);
+						var vals = Object.values(require);
+						var len = keys.length;
+						
+						var list = [];
+						
+						
+						eval('var '+keys.join(",") +";");// 这个实在是没有办法
+						
+						for(var i =0 ;i<len;i++) list.push(FunUtil.common4require(vals[i]));
+						
+						Promise.all(list).then(values => { 
+							  
+							for(var i =0 ;i<len;i++)  keys[i] = values[i];
+							
+							delete FunUtil.Global.Page.require;
+						
+							Router = param;
+							
+							FunUtil.Global.Router[nid].page = Router;
+							FunUtil.Global.Router[nid].state = "show";
+							
+							
+							$main.append('<div class="'+id+'">'+Router.data().HtmUtil.layout()+'</div').show();
+							console.log(FunUtil.Global.Router[nid].jid);
+							
+							Router.init();
+							Router.show();
+						});
+						
+						
+						
+					  console.log(value); // "Success"
+					}, function(value) {
+					  // 不会被调用
+					}); 
+					 
+					 
 					
 					
-					eval('var '+keys.join(",") +";");// 这个实在是没有办法
-					
-					for(var i =0 ;i<len;i++){  //加载异步 所包含JS
-						 keys[i] = await FunUtil.common4require(vals[i]);
-					}
-					
-					delete FunUtil.Global.Page.require;
-					
-				 	Router = param;
-					
-					FunUtil.Global.Router[nid].page = Router;
-					FunUtil.Global.Router[nid].state = "show";
-					
-					
-					$main.append('<div class="'+id+'">'+Router.data().HtmUtil.layout()+'</div').show();
-					console.log(FunUtil.Global.Router[nid].jid);
-					
-					Router.init();
-					Router.show();
 				 	
 				};
 				
@@ -654,24 +677,25 @@
 	 	
 	 	var futil ={};
 	 	
-		futil.getJs = async function(param){
+		futil.getJs =  function(param){
 			var require = param.require;
 			var keys = Object.keys(require);
 			var vals = Object.values(require);
-			var len = keys.length;
-			
+			var len  = keys.length;
+			var list = [];
 			
 			eval('var '+keys.join(",") +";");// 这个实在是没有办法
 			
-			for(var i =0 ;i<len;i++){
-				 keys[i] = await FunUtil.common4require(vals[i]);
-			}
+			for(var i =0 ;i<len;i++) list.push(FunUtil.common4require(vals[i]));
 			
-			FunUtil.common4Global(param.Global);
-			FunUtil.common4Router(param.Router);
-			FunUtil.common4Pub(param.Pub);
-			
-		 	
+			Promise.all(list).then(values => { 
+				  
+				for(var i =0 ;i<len;i++)  keys[i] = values[i];
+				
+				FunUtil.common4Global(param.Global);
+				FunUtil.common4Router(param.Router);
+				FunUtil.common4Pub(param.Pub);
+			});
 		};
 		
 		
