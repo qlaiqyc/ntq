@@ -116,8 +116,18 @@ module.exports = function (grunt) {
 		}); 
 	};
 	
-	
-	
+	FunUtil.common4Num = function(){
+		
+		var html = grunt.file.read("html/index.html");
+		    html = html.split("<\/body>");
+			
+		var before = html[0];	
+		
+		var reslut = before + '</body><script type="text/javascript"> var v4num = '+parseInt(Math.random()*100000000)+';</script>' +html.slice(1);
+		 
+		grunt.file.write("dist/html/index.html",reslut);
+		
+	};
 	
 
     // ������������
@@ -211,12 +221,7 @@ module.exports = function (grunt) {
 			dest: 'dist/assets/js'
 		  },
 		  
-		  html: { 
-			expand: true,
-			cwd: 'html',
-			src: ['index.html'],
-			dest: 'dist/html'
-		  },
+		 
 		  
 		   css: { 
 				expand: true,
@@ -250,14 +255,17 @@ module.exports = function (grunt) {
 		FunUtil.concathtml();
 	});
 	
+	grunt.registerTask("common4Num", "", function() {
+		FunUtil.common4Num();
+	});
+	
 	
 	
     require('load-grunt-tasks')(grunt);
  
-   // grunt.registerTask('default', ["clean",'bable4getFiles','babel','bable4delmap','uglify']);
- 
-//	grunt.registerTask('default', ['htmlmin']);
- grunt.registerTask('default', ["clean",'htmlmin','concathtml','bable4getFiles','babel','bable4delmap',"copy"]);
+  
+//	grunt.registerTask('default', ['common4Num']);
+grunt.registerTask('default', ["clean",'htmlmin','concathtml','bable4getFiles','babel','bable4delmap',"copy",'common4Num']);
  
 
  
