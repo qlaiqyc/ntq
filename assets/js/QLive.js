@@ -369,7 +369,7 @@
 			execuFun.pub = function(data){
 				var futil ={};
 				
-				var url ="/"+FunUtil.Global.name+ FunUtil.common4hash({"type":"js","key":id+".js"});
+				var url ="/"+ FunUtil.common4hash({"type":"js","key":id+""});
 		 	
 				futil.getJs =  function(){
 					/**
@@ -586,6 +586,7 @@
 			var type = "foot";
 			
 			var loadJS = location.origin+"/"+location.pathname.split("/")[1]+str+".js";
+			//if(String.HasText(FunUtil.Global.Router))  loadJS = 
 			
 			if(FunUtil.common4Prop({"type":"isIN","in":str,"obj":path}))  {loadJS = path[str]; type="head"}
 			
@@ -604,7 +605,7 @@
 			execuFun.foot = function(){
 				FunUtil.common4GetJS({"url":loadJS,"async":"async","callback":function(data){
 					
-					if(loadJS.indexOf("common")){
+					if(loadJS.indexOf("common") >= 0){
 						
 						resolve(FunUtil.Global.plug);
 					}else{
