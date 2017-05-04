@@ -19,7 +19,7 @@ PageInfo.register({"type":"Obj","info":function(){
 		 
 		Page.show = function(){
 			 
-		 	var request = this.api;
+		 	var request = this.api.rq();
 			    	
 			    	
 			    	 
@@ -50,30 +50,60 @@ PageInfo.register({"type":"Obj","info":function(){
 					  
 					  //监听提交
 					  form.on('submit(ntq-employ-add-btn)', function(data){
-					     console.log(data);
-					   /*	request.rq4addCompanyInfoWithPositionInfoList(data.field,function(cdata){
+					   
+					   var  obj = data.field;
+					   var param = 	{
+					        "companyInfo":{
+					        	"companyName":obj.companyName,
+								"companyPhone":obj.companyPhone,
+								"resumeMail":obj.resumeMail,
+								"contactWeixinId":obj.contactWeixinId,
+								"recruitType":obj.recruitType,
+								"companyType":obj.companyType,
+								"serverCreateDate":obj.serverCreateDate,
+								"serverUpdateDate":obj.serverUpdateDate,
+								"isNewlyEstablished":obj.isNewlyEstablished,
+								"financingType":obj.financingType,
+								"isValid":obj.isValid,
+								"recruiterName":obj.recruiterName,
+								"companySynopsis":obj.companySynopsis,
+								"companyBenefit":obj.companyBenefit		,
+
+					       },
+					      "companyPositionInfosWithBlobList":[{
+					      	
+					      	"positionName":obj.positionName,
+							"highSalary":obj.highSalary,
+							"lowSalary":obj.lowSalary,
+							"positionType":obj.positionType,
+							"qualificationsType":obj.qualificationsType,
+							"positionDesc":obj.positionDesc,
+							"positionRequirements":obj.positionRequirements,
+							"lowWorkingLife":obj.lowWorkingLife,
+							"highWorkingLife":obj.highWorkingLife,
+							"workAddress":obj.workAddress,
+							"deadline":obj.deadline,
+							"isDiscussPersonally":obj.isDiscussPersonally,
+							"isValid":obj.isValid,
+							"postionStatus":obj.postionStatus,
+							"publishTime":obj.publishTime,
+					      	
+					      	
+					      }]
+						
+					}
+				 	
+				 		request.addCompanyInfoWithPositionInfoList(JSON.stringify(param),function(cdata){
 					    	
 					    	console.log(cdata);
 					    	return false;
 					    }); 
-					    console.log(data);*/
-					    
 					    
 					    return false;
 					  });
 					  
 				 
-				 	setTimeout(function(){
-				 		
-				 	var param = 	{ "companyInfo":{  "companyName":"测试公司名称11", "companyPhone":15123247202, "resumeMail":"247677858@qq.com", "contactWeixinId":"weChat", "recruitType":1, "companyType":1, "serverCreateDate":1491537753077, "serverUpdateDate":1491537753077, "isNewlyEstablished":1, "financingType":1, "isValid":1, "recruiterName":"杨爽", "companySynopsis":null }, "companyPositionInfosWithBlobList":[{"positionDesc":"test"}]  };
-				 	
-				 			request.rq4addCompanyInfoWithPositionInfoList(param,function(cdata){
-					    	
-					    	console.log(cdata);
-					    	return false;
-					    }); 
-				 	},3000);
-				 
+				 		 
 				 
 					  
 					});

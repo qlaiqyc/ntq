@@ -26,14 +26,14 @@ PageInfo.register({"type":"plug","info":(function(){
 	
 	FunUtil.request = function(data){
 		FunUtil.common4init();
-	 var execuFun ={};
+	 	var execuFun ={};
 	 
 		execuFun.pub = function(){
 			
 			/*原理类似只需在options 添加参数进行判断 */
 			var contentType = (data.method == "post") ? "application/x-www-form-urlencoded" :"application/json";
 			 
-			
+			contentType= "application/json";
 		 
 	        
 	         $.ajax({
@@ -92,75 +92,80 @@ PageInfo.register({"type":"plug","info":(function(){
 	}
 	
 	
-	FunUtil.rq = (function(){}(
+	FunUtil.rq = function(data, success){
 		
-		var burl = "http://119.23.69.169:8080/ntq/";
+		
+			var burl = "http://119.23.69.169:8080/ntq/";
 		
 		return {
-			 'getWeiXinMessage': function(url,typeFlag, success) {
-                getData(dataUrl + "getWeiXinMessage", {url: url, typeFlag: typeFlag}, success);
-            },
 			
+			   /*=======招聘模块============ */
+			 	'getMessageCode': function(data, success) {
+                	FunUtil.common4post({url:(burl + "companyInfo/getMessageCode.action"),"param":data}, success);
+            	},
+            	'verifyMessageCode': function(data, success) {
+                	FunUtil.common4post({url:(burl + "companyInfo/verifyMessageCode.action"),"param":data}, success);
+            	},
+            	'getMessageAfterValidatePhoneNumber': function(data, success) {
+               		 FunUtil.common4post({url:(burl + "companyInfo/getMessageAfterValidatePhoneNumber.action"),"param":data}, success);
+            	},
+            	
+            	'verifyHrPhoneNumber': function(data, success) {
+                	FunUtil.common4post({url:(burl + "companyInfo/verifyHrPhoneNumber.action"),"param":data}, success);
+            	},
+            	
+            	'addCompanyInfoWithPositionInfoList': function(data, success) {
+               		 FunUtil.common4post({url:(burl + "companyInfo/addCompanyInfoWithPositionInfoList.action"),"param":data}, success);
+            	},
+            	
+            	'addCompanyPositionInfo': function(data, success) {
+                	FunUtil.common4post({url:(burl + "companyInfo/addCompanyPositionInfo.action"),"param":data}, success);
+            	},
+            	
+            	'queryCompanyPositionInfoListByCondition': function(data, success) {
+                	FunUtil.common4post({url:(burl + "companyInfo/queryCompanyPositionInfoListByCondition.action"),"param":data}, success);
+            	},
+            	
+            	'getCompanyPositionInfoById': function(data, success) {
+                	FunUtil.common4post({url:(burl + "companyInfo/getCompanyPositionInfoById.action"),"param":data}, success);
+            	},
+            	
+            	'queryJobSeekerInfoVoList': function(data, success) {
+                	FunUtil.common4post({url:(burl + "companyInfo/queryJobSeekerInfoVoList.action"),"param":data}, success);
+            	},
+            	
+            	'updateOrInsertCompanyPositionInfo': function(data, success) {
+                	FunUtil.common4post({url:(burl + "companyInfo/updateOrInsertCompanyPositionInfo.action"),"param":data}, success);
+            	},
+            	
+            	'withDrawCompanyPositionInfo': function(data, success) {
+                	FunUtil.common4post({url:(burl + "companyInfo/withDrawCompanyPositionInfo.action"),"param":data}, success);
+            	},
 			
+			   /*=======求职者模块============== */
+			  
+			    'getInfos': function(data, success) {
+                	FunUtil.common4post({url:(burl + "get/position/getinfos.action"),"param":data}, success);
+            	},
+            	
+            	'addJobSeekerInfoAndResume': function(data, success) {
+                	FunUtil.common4post({url:(burl + "jobSeekerInfo/addJobSeekerInfoAndResume.action"),"param":data}, success);
+            	},
+            	'getPosition': function(data, success) {
+                	FunUtil.common4post({url:(burl + "companyInfo/getPosition.action"),"param":data}, success);
+            	},
+            	 
+			  
 			
 		};
 		
-	));
-	
- 	
- 	FunUtil.rq4addCompanyInfoWithPositionInfoList = function(data,success){
-		var url = "/addCompanyInfoWithPositionInfoList.action"
 		
-		var param = {
-			"url":url,
-			"param":data
-		}
-		FunUtil.common4post(param,success);
-	};
-	
-	FunUtil.rq4addCompanyInfoWithPositionInfoList = function(data,success){
-		var url = "companyInfo/addCompanyInfoWithPositionInfoList.action"
 		
-		var param = {
-			"url":url,
-			"param":data
-		}
-		FunUtil.common4post(param,success);
-	};
-	 
-	FunUtil.rq4verifyMessageCode = function(data,success){
-		var url = "companyInfo/verifyMessageCode.action"
-		//phoneNumber=15123247211&&verifyCode=1
-		var param = {
-			"url":url,
-			"param":data
-		}
-		FunUtil.common4get(param,success);
 	};
 	
-	FunUtil.rq4getMessageCode = function(data,success){
-		var url = "companyInfo/getMessageCode.action";
-		//"phoneNumber"
-	 
-		var param = {
-			"url":url,
-			"param":data
-		}
-		FunUtil.common4get(param,success);
-	};
+ 	 
  
-	
-
-	
-	FunUtil.rq4addCompanyInfoWithPositionInfoList = function(data,success){
-		var url = "companyInfo/addCompanyInfoWithPositionInfoList.action"
-		 companyInfo/getMessageAfterValidatePhoneNumber.action?phoneNumber=15123247202
-		var param = {
-			"url":url,
-			"param":data
-		}
-		FunUtil.common4post(param,success);
-	};
+ 
  
  	
  	return FunUtil
