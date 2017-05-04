@@ -1,144 +1,21 @@
 PageInfo.register({"type":"Obj","info":function(){
-	var FunUtil = {};
-    var HtmUtil = {};
-    var PageObj = {};
 	
-	
-	HtmUtil.layout   = function(){
-		
-		var buf = [];
-	 	
-		buf.push('<div id="ntq-apply-job" class="common-box">                                                                                                                                                    ');
-		buf.push('    <div id="ntq-apply-job-search">                                                                                                                                                            ');
-		buf.push('        <form class="layui-form" action="">                                                                                                                                                    ');
-		buf.push('            <div class="layui-form-item">                                                                                                                                                      ');
-		buf.push('                <div class="layui-inline">                                                                                                                                                     ');
-		buf.push('                    <label class="layui-form-label">职位编号</label>                                                                                                                           ');
-		buf.push('                    <div class="layui-input-inline">                                                                                                                                           ');
-		buf.push('                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input"> </div>                                             ');
-		buf.push('                </div>                                                                                                                                                                         ');
-		buf.push('                <div class="layui-inline">                                                                                                                                                     ');
-		buf.push('                    <label class="layui-form-label">职位名称</label>                                                                                                                           ');
-		buf.push('                    <div class="layui-input-inline">                                                                                                                                           ');
-		buf.push('                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input"> </div>                                             ');
-		buf.push('                </div>                                                                                                                                                                         ');
-		buf.push('                <div class="layui-inline">                                                                                                                                                     ');
-		buf.push('                    <label class="layui-form-label">公司名称</label>                                                                                                                           ');
-		buf.push('                    <div class="layui-input-inline">                                                                                                                                           ');
-		buf.push('                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input"> </div>                                             ');
-		buf.push('                </div>                                                                                                                                                                         ');
-		buf.push('            </div>                                                                                                                                                                             ');
-		buf.push('            <div class="layui-form-item">                                                                                                                                                      ');
-		buf.push('                <div class="layui-inline">                                                                                                                                                     ');
-		buf.push('                    <label class="layui-form-label">投递时间</label>                                                                                                                           ');
-		buf.push('                    <div class="layui-input-inline">                                                                                                                                           ');
-		buf.push('                        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})"> </div');
-		buf.push('                </div>                                                                                                                                                                          ');
-		buf.push('                <div class="layui-inline">                                                                                                                                                      ');
-		buf.push('                    <label class="layui-form-label">状态</label>                                                                                                                                ');
-		buf.push('                    <div class="layui-input-inline">                                                                                                                                            ');
-		buf.push('                        <select name="interest" lay-filter="aihao">                                                                                                                             ');
-		buf.push('                            <option value=""></option>                                                                                                                                          ');
-		buf.push('                            <option value="0">写作</option>                                                                                                                                     ');
-		buf.push('                            <option value="1" selected="">阅读</option>                                                                                                                         ');
-		buf.push('                            <option value="2">游戏</option>                                                                                                                                     ');
-		buf.push('                            <option value="3">音乐</option>                                                                                                                                     ');
-		buf.push('                            <option value="4">旅行</option>                                                                                                                                     ');
-		buf.push('                        </select>                                                                                                                                                               ');
-		buf.push('                        <div class="layui-unselect layui-form-select">                                                                                                                          ');
-		buf.push('                            <div class="layui-select-title">                                                                                                                                    ');
-		buf.push('                                <input type="text" placeholder="请选择" value="阅读" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i></div>                            ');
-		buf.push('                            <dl class="layui-anim layui-anim-upbit">                                                                                                                            ');
-		buf.push('                                <dd lay-value="0" class="">写作</dd>                                                                                                                            ');
-		buf.push('                                <dd lay-value="1" class="layui-this">阅读</dd>                                                                                                                  ');
-		buf.push('                                <dd lay-value="2" class="">游戏</dd>                                                                                                                            ');
-		buf.push('                                <dd lay-value="3" class="">音乐</dd>                                                                                                                            ');
-		buf.push('                                <dd lay-value="4" class="">旅行</dd>                                                                                                                            ');
-		buf.push('                            </dl>                                                                                                                                                               ');
-		buf.push('                        </div>                                                                                                                                                                  ');
-		buf.push('                    </div>                                                                                                                                                                      ');
-		buf.push('                </div>                                                                                                                                                                          ');
-		buf.push('                <div class="layui-inline">                                                                                                                                                      ');
-		buf.push('                    <label class="layui-form-label">                                                                                                                                            ');
-		buf.push('                        <button class="layui-btn" lay-submit="" lay-filter="demo1">搜索</button>                                                                                                ');
-		buf.push('                    </label>                                                                                                                                                                    ');
-		buf.push('                    <div class="layui-input-inline"> </div>                                                                                                                                     ');
-		buf.push('                </div>                                                                                                                                                                          ');
-		buf.push('            </div>                                                                                                                                                                              ');
-		buf.push('        </form>                                                                                                                                                                                 ');
-		buf.push('    </div>                                                                                                                                                                                      ');
-		buf.push('    <div id="ntq-apply-job-condition">                                                                                                                                                          ');
-		buf.push('        <table class="layui-table" lay-even="" lay-skin="row">                                                                                                                                  ');
-		buf.push('            <colgroup>                                                                                                                                                                          ');
-		buf.push('                <col width="150">                                                                                                                                                               ');
-		buf.push('                    <col width="150">                                                                                                                                                           ');
-		buf.push('                        <col width="200">                                                                                                                                                       ');
-		buf.push('                            <col>                                                                                                                                                               ');
-		buf.push('            </colgroup>                                                                                                                                                                         ');
-		buf.push('            <thead>                                                                                                                                                                             ');
-		buf.push('                <tr>                                                                                                                                                                            ');
-		buf.push('                    <th>公司名称</th>                                                                                                                                                           ');
-		buf.push('                    <th>职位编号</th>                                                                                                                                                           ');
-		buf.push('                    <th>职位名称</th>                                                                                                                                                           ');
-		buf.push('                    <th>当前状态</th>                                                                                                                                                           ');
-		buf.push('                    <th>投递时间</th>                                                                                                                                                           ');
-		buf.push('                </tr>                                                                                                                                                                           ');
-		buf.push('            </thead>                                                                                                                                                                            ');
-		buf.push('            <tbody>                                                                                                                                                                             ');
-		buf.push('                <tr>                                                                                                                                                                            ');
-		buf.push('                    <td>1000110</td>                                                                                                                                                            ');
-		buf.push('                    <td>1000110</td>                                                                                                                                                            ');
-		buf.push('                    <td>1000110</td>                                                                                                                                                            ');
-		buf.push('                    <td>1000110</td>                                                                                                                                                            ');
-		buf.push('                    <td>1000110</td>                                                                                                                                                            ');
-		buf.push('                </tr>                                                                                                                                                                           ');
-		buf.push('                <tr>                                                                                                                                                                            ');
-		buf.push('                    <td>1000110</td>                                                                                                                                                            ');
-		buf.push('                    <td>1000110</td>                                                                                                                                                            ');
-		buf.push('                    <td>1000110</td>                                                                                                                                                            ');
-		buf.push('                    <td>1000110</td>                                                                                                                                                            ');
-		buf.push('                    <td>1000110</td>                                                                                                                                                            ');
-		buf.push('                </tr>                                                                                                                                                                           ');
-		buf.push('                <tr>                                                                                                                                                                            ');
-		buf.push('                    <td>1000110</td>                                                                                                                                                            ');
-		buf.push('                    <td>1000110</td>                                                                                                                                                            ');
-		buf.push('                    <td>1000110</td>                                                                                                                                                            ');
-		buf.push('                    <td>1000110</td>                                                                                                                                                            ');
-		buf.push('                    <td>1000110</td>                                                                                                                                                            ');
-		buf.push('                </tr>                                                                                                                                                                           ');
-		buf.push('                <tr>                                                                                                                                                                            ');
-		buf.push('                    <td>1000110</td>                                                                                                                                                            ');
-		buf.push('                    <td>1000110</td>                                                                                                                                                            ');
-		buf.push('                    <td>1000110</td>                                                                                                                                                            ');
-		buf.push('                    <td>1000110</td>                                                                                                                                                            ');
-		buf.push('                    <td>1000110</td>                                                                                                                                                            ');
-		buf.push('                </tr>                                                                                                                                                                           ');
-		buf.push('                <tr>                                                                                                                                                                            ');
-		buf.push('                    <td>1000110</td>                                                                                                                                                            ');
-		buf.push('                    <td>1000110</td>                                                                                                                                                            ');
-		buf.push('                    <td>1000110</td>                                                                                                                                                            ');
-		buf.push('                    <td>1000110</td>                                                                                                                                                            ');
-		buf.push('                    <td>1000110</td>                                                                                                                                                            ');
-		buf.push('                </tr>                                                                                                                                                                           ');
-		buf.push('                <tr>                                                                                                                                                                            ');
-		buf.push('                    <td>1000110</td>                                                                                                                                                            ');
-		buf.push('                    <td>1000110</td>                                                                                                                                                            ');
-		buf.push('                    <td>1000110</td>                                                                                                                                                            ');
-		buf.push('                    <td>1000110</td>                                                                                                                                                            ');
-		buf.push('                    <td>1000110</td>                                                                                                                                                            ');
-		buf.push('                </tr>                                                                                                                                                                           ');
-		buf.push('            </tbody>                                                                                                                                                                            ');
-		buf.push('        </table>                                                                                                                                                                                ');
-		buf.push('        <div id="ntq-apply-job-condition-pag">                                                                                                                                                  ');
-		buf.push('        </div>');
-		buf.push('    </div>	');
-		buf.push('</div>		');	 	
-		
-		return buf.join("");
-		
+	var PageObj = {};
+	 
+	PageObj.require = {
+		"$":"jquery",
+		"layui":"layui"
 	};
 	
-	HtmUtil.common4num = function(){
+	 
+	PageObj.page = function(){
+		
+		var FunUtil = {};
+	    var HtmUtil = {};
+    	var Page 	= {};
+    	
+    	
+    	HtmUtil.common4num = function(){
 		var buf = [];
 		buf.push('<div id="ntq-apply-job-num">');
 		
@@ -168,7 +45,7 @@ PageInfo.register({"type":"Obj","info":function(){
 	
 	
 	
-	HtmUtil.common4update  = function(data){
+		HtmUtil.common4update  = function(data){
 		
 		var buf = [];
 	 	buf.push('<div id="ntq-apply-job-update">');
@@ -278,37 +155,12 @@ PageInfo.register({"type":"Obj","info":function(){
 		
 	};
 	
+    	
 	
-	FunUtil.Global = {
-		"child":{
-			"id":123
-		}
-	};//传参对象
-	
-	PageObj.require = {
-		"$":"jquery",
-		"layui":"layui"
-	};
-	
-	PageObj.page= {
-			    data(){
-			        var param = {};
-			        
-			        param.HtmUtil = HtmUtil;
-			        param.FunUtil = FunUtil;
-			        
-			        return param;
-			    },
-			    init(){
-			         
-			    },
-			    update(){
-			        
-			    },
-			    show(){
-			    	 
-			    	var $this = this;
-			    	layui.use(['form', 'layedit', 'laydate','laypage', 'layer'], function(){
+	 
+		Page.show = function(){
+			var $this = this;
+			layui.use(['form', 'layedit', 'laydate','laypage', 'layer'], function(){
 					  var form = layui.form()
 					  ,layer = layui.layer
 					  ,layedit = layui.layedit
@@ -388,15 +240,12 @@ PageInfo.register({"type":"Obj","info":function(){
 					  
 					});
 					
-			    },
-			    hide(){
-			    	//console.log("==add==hide")
-			    },   
-			    destory(){
-			        
-			    }
-			
-			};
+		 };
+		
+		return Page;
+		
+	};
+	
 	
 	return PageObj;
 }});

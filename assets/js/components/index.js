@@ -5,17 +5,21 @@ PageInfo.register({"type":"Obj","info":function(){
 	
 	PageObj.require = {
 		"$":"jquery",
-		"layui":"layui"
+		"layui":"layui",
+		 "api":"/assets/js/components/common/data-api"
 	};
 	
-	PageObj.page = (function(){
+	PageObj.page = function(){
 		
 		var FunUtil = {};
 	    var HtmUtil = {};
     	var Page 	= {};
 		
 		Page.show = function(){
+			 
+			var request = this.api;
 			
+			 
 				 
 			var $btn4apply	= $("div.ntq-index-apply-btn");
 			var $btn4employ = $("div.ntq-index-employ-btn");
@@ -33,7 +37,7 @@ PageInfo.register({"type":"Obj","info":function(){
 		
 		return Page;
 		
-	}());
+	};
 	
 	return PageObj;
 }});

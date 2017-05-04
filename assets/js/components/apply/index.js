@@ -8,7 +8,7 @@ PageInfo.register({"type":"Obj","info":function(){
 	};
 	
 	 
-	PageObj.page = (function(){
+	PageObj.page = function(){
 		
 		var FunUtil = {};
 	    var HtmUtil = {};
@@ -50,8 +50,13 @@ PageInfo.register({"type":"Obj","info":function(){
 	
 		Page.show = function(){
 			 var $this = this;
-			    	 
-			    	alert(PageInfo.FunUtil.common4getUrlParam()["uuid"]);
+			
+			layui.use(['form', 'layedit', 'laydate','laypage', 'layer'], function(){
+				var form = layui.form() ,layer = layui.layer ,layedit = layui.layedit ,laydate = layui.laydate, laypage = layui.laypage ,layer = layui.layer;
+				form.render('');
+					 	
+				
+				alert(PageInfo.FunUtil.common4getUrlParam()["uuid"]);
 			    	var $no = $("#ntq-apply-index-btn-no");
 			    	var $has = $("#ntq-apply-index-btn-has");
 			    	
@@ -84,11 +89,17 @@ PageInfo.register({"type":"Obj","info":function(){
 					      });
 			    	});
 			 
+				
+					  
+			});
+			
+			
+			    	
 		 };
 		
 		return Page;
 		
-	}());
+	};
 	
 	
 	return PageObj;

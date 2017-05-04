@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta name="author" content="">
+		<title></title>
+		<link rel="stylesheet" href="../../assets/js/plug/layui/css/layui.css" />
+		<link rel="stylesheet" type="text/css" href="../../assets/css/common.css"/>
+	</head>
+
+	<body>
+			 
+	 	
+		 <div id="ntq-apply-job" class="common-box">                                                                                                                                                     
+		     <div id="ntq-apply-job-search">                                                                                                                                                             
+		         <form class="layui-form" action="">                                                                                                                                                     
+		             <div class="layui-form-item">                                                                                                                                                       
+		                 <div class="layui-inline">                                                                                                                                                      
+		                     <label class="layui-form-label">职位编号</label>                                                                                                                            
+		                     <div class="layui-input-inline">                                                                                                                                            
+		                         <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input"> </div>                                              
+		                 </div>                                                                                                                                                                          
+		                 <div class="layui-inline">                                                                                                                                                      
+		                     <label class="layui-form-label">职位名称</label>                                                                                                                            
+		                     <div class="layui-input-inline">                                                                                                                                            
+		                         <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input"> </div>                                              
+		                 </div>                                                                                                                                                                          
+		                 <div class="layui-inline">                                                                                                                                                      
+		                     <label class="layui-form-label">公司名称</label>                                                                                                                            
+		                     <div class="layui-input-inline">                                                                                                                                            
+		                         <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input"> </div>                                              
+		                 </div>                                                                                                                                                                          
+		             </div>                                                                                                                                                                              
+		             <div class="layui-form-item">                                                                                                                                                       
+		                 <div class="layui-inline">                                                                                                                                                      
+		                     <label class="layui-form-label">投递时间</label>                                                                                                                            
+		                     <div class="layui-input-inline">                                                                                                                                            
+		                         <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})"> </div 
+		                 </div>                                                                                                                                                                           
+		                 <div class="layui-inline">                                                                                                                                                       
+		                     <label class="layui-form-label">状态</label>                                                                                                                                 
+		                     <div class="layui-input-inline">                                                                                                                                             
+		                         <select name="interest" lay-filter="aihao">                                                                                                                              
+		                             <option value=""></option>                                                                                                                                           
+		                             <option value="0">写作</option>                                                                                                                                      
+		                             <option value="1" selected="">阅读</option>                                                                                                                          
+		                             <option value="2">游戏</option>                                                                                                                                      
+		                             <option value="3">音乐</option>                                                                                                                                      
+		                             <option value="4">旅行</option>                                                                                                                                      
+		                         </select>                                                                                                                                                                
+		                         <div class="layui-unselect layui-form-select">                                                                                                                           
+		                             <div class="layui-select-title">                                                                                                                                     
+		                                 <input type="text" placeholder="请选择" value="阅读" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i></div>                             
+		                             <dl class="layui-anim layui-anim-upbit">                                                                                                                             
+		                                 <dd lay-value="0" class="">写作</dd>                                                                                                                             
+		                                 <dd lay-value="1" class="layui-this">阅读</dd>                                                                                                                   
+		                                 <dd lay-value="2" class="">游戏</dd>                                                                                                                             
+		                                 <dd lay-value="3" class="">音乐</dd>                                                                                                                             
+		                                 <dd lay-value="4" class="">旅行</dd>                                                                                                                             
+		                             </dl>                                                                                                                                                                
+		                         </div>                                                                                                                                                                   
+		                     </div>                                                                                                                                                                       
+		                 </div>                                                                                                                                                                           
+		                 <div class="layui-inline">                                                                                                                                                       
+		                     <label class="layui-form-label">                                                                                                                                             
+		                         <button class="layui-btn" lay-submit="" lay-filter="demo1">搜索</button>                                                                                                 
+		                     </label>                                                                                                                                                                     
+		                     <div class="layui-input-inline"> </div>                                                                                                                                      
+		                 </div>                                                                                                                                                                           
+		             </div>                                                                                                                                                                               
+		         </form>                                                                                                                                                                                  
+		     </div>                                                                                                                                                                                       
+		     <div id="ntq-apply-job-condition">                                                                                                                                                           
+		         <table class="layui-table" lay-even="" lay-skin="row">                                                                                                                                   
+		             <colgroup>                                                                                                                                                                           
+		                 <col width="150">                                                                                                                                                                
+		                     <col width="150">                                                                                                                                                            
+		                         <col width="200">                                                                                                                                                        
+		                             <col>                                                                                                                                                                
+		             </colgroup>                                                                                                                                                                          
+		             <thead>                                                                                                                                                                              
+		                 <tr>                                                                                                                                                                             
+		                     <th>公司名称</th>                                                                                                                                                            
+		                     <th>职位编号</th>                                                                                                                                                            
+		                     <th>职位名称</th>                                                                                                                                                            
+		                     <th>当前状态</th>                                                                                                                                                            
+		                     <th>投递时间</th>                                                                                                                                                            
+		                 </tr>                                                                                                                                                                            
+		             </thead>                                                                                                                                                                             
+		             <tbody>                                                                                                                                                                              
+		                 <tr>                                                                                                                                                                             
+		                     <td>1000110</td>                                                                                                                                                             
+		                     <td>1000110</td>                                                                                                                                                             
+		                     <td>1000110</td>                                                                                                                                                             
+		                     <td>1000110</td>                                                                                                                                                             
+		                     <td>1000110</td>                                                                                                                                                             
+		                 </tr>                                                                                                                                                                            
+		                 <tr>                                                                                                                                                                             
+		                     <td>1000110</td>                                                                                                                                                             
+		                     <td>1000110</td>                                                                                                                                                             
+		                     <td>1000110</td>                                                                                                                                                             
+		                     <td>1000110</td>                                                                                                                                                             
+		                     <td>1000110</td>                                                                                                                                                             
+		                 </tr>                                                                                                                                                                            
+		                 <tr>                                                                                                                                                                             
+		                     <td>1000110</td>                                                                                                                                                             
+		                     <td>1000110</td>                                                                                                                                                             
+		                     <td>1000110</td>                                                                                                                                                             
+		                     <td>1000110</td>                                                                                                                                                             
+		                     <td>1000110</td>                                                                                                                                                             
+		                 </tr>                                                                                                                                                                            
+		                 <tr>                                                                                                                                                                             
+		                     <td>1000110</td>                                                                                                                                                             
+		                     <td>1000110</td>                                                                                                                                                             
+		                     <td>1000110</td>                                                                                                                                                             
+		                     <td>1000110</td>                                                                                                                                                             
+		                     <td>1000110</td>                                                                                                                                                             
+		                 </tr>                                                                                                                                                                            
+		                 <tr>                                                                                                                                                                             
+		                     <td>1000110</td>                                                                                                                                                             
+		                     <td>1000110</td>                                                                                                                                                             
+		                     <td>1000110</td>                                                                                                                                                             
+		                     <td>1000110</td>                                                                                                                                                             
+		                     <td>1000110</td>                                                                                                                                                             
+		                 </tr>                                                                                                                                                                            
+		                 <tr>                                                                                                                                                                             
+		                     <td>1000110</td>                                                                                                                                                             
+		                     <td>1000110</td>                                                                                                                                                             
+		                     <td>1000110</td>                                                                                                                                                             
+		                     <td>1000110</td>                                                                                                                                                             
+		                     <td>1000110</td>                                                                                                                                                             
+		                 </tr>                                                                                                                                                                            
+		             </tbody>                                                                                                                                                                             
+		         </table>                                                                                                                                                                                 
+		         <div id="ntq-apply-job-condition-pag">                                                                                                                                                   
+		         </div> 
+		     </div>	 
+		 </div>		 	 	
+		
+ 
+	
+	</body>
+	
+ 
+  	<script type="text/javascript" src="../../assets/js/QLive.js"></script>
+  	<script type="text/javascript" src="../../assets/js/QLive-config.js"></script>
+	 
+	<script src="../../assets/js/components/apply/index.js"></script>
+	 
+ 
+</html>

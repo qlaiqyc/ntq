@@ -120,7 +120,14 @@
 			show(){
 				super.show();
 				
-				if(FunUtil.common4Prop({"type":"isIN","in":"show","obj":IOBJ}))  IOBJ.show();
+				if(FunUtil.common4Prop({"type":"isIN","in":"show","obj":IOBJ})) {
+					   	var func=new function(){
+					   		
+					   		for(var p in FunUtil.Global.Page.require) this[p]=FunUtil.Global.Page.require[p];
+					   	};
+					 
+					    IOBJ.show.call(func,"var");  
+				} 
 			} 
 			hide(){
 				super.hide();
@@ -312,10 +319,7 @@
 		
 		fun4help.single = function(){
 			
-			var futil   = {};
-			
-			futil.getJs = function(){
-				/**
+			/**
 				 * 第一步加载所需JS  成功后 输出对象  require 加载， 然后执行 相应方法
 				 * */
 				var param 	= FunUtil.Global.Page;
@@ -326,26 +330,20 @@
 				
 				var list = [];
 				
-				eval('var '+keys.join(",") +";");// 这个实在是没有办法
+				
 				
 				for(var i =0 ;i<len;i++) list.push(FunUtil.common4require(vals[i]));
 				 
 				Promise.all(list).then(values => { 
-				  
-					for(var i =0 ;i<len;i++)  keys[i] = values[i];
 					
-					delete FunUtil.Global.Page.require;
+					FunUtil.Global.Page.require = {};
 				
 				 	Router = param;
+					for(var i =0 ;i<len;i++)   	FunUtil.Global.Page.require[keys[i]] = values[i];
 					
 					Router.init();
 					Router.show();
 				});
-				console.log(FunUtil.Global.Page);
-			};
-			
-			futil.getJs()
-			
 			
 			
 		};
@@ -587,7 +585,7 @@
 		    var path = FunUtil.Global.config().paths;
 			var type = "foot";
 			
-			var loadJS = window.location.origin+str;
+			var loadJS = location.origin+"/"+location.pathname.split("/")[1]+str+".js";
 			
 			if(FunUtil.common4Prop({"type":"isIN","in":str,"obj":path}))  {loadJS = path[str]; type="head"}
 			
@@ -605,7 +603,14 @@
 			
 			execuFun.foot = function(){
 				FunUtil.common4GetJS({"url":loadJS,"async":"async","callback":function(data){
-					resolve(FunUtil.Global.Page);
+					
+					if(loadJS.indexOf("common")){
+						
+						resolve(FunUtil.Global.plug);
+					}else{
+						
+						resolve(FunUtil.Global.Page);
+					}
 				}});
 			};
 			  
@@ -658,13 +663,13 @@
 	
 	PageInfo.init4plug = function(data){
 		 
-		FunUtil.Global.plug = data.info(); 
+		FunUtil.Global.plug = data.info; 
 	};
 	
 	PageInfo.init4Obj = function(data){
 		var obj = data.info();
 		
-		FunUtil.Global.Page = FunUtil.common4class(obj.page);
+		FunUtil.Global.Page = FunUtil.common4class(obj.page());
 		FunUtil.Global.Page.require = obj.require;
 		
 		if(!String.HasText(FunUtil.Global.Router))  FunUtil.common4Page();
