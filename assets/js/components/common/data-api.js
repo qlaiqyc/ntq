@@ -33,12 +33,12 @@ PageInfo.register({"type":"plug","info":(function(){
 			/*原理类似只需在options 添加参数进行判断 */
 			var contentType = (data.method == "post") ? "application/x-www-form-urlencoded" :"application/json";
 			 
-			 var burl = "http://119.23.69.169:8080/ntq/";
+			
 		 
 	        
 	         $.ajax({
 	             type:data.method,
-	             url: burl+data.url,
+	             url:data.url,
 	             data: data.param,
 	             dataType: "json",
 	             contentType:contentType,
@@ -91,9 +91,70 @@ PageInfo.register({"type":"plug","info":(function(){
 		
 	}
 	
+	
+	FunUtil.rq = (function(){}(
+		
+		var burl = "http://119.23.69.169:8080/ntq/";
+		
+		return {
+			 'getWeiXinMessage': function(url,typeFlag, success) {
+                getData(dataUrl + "getWeiXinMessage", {url: url, typeFlag: typeFlag}, success);
+            },
+			
+			
+			
+		};
+		
+	));
+	
+ 	
+ 	FunUtil.rq4addCompanyInfoWithPositionInfoList = function(data,success){
+		var url = "/addCompanyInfoWithPositionInfoList.action"
+		
+		var param = {
+			"url":url,
+			"param":data
+		}
+		FunUtil.common4post(param,success);
+	};
+	
 	FunUtil.rq4addCompanyInfoWithPositionInfoList = function(data,success){
 		var url = "companyInfo/addCompanyInfoWithPositionInfoList.action"
 		
+		var param = {
+			"url":url,
+			"param":data
+		}
+		FunUtil.common4post(param,success);
+	};
+	 
+	FunUtil.rq4verifyMessageCode = function(data,success){
+		var url = "companyInfo/verifyMessageCode.action"
+		//phoneNumber=15123247211&&verifyCode=1
+		var param = {
+			"url":url,
+			"param":data
+		}
+		FunUtil.common4get(param,success);
+	};
+	
+	FunUtil.rq4getMessageCode = function(data,success){
+		var url = "companyInfo/getMessageCode.action";
+		//"phoneNumber"
+	 
+		var param = {
+			"url":url,
+			"param":data
+		}
+		FunUtil.common4get(param,success);
+	};
+ 
+	
+
+	
+	FunUtil.rq4addCompanyInfoWithPositionInfoList = function(data,success){
+		var url = "companyInfo/addCompanyInfoWithPositionInfoList.action"
+		 companyInfo/getMessageAfterValidatePhoneNumber.action?phoneNumber=15123247202
 		var param = {
 			"url":url,
 			"param":data
