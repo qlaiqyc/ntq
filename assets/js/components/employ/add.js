@@ -4,7 +4,8 @@ PageInfo.register({"type":"Obj","info":function(){
 	 
 	PageObj.require = {
 		"$":"jquery",
-		"layui":"layui"
+		"layui":"layui",
+		"api":"/assets/js/components/common/data-api"
 	};
 	
 	 
@@ -18,26 +19,23 @@ PageInfo.register({"type":"Obj","info":function(){
 		 
 		Page.show = function(){
 			 
-		 	var request = PageInfo.FunUtil.Global.API;
+		 	var request = this.api;
 			    	
 			    	
 			    	 
 			    	layui.use(['form', 'layedit', 'laydate'], function(){
-					  var form = layui.form()
-					  ,layer = layui.layer
-					  ,layedit = layui.layedit
-					  ,laydate = layui.laydate;
+					  	var form = layui.form() ,layer = layui.layer  ,layedit = layui.layedit  ,laydate = layui.laydate;
 					 	form.render('');
 					 
 					  //自定义验证规则
-					  form.verify({
-					    title: function(value){
+					  form.verify({ 
+					  	title: function(value){
 					      if(value.length < 5){
 					        return '标题至少得5个字符啊';
 					      }
-					    }
-					    ,pass: [/(.+){6,12}$/, '密码必须6到12位']
-					    ,content: function(value){
+					   	},
+					   pass: [/(.+){6,12}$/, '密码必须6到12位'],
+					   content: function(value){
 					      layedit.sync(editIndex);
 					    }
 					  });
@@ -52,13 +50,32 @@ PageInfo.register({"type":"Obj","info":function(){
 					  
 					  //监听提交
 					  form.on('submit(ntq-employ-add-btn)', function(data){
-					    
-					    
-					    console.log(data);
+					     console.log(data);
+					   /*	request.rq4addCompanyInfoWithPositionInfoList(data.field,function(cdata){
+					    	
+					    	console.log(cdata);
+					    	return false;
+					    }); 
+					    console.log(data);*/
 					    
 					    
 					    return false;
 					  });
+					  
+				 
+				 	setTimeout(function(){
+				 		
+				 	var param = 	{ "companyInfo":{  "companyName":"测试公司名称11", "companyPhone":15123247202, "resumeMail":"247677858@qq.com", "contactWeixinId":"weChat", "recruitType":1, "companyType":1, "serverCreateDate":1491537753077, "serverUpdateDate":1491537753077, "isNewlyEstablished":1, "financingType":1, "isValid":1, "recruiterName":"杨爽", "companySynopsis":null }, "companyPositionInfosWithBlobList":[{"positionDesc":"test"}]  };
+				 	
+				 			request.rq4addCompanyInfoWithPositionInfoList(param,function(cdata){
+					    	
+					    	console.log(cdata);
+					    	return false;
+					    }); 
+				 	},3000);
+				 
+				 
+					  
 					});
 		};
 		
