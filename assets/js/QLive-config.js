@@ -15,7 +15,7 @@ PageInfo.register({"type":"config","info":function(){
 	 	
 	 	paths:{
 	 		"jquery":baseURL+"/assets/js/plug/jquery-3.2.0.js",
-	 		"layui":baseURL+"/assets/js/plug/layui/layui.js"
+	 		"layui":baseURL+"/assets/js/plug/layui/lay/dest/layui.all.js"
 	 	}
 	 };
 	 
