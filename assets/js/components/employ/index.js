@@ -8,7 +8,7 @@ PageInfo.register({"type":"Obj","info":function(){
 	};
 	
 	 
-	PageObj.page = (function(){
+	 PageObj.page = function(){
 		
 		var FunUtil = {};
 	    var HtmUtil = {};
@@ -92,9 +92,11 @@ PageInfo.register({"type":"Obj","info":function(){
 		
 		return Page;
 		
-	}());
+	};
 	
 	
 	return PageObj;
 }});
+
+
 

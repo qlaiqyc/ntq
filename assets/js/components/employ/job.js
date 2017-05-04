@@ -1,132 +1,50 @@
-PageInfo.register({"type":"Obj","info":function(){
-	var FunUtil = {};
-    var HtmUtil = {};
-    var PageObj = {};
-	
-	
-	HtmUtil.layout   = function(){
-		
-		var buf = [];
-	 	
-		buf.push('<div id="ntq-employ-job">');
-		buf.push('	<div id="ntq-employ-job-search" class="common-box">                                                                                                                             ');
-		buf.push('		<form class="layui-form" action="">                                                                                                                                  ');
-		buf.push('			<div class="layui-form-item">                                                                                                                                    ');
-		buf.push('				<div class="layui-inline"> <label class="layui-form-label">职位名称</label>                                                                                  ');
-		buf.push('					<div class="layui-input-inline"> <input type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input"> </div>            ');
-		buf.push('				</div>                                                                                                                                                       ');
-		buf.push('				<div class="layui-inline"> <label class="layui-form-label">发布日期</label>                                                                                  ');
-		buf.push('					<div class="layui-input-inline"> <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off"  class="layui-input" onclick="layui.laydate({elem: this})"> </div> ');
-		buf.push('				</div>                                                                                                                                                       ');
-		buf.push('				<div class="layui-inline"> <label class="layui-form-label">处理状态</label>                                                                                  ');
-		buf.push('					<div class="layui-input-inline">                                                                                                                         ');
-		buf.push('						<select name="interest" lay-filter="aihao">                                                                                                          ');
-		buf.push('							<option value=""></option>                                                                                                                       ');
-		buf.push('							<option value="0">写作</option>                                                                                                                  ');
-		buf.push('							<option value="1" selected="">阅读</option>                                                                                                      ');
-		buf.push('							<option value="2">游戏</option>                                                                                                                  ');
-		buf.push('							<option value="3">音乐</option>                                                                                                                  ');
-		buf.push('							<option value="4">旅行</option>                                                                                                                  ');
-		buf.push('						</select>                                                                                                                                            ');
-		buf.push('					</div> <button class="layui-btn" lay-submit="" lay-filter="demo1">搜索</button> </div>                                                                   ');
-		buf.push('			</div>                                                                                                                                                           ');
-		buf.push('		</form>                                                                                                                                                              ');
-		buf.push('	</div>                                                                                                                                                                   ');
-		buf.push('	<div id="ntq-employ-job-condition" class="common-box"> <button class="layui-btn layui-btn-normal" id="ntq-employ-job-condition-add">新增职位</button> <button class="layui-btn layui-btn-warm" id="ntq-employ-job-condition-update">重新发布</button>    <button class="layui-btn layui-btn-danger">下架</button>');
-		buf.push('		<table class="layui-table" lay-even="" lay-skin="row">                                                                                                               ');
-		buf.push('			<colgroup>                                                                                                                                                       ');
-		buf.push('				<col width="150">                                                                                                                                            ');
-		buf.push('				<col width="150">                                                                                                                                            ');
-		buf.push('				<col width="200">                                                                                                                                            ');
-		buf.push('				<col> </colgroup>                                                                                                                                            ');
-		buf.push('			<thead>                                                                                                                                                          ');
-		buf.push('				<tr>                                                                                                                                                         ');
-		buf.push('					<th>职位编号</th>                                                                                                                                        ');
-		buf.push('					<th>职位名称</th>                                                                                                                                        ');
-		buf.push('					<th>创建时间</th>                                                                                                                                        ');
-		buf.push('					<th>求职投放数量</th>                                                                                                                                    ');
-		buf.push('					<th>状态</th>                                                                                                                                            ');
-		buf.push('					<th>发布时间</th>                                                                                                                                        ');
-		buf.push('				</tr>                                                                                                                                                        ');
-		buf.push('			</thead>                                                                                                                                                         ');
-		buf.push('			<tbody>                                                                                                                                                          ');
-		buf.push('				<tr>                                                                                                                                                         ');
-		buf.push('					<td>1000110</td>                                                                                                                                         ');
-		buf.push('					<td>高级JAVA</td>                                                                                                                                        ');
-		buf.push('					<td>20170301</td>                                                                                                                                        ');
-		buf.push('					<td><span class="ntq-employ-job-condition-num">20</span></td>                                                                                                   ');
-		buf.push('					<td>待审核</td>                                                                                                                                          ');
-		buf.push('					<td>20170301</td>                                                                                                                                        ');
-		buf.push('				</tr>                                                                                                                                                        ');
-		buf.push('				<tr>                                                                                                                                                         ');
-		buf.push('					<td>1000110</td>                                                                                                                                         ');
-		buf.push('					<td>高级JAVA</td>                                                                                                                                        ');
-		buf.push('					<td>20170301</td>                                                                                                                                        ');
-		buf.push('					<td><span class="ntq-employ-job-condition-num">20</span></td>                                                                                                   ');
-		buf.push('					<td>待审核</td>                                                                                                                                          ');
-		buf.push('					<td>20170301</td>                                                                                                                                        ');
-		buf.push('				</tr>                                                                                                                                                        ');
-		buf.push('				<tr>                                                                                                                                                         ');
-		buf.push('					<td>1000110</td>                                                                                                                                         ');
-		buf.push('					<td>高级JAVA</td>                                                                                                                                        ');
-		buf.push('					<td>20170301</td>                                                                                                                                        ');
-		buf.push('					<td><span class="ntq-employ-job-condition-num">20</span></td>                                                                                                   ');
-		buf.push('					<td>待审核</td>                                                                                                                                          ');
-		buf.push('					<td>20170301</td>                                                                                                                                        ');
-		buf.push('				</tr>                                                                                                                                                        ');
-		buf.push('				<tr>                                                                                                                                                         ');
-		buf.push('					<td>1000110</td>                                                                                                                                         ');
-		buf.push('					<td>高级JAVA</td>                                                                                                                                        ');
-		buf.push('					<td>20170301</td>                                                                                                                                        ');
-		buf.push('					<td><span class="ntq-employ-job-condition-num">20</span></td>                                                                                                   ');
-		buf.push('					<td>待审核</td>                                                                                                                                          ');
-		buf.push('					<td>20170301</td>                                                                                                                                        ');
-		buf.push('				</tr>                                                                                                                                                        ');
-		buf.push('				<tr>                                                                                                                                                         ');
-		buf.push('					<td>1000110</td>                                                                                                                                         ');
-		buf.push('					<td>高级JAVA</td>                                                                                                                                        ');
-		buf.push('					<td>20170301</td>                                                                                                                                        ');
-		buf.push('					<td><span class="ntq-employ-job-condition-num">20</span></td>                                                                                                   ');
-		buf.push('					<td>待审核</td>                                                                                                                                          ');
-		buf.push('					<td>20170301</td>                                                                                                                                        ');
-		buf.push('				</tr>                                                                                                                                                        ');
-		buf.push('			</tbody>                                                                                                                                                         ');
-		buf.push('		</table>                                                                                                                                                             ');
-		buf.push('		<div id="ntq-employ-job-condition-pag"></div>                                                                                                                               ');
-		buf.push('	</div>                                                                                                                                                                   ');
-		buf.push('</div>																									');																																
-		 
-		return buf.join("");
-		
-	};
-	
-	HtmUtil.common4num = function(){
-		var buf = [];
-		buf.push('<div id="ntq-employ-job-num">');
-		
-		buf.push('<table class="layui-table" lay-even="" lay-skin="row">');
-		buf.push('	<thead>');
-		buf.push('		<tr>');
-		buf.push('			<th>姓名</th>');
-		buf.push('			<th>学历</th>');
-		buf.push('			<th>电话</th>');
-		buf.push('			<th>工作年限</th>');
-		buf.push('		</tr>');
-		buf.push('	</thead>');
-		buf.push('	<tbody>');
-		buf.push('		<tr>');
-		buf.push('			<td>1000110</td>');
-		buf.push('			<td>高级JAVA</td>');
-		buf.push('			<td>20170301</td>');
-		buf.push('			<td>20170301</td>');
-		buf.push('		</tr>');
-		buf.push('	 </tbody>');
-		buf.push('</table>');
-		buf.push('</div>')
-		
-		return buf.join("");
+ 
 
+
+
+PageInfo.register({"type":"Obj","info":function(){
+	
+	var PageObj = {};
+	 
+	PageObj.require = {
+		"$":"jquery",
+		"layui":"layui"
 	};
+	
+	 
+	PageObj.page = function(){
+		
+		var FunUtil = {};
+	    var HtmUtil = {};
+    	var Page 	= {};
+	
+		HtmUtil.common4num = function(){
+			var buf = [];
+			buf.push('<div id="ntq-employ-job-num">');
+			
+			buf.push('<table class="layui-table" lay-even="" lay-skin="row">');
+			buf.push('	<thead>');
+			buf.push('		<tr>');
+			buf.push('			<th>姓名</th>');
+			buf.push('			<th>学历</th>');
+			buf.push('			<th>电话</th>');
+			buf.push('			<th>工作年限</th>');
+			buf.push('		</tr>');
+			buf.push('	</thead>');
+			buf.push('	<tbody>');
+			buf.push('		<tr>');
+			buf.push('			<td>1000110</td>');
+			buf.push('			<td>高级JAVA</td>');
+			buf.push('			<td>20170301</td>');
+			buf.push('			<td>20170301</td>');
+			buf.push('		</tr>');
+			buf.push('	 </tbody>');
+			buf.push('</table>');
+			buf.push('</div>')
+			
+			return buf.join("");
+	
+		};
 	
 	HtmUtil.common4update  = function(data){
 		
@@ -238,39 +156,10 @@ PageInfo.register({"type":"Obj","info":function(){
 		
 	};
 	
-	
-	FunUtil.Global = {
-		"child":{
-			"id":123
-		}
-	};//传参对象
-	
-	PageObj.require = {
-		"$":"jquery",
-		"layui":"layui"
-	};
-	
-	PageObj.page = {
-			    data(){
-			        var param = {};
-			        
-			        param.HtmUtil = HtmUtil;
-			        param.FunUtil = FunUtil;
-			        
-			        return param;
-			    },
-			    init(){
-			         
-			    },
-			    update(){
-			        
-			    },
-			    show(){
-			    	 
-			    	var $this = this;
-			    	
-			    	 
-			    	layui.use(['form', 'layedit', 'laydate','laypage', 'layer'], function(){
+		
+		Page.show = function(){
+			 
+			  layui.use(['form', 'layedit', 'laydate','laypage', 'layer'], function(){
 					  var form = layui.form()
 					  ,layer = layui.layer
 					  ,layedit = layui.layedit
@@ -349,16 +238,14 @@ PageInfo.register({"type":"Obj","info":function(){
 						 
 					});
 					
-			    },
-			    hide(){
-			    	//console.log("==add==hide")
-			    },   
-			    destory(){
-			        
-			    }
-			
-			};
+		};
+		
+		return Page;
+		
+	};
+	
 	
 	return PageObj;
 }});
+
 

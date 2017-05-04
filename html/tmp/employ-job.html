@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta name="author" content="">
+		<title></title>
+		<link rel="stylesheet" href="../../assets/js/plug/layui/css/layui.css" />
+		<link rel="stylesheet" type="text/css" href="../../assets/css/common.css"/>
+	</head>
+
+	<body>
+				 <div id="ntq-employ-job"> 
+		 	<div id="ntq-employ-job-search" class="common-box">                                                                                                                              
+		 		<form class="layui-form" action="">                                                                                                                                   
+		 			<div class="layui-form-item">                                                                                                                                     
+		 				<div class="layui-inline"> <label class="layui-form-label">职位名称</label>                                                                                   
+		 					<div class="layui-input-inline"> <input type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input"> </div>             
+		 				</div>                                                                                                                                                        
+		 				<div class="layui-inline"> <label class="layui-form-label">发布日期</label>                                                                                   
+		 					<div class="layui-input-inline"> <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off"  class="layui-input" onclick="layui.laydate({elem: this})"> </div>  
+		 				</div>                                                                                                                                                        
+		 				<div class="layui-inline"> <label class="layui-form-label">处理状态</label>                                                                                   
+		 					<div class="layui-input-inline">                                                                                                                          
+		 						<select name="interest" lay-filter="aihao">                                                                                                           
+		 							<option value=""></option>                                                                                                                        
+		 							<option value="0">写作</option>                                                                                                                   
+		 							<option value="1" selected="">阅读</option>                                                                                                       
+		 							<option value="2">游戏</option>                                                                                                                   
+		 							<option value="3">音乐</option>                                                                                                                   
+		 							<option value="4">旅行</option>                                                                                                                   
+		 						</select>                                                                                                                                             
+		 					</div> <button class="layui-btn" lay-submit="" lay-filter="demo1">搜索</button> </div>                                                                    
+		 			</div>                                                                                                                                                            
+		 		</form>                                                                                                                                                               
+		 	</div>                                                                                                                                                                    
+		 	<div id="ntq-employ-job-condition" class="common-box"> <button class="layui-btn layui-btn-normal" id="ntq-employ-job-condition-add">新增职位</button> <button class="layui-btn layui-btn-warm" id="ntq-employ-job-condition-update">重新发布</button>    <button class="layui-btn layui-btn-danger">下架</button> 
+		 		<table class="layui-table" lay-even="" lay-skin="row">                                                                                                                
+		 			<colgroup>                                                                                                                                                        
+		 				<col width="150">                                                                                                                                             
+		 				<col width="150">                                                                                                                                             
+		 				<col width="200">                                                                                                                                             
+		 				<col> </colgroup>                                                                                                                                             
+		 			<thead>                                                                                                                                                           
+		 				<tr>                                                                                                                                                          
+		 					<th>职位编号</th>                                                                                                                                         
+		 					<th>职位名称</th>                                                                                                                                         
+		 					<th>创建时间</th>                                                                                                                                         
+		 					<th>求职投放数量</th>                                                                                                                                     
+		 					<th>状态</th>                                                                                                                                             
+		 					<th>发布时间</th>                                                                                                                                         
+		 				</tr>                                                                                                                                                         
+		 			</thead>                                                                                                                                                          
+		 			<tbody>                                                                                                                                                           
+		 				<tr>                                                                                                                                                          
+		 					<td>1000110</td>                                                                                                                                          
+		 					<td>高级JAVA</td>                                                                                                                                         
+		 					<td>20170301</td>                                                                                                                                         
+		 					<td><span class="ntq-employ-job-condition-num">20</span></td>                                                                                                    
+		 					<td>待审核</td>                                                                                                                                           
+		 					<td>20170301</td>                                                                                                                                         
+		 				</tr>                                                                                                                                                         
+		 				<tr>                                                                                                                                                          
+		 					<td>1000110</td>                                                                                                                                          
+		 					<td>高级JAVA</td>                                                                                                                                         
+		 					<td>20170301</td>                                                                                                                                         
+		 					<td><span class="ntq-employ-job-condition-num">20</span></td>                                                                                                    
+		 					<td>待审核</td>                                                                                                                                           
+		 					<td>20170301</td>                                                                                                                                         
+		 				</tr>                                                                                                                                                         
+		 				<tr>                                                                                                                                                          
+		 					<td>1000110</td>                                                                                                                                          
+		 					<td>高级JAVA</td>                                                                                                                                         
+		 					<td>20170301</td>                                                                                                                                         
+		 					<td><span class="ntq-employ-job-condition-num">20</span></td>                                                                                                    
+		 					<td>待审核</td>                                                                                                                                           
+		 					<td>20170301</td>                                                                                                                                         
+		 				</tr>                                                                                                                                                         
+		 				<tr>                                                                                                                                                          
+		 					<td>1000110</td>                                                                                                                                          
+		 					<td>高级JAVA</td>                                                                                                                                         
+		 					<td>20170301</td>                                                                                                                                         
+		 					<td><span class="ntq-employ-job-condition-num">20</span></td>                                                                                                    
+		 					<td>待审核</td>                                                                                                                                           
+		 					<td>20170301</td>                                                                                                                                         
+		 				</tr>                                                                                                                                                         
+		 				<tr>                                                                                                                                                          
+		 					<td>1000110</td>                                                                                                                                          
+		 					<td>高级JAVA</td>                                                                                                                                         
+		 					<td>20170301</td>                                                                                                                                         
+		 					<td><span class="ntq-employ-job-condition-num">20</span></td>                                                                                                    
+		 					<td>待审核</td>                                                                                                                                           
+		 					<td>20170301</td>                                                                                                                                         
+		 				</tr>                                                                                                                                                         
+		 			</tbody>                                                                                                                                                          
+		 		</table>                                                                                                                                                              
+		 		<div id="ntq-employ-job-condition-pag"></div>                                                                                                                                
+		 	</div>                                                                                                                                                                    
+		 </div>																									 																																
+		 
+			
+	</body>
+	
+ 	<script type="text/javascript" src="../../assets/js/QLive.js"></script>
+  	<script type="text/javascript" src="../../assets/js/QLive-config.js"></script>
+	 
+	 <script src="../../assets/js/components/employ/job.js"></script>
+	 
+ 
+</html>
