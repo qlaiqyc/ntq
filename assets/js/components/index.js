@@ -19,6 +19,8 @@ PageInfo.register({"type":"Obj","info":function(){
 			 
 			var request = this.api;
 			
+			request.
+			
 			 
 				 
 			var $btn4apply	= $("div.ntq-index-apply-btn");

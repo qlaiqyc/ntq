@@ -125,9 +125,19 @@ PageInfo.register({"type":"plug","info":(function(){
 	
 	/*请求集合 */
 	
+	FunUtil.common4post = function(data,callback){
+		FunUtil.request({"method":"post","url":data.url,"param":data.param,"success":callback});
+	};
 	
-	FunUtil.rq4 = function(data,success){
+	
+	FunUtil.common4get = function(data,callback){
 		
+		FunUtil.request({"method":"get","url":data.url,"param":data.param,"success":callback});
+		
+	}
+	
+	FunUtil.rq4addJobSeekerInfoAndResume = function(data,success){
+		var url = ""
 		
 	};
  

@@ -11,61 +11,73 @@
 		<title></title>
 		<link rel="stylesheet" href="../../assets/js/plug/layui/css/layui.css" />
 		<link rel="stylesheet" type="text/css" href="../../assets/css/common.css"/>
+		
+		<style type="text/css">
+			#ntq-apply-add{
+				padding-top: 40px;
+    display: table;
+    margin: 0 auto;
+    margin-top: 94px;
+    width: 1080px;
+			}
+		</style>
 	</head>
 
 	<body>
-				 	 <div id="ntq-apply-add" class="common-box">                                                                                                                       
+ 
+		
+			<div id="ntq-apply-add" class="common-box">                                                                                                                       
 		     <form class="layui-form" action="">                                                                                                                           
 		         <div class="layui-form-item">                                                                                                                             
 		             <div class="layui-inline">                                                                                                                            
-		                 <label class="layui-form-label">电话</label>                                                                                                      
+		                 <label class="layui-form-label" name="jobSeekerPhone"  >电话</label>                                                                                                      
 		                 <div class="layui-input-inline">                                                                                                                  
 		                     <input type="tel" name="phone" lay-verify="phone" autocomplete="off" class="layui-input"> </div>                                              
 		             </div>                                                                                                                                                
 		             <div class="layui-inline">                                                                                                                            
 		                 <label class="layui-form-label">姓名</label>                                                                                                      
 		                 <div class="layui-input-inline">                                                                                                                  
-		                     <input type="text" name="username" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input"> </div>                  
+		                     <input type="text" name="jobSeekerName"  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input"> </div>                  
 		             </div>                                                                                                                                                
 		             <div class="layui-inline">                                                                                                                            
 		                 <label class="layui-form-label">Email</label>                                                                                                     
 		                 <div class="layui-input-inline">                                                                                                                  
-		                     <input type="text" name="username" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input"> </div>                  
+		                     <input type="text" name="jobSeekerEmail"  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input"> </div>                  
 		             </div>                                                                                                                                                
 		         </div>                                                                                                                                                    
 		         <div class="layui-form-item">                                                                                                                             
 		             <div class="layui-inline">                                                                                                                            
 		                 <label class="layui-form-label">性别</label>                                                                                                      
 		                 <div class="layui-input-inline">                                                                                                                  
-		                     <input type="radio" name="sex" value="男" title="男" checked="">                                                                              
-		                     <input type="radio" name="sex" value="女" title="女"> </div>                                                                                  
+		                     <input type="radio" name="jobSeekerSex"  value="男" title="男" checked="">                                                                              
+		                     <input type="radio" name="jobSeekerSex"  value="女" title="女"> </div>                                                                                  
 		             </div>                                                                                                                                                
 		             <div class="layui-inline">                                                                                                                            
 		                 <label class="layui-form-label"></label>                                                                                                          
-		                 <div class="layui-input-inline">                                                                                                                  
+		                 <div class="layui-input-inline">       <!--isAddNtqweixin-->                                                                                                           
 		                     <input type="checkbox" name="like1[write]" lay-skin="primary" title="是否添加组织者微信" checked=""> </div>                                   
 		             </div>                                                                                                                                                
 		             <div class="layui-inline">                                                                                                                            
 		                 <label class="layui-form-label">上传简历</label>                                                                                                  
 		                 <div class="layui-input-inline">                                                                                                                  
-		                     <input id="ntq-apply-add-btn" type="file" name="file1" lay-type="file" class="layui-upload-file"> </div>                                      
+		                     <input id="ntq-apply-add-btn" type="file" name="fileName" lay-type="file" class="layui-upload-file"> </div>                                      
 		             </div>                                                                                                                                                
 		         </div>                                                                                                                                                    
 		         <div class="layui-form-item">                                                                                                                             
 		             <div class="layui-inline">                                                                                                                            
 		                 <label class="layui-form-label">毕业院校</label>                                                                                                  
 		                 <div class="layui-input-inline">                                                                                                                  
-		                     <input type="tel" name="phone" lay-verify="phone" autocomplete="off" class="layui-input"> </div>                                              
+		                     <input type="tel" name="graduateSchool" lay-verify="phone" autocomplete="off" class="layui-input"> </div>                                              
 		             </div>                                                                                                                                                
 		             <div class="layui-inline">                                                                                                                            
 		                 <label class="layui-form-label">专业</label>                                                                                                      
 		                 <div class="layui-input-inline">                                                                                                                  
-		                     <input type="text" name="username" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input"> </div>                  
+		                     <input type="text" name="majorSubjects"  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input"> </div>                  
 		             </div>                                                                                                                                                
 		             <div class="layui-inline">                                                                                                                            
 		                 <label class="layui-form-label">学历</label>                                                                                                      
 		                 <div class="layui-input-inline">                                                                                                                  
-		                     <select name="interest" lay-filter="aihao">                                                                                                   
+		                     <select name="recordOfFormalSchooling" lay-filter="aihao">                                                                                                   
 		                         <option value=""></option>                                                                                                                
 		                         <option value="0">写作</option>                                                                                                           
 		                         <option value="1" selected="">阅读</option>                                                                                               
@@ -80,17 +92,17 @@
 		             <div class="layui-inline">                                                                                                                            
 		                 <label class="layui-form-label">毕业时间</label>                                                                                                  
 		                 <div class="layui-input-inline">                                                                                                                  
-		                     <input type="tel" name="phone" lay-verify="phone" autocomplete="off" class="layui-input"> </div>                                              
+		                     <input type="tel" name="graduateDate" lay-verify="phone" autocomplete="off" class="layui-input"> </div>                                              
 		             </div>                                                                                                                                                
 		             <div class="layui-inline">                                                                                                                            
 		                 <label class="layui-form-label">职位编码</label>                                                                                                  
 		                 <div class="layui-input-inline">                                                                                                                  
-		                     <input type="text" name="username" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input"> </div>                  
+		                     <input type="text" name="jobCode" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input"> </div>                  
 		             </div>                                                                                                                                                
 		             <div class="layui-inline">                                                                                                                            
 		                 <label class="layui-form-label">微信ID</label>                                                                                                    
 		                 <div class="layui-input-inline">                                                                                                                  
-		                     <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input"> </div>                    
+		                     <input type="text" name="jobSeekerWeixin" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input"> </div>                    
 		             </div>                                                                                                                                                
 		         </div>                                                                                                                                                    
 		         <div class="layui-form-item" id="ntq-apply-add-subline">                                                                                                  
