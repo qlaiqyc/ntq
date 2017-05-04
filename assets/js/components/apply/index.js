@@ -92,9 +92,6 @@ PageInfo.register({"type":"Obj","info":function(){
 				
 					  
 			});
-			
-			
-			    	
 		 };
 		
 		return Page;
