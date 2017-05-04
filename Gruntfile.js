@@ -214,6 +214,15 @@ module.exports = function (grunt) {
 			dest: 'dist/assets/js/plug'
 			 
 		  },
+		  
+		  common: {
+			expand: true,
+			expand: true,
+			cwd: 'assets/js/components/common',
+			src: ['**/*.*', '*.*'],
+			dest: 'dist/assets/js/components/common'
+			 
+		  },
 		  js: { 
 			expand: true,
 			cwd: 'dist/tmp/js',
