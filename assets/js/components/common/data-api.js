@@ -34,7 +34,7 @@ PageInfo.register({"type":"plug","info":(function(){
 			var contentType = (data.method == "post") ? "application/x-www-form-urlencoded" :"application/json";
 			 
 			contentType= "application/json";
-		 
+		    if(!String.HasText(data.method)) return;
 	        
 	         $.ajax({
 	             type:data.method,

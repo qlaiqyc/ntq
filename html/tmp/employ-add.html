@@ -61,22 +61,24 @@
 		         <div class="layui-inline">                                                                                                                                                            
 		             <label class="layui-form-label">公司福利</label>                                                                                                                                  
 		             <div class="layui-input-inline">                                                                                                                                                  
-		                 <select name="interest" lay-filter="aihao">                                                                                                                                   
-		                     <option value=""></option>                                                                                                                                                
-		                     <option value="0">写作</option>                                                                                                                                           
-		                     <option value="1" selected="">阅读</option>                                                                                                                               
-		                 </select>                                                                                                                                                                     
+		                 <input type="text" name="companyBenefit" lay-verify="required" autocomplete="off" placeholder="" class="layui-input">                                                                                                                                                              
 		             </div>                                                                                                                                                                            
 		         </div>                                                                                                                                                                                
 		         <div class="layui-inline">                                                                                                                                                            
 		             <label class="layui-form-label">融资情况</label>                                                                                                                                  
-		             <div class="layui-input-inline">                                                                                                                                                  
+		             <div class="layui-input-inline" style="width: 100px;">                                                                                                                                                  
 		                 <select name="financingType" lay-filter="aihao">                                                                                                                                   
 		                     <option value=""></option>                                                                                                                                                
 		                     <option value="1" selected="">是</option>                                                                                                                               
 		                     <option value="2">否</option>                                                                                                                                           
-		                 </select>                                                                                                                                                                     
-		             </div>                                                                                                                                                                            
+		                 </select>
+		                 
+		             </div>   
+		             
+		               <div class="layui-input-inline">                                                                                                                                                  
+		                 
+		                  <input type="checkbox" name="isNewlyEstablished" title="創業">                       
+		             </div>         
 		         </div>                                                                                                                                                                                
 		     </div>                                                                                                                                                                                    
 		                                                                                                                                                                                               
@@ -143,7 +145,7 @@
 		                 <input type="text" name="lowSalary" placeholder="￥" autocomplete="off" class="layui-input">                                                                                  
 		             </div>                                                                                                                                                                            
 		             <div class="layui-input-inline" style="width: 32px;" data-name="isDiscussPersonally">                                                                                                                             
-		                 <input type="checkbox" name="like[write]" title="面议">                                                                                                                       
+		                 <input type="checkbox" name="isDiscussPersonally" title="面议">                                                                                                                       
 		             </div>                                                                                                                                                                            
 		         </div>                                                                                                                                                                                
 		     </div>                                                                                                                                                                                    
@@ -152,7 +154,7 @@
 		         <div class="layui-inline">                                                                                                                                                            
 		             <label class="layui-form-label">职位性质</label>                                                                                                                                  
 		             <div class="layui-input-inline">                                                                                                                                                  
-		                 <select name="interest" lay-filter="aihao">                                                                                                                                   
+		                 <select name="positionType" lay-filter="aihao">                                                                                                                                   
 		                     <option value=""></option>                                                                                                                                                
 		                     <option value="1">全职</option>                                                                                                                                           
 		                     <option value="2" selected="">兼职</option>                                                                                                                               
@@ -163,7 +165,7 @@
 		         <div class="layui-inline">                                                                                                                                                            
 		             <label class="layui-form-label">学历要求</label>                                                                                                                                  
 		             <div class="layui-input-inline">                                                                                                                                                  
-		                 <select name="interest" lay-filter="aihao">                                                                                                                                   
+		                 <select name="qualificationsType" lay-filter="aihao">                                                                                                                                   
 		                     <option value=""></option>                                                                                                                                                
 		                     <option value="0">写作</option>                                                                                                                                           
 		                     <option value="1" selected="">高中</option>                                                                                                                               
@@ -225,6 +227,7 @@
   	<script type="text/javascript" src="../../assets/js/QLive-config.js"></script>
 	 
 	 <script src="../../assets/js/components/employ/add.js"></script>
+ 
 	 
  
 </html>
