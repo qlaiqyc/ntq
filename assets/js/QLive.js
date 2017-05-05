@@ -338,7 +338,7 @@
 					
 					FunUtil.Global.Page.require = {};
 				
-				 	Router = param;
+				 	var Router = param;
 					for(var i =0 ;i<len;i++)   	FunUtil.Global.Page.require[keys[i]] = values[i];
 					
 					Router.init();
@@ -396,7 +396,7 @@
 							
 							delete FunUtil.Global.Page.require;
 						
-							Router = param;
+							var Router = param;
 							
 							FunUtil.Global.Router[nid].page = Router;
 							FunUtil.Global.Router[nid].state = "show";
