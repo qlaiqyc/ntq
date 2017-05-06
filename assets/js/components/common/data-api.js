@@ -110,7 +110,7 @@ PageInfo.register({
 					}, success);
 				},
 				'verifyMessageCode': function(data, success) {
-					FunUtil.common4post({
+					FunUtil.common4get({
 						url: (burl + "companyInfo/verifyMessageCode.action"),
 						"param": data
 					}, success);

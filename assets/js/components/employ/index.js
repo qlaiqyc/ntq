@@ -25,7 +25,7 @@ PageInfo.register({
 						buf.push('        <div class="layui-inline">')
 						buf.push('            <label class="layui-form-label">验证手机</label>')
 						buf.push('            <div class="layui-input-inline">')
-						buf.push('                <input type="tel" name="phone" lay-verify="phone" autocomplete="off" class="layui-input" id="ntq-employ-index-form-phone">')
+						buf.push('                <input type="tel" name="phoneNumber" lay-verify="phone" autocomplete="off" class="layui-input" id="ntq-employ-index-form-phone">')
 						buf.push('            </div>')
 						buf.push('            <label class="layui-form-label" id="ntq-employ-index-form-code">获取验证码</label>')
 						buf.push('        </div>')
@@ -34,7 +34,7 @@ PageInfo.register({
 						buf.push('        <div class="layui-inline">')
 						buf.push('            <label class="layui-form-label">输入验证码</label>')
 						buf.push('            <div class="layui-input-inline">')
-						buf.push('                <input type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input">')
+						buf.push('                <input type="text" name="verifyCode" lay-verify="required|number" autocomplete="off" class="layui-input">')
 						buf.push('            </div>')
 						buf.push('        </div>')
 						buf.push('    </div>')
@@ -74,11 +74,6 @@ PageInfo.register({
 												area: ['420px', '240px'], //宽高
 												content: HtmUtil.common4input(),
 												success: function() {
-													/*$("#ntq-employ-index-form-btn").unbind("click").bind("click",function(){
-														layer.closeAll()
-														PageInfo.FunUtil.common4openUrl({"url":'employ/job'});
-													});*/
-													
 													var $phone = $("#ntq-employ-index-form-phone");
 													
 
@@ -88,12 +83,23 @@ PageInfo.register({
 															if(!String.HasText(phoneNumber)) return;
 															
 															request.getMessageCode({"phoneNumber":phoneNumber},function(data){
-																console.log(data);
+																if(!data.success) layer.msg(data.message);
 															});
 													});
 
 													form.on('submit(ntq-employ-index-form-btn)', function(data) {
 
+															request.verifyMessageCode(data.field,function(data){
+																
+																
+																if(data.success)  {
+																	PageInfo.FunUtil.common4openUrl({"url":'employ/job'});
+																}else{
+																	layer.msg(data.message);
+																}
+																
+															});
+															
 															return false;
 													 
 													});
