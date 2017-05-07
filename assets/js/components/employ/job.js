@@ -216,9 +216,13 @@ PageInfo.register({"type":"Obj","info":function(){
 							if(type == "init") {
 								laypage({ cont: 'ntq-employ-job-condition-pag' ,pages: pages  ,jump: 
 									function(obj, first){
-										FunUtil.Global.pageNo = obj.curr;
-										param.pageNo = obj.curr;;
-										Fun4Help("next");
+										
+										if(obj.curr > 1){
+											FunUtil.Global.pageNo = obj.curr;
+											param.pageNo = obj.curr;;
+											Fun4Help("next");
+										}
+										
 									}
 								});
 							}
