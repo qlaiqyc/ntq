@@ -1,8 +1,7 @@
 PageInfo.register({"type":"Start","info":function(){
  	
 	/**
-	 * 所有对象通过初始化进入 Start
-	 * 
+	 * 所有入口通过初始化进入 Start
 	 * require: 需要哪些 外部引用
 	 * 
 	 * Pub: 公共方法对象

@@ -5,8 +5,6 @@ PageInfo.register({"type":"config","info":function(){
 	* 02 :cdn 优化
 	* 
 	* */
-		
-		
 	 var baseURL = location.origin+"/"+location.pathname.split("/")[1]
 	
 	// var baseURL = "http://192.168.2.178:8020/ntq";
