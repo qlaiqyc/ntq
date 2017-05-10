@@ -129,16 +129,17 @@ module.exports = function (grunt) {
 		
 	};
 	
+	
 
-    // ������������
+    // 构建任务配置
     grunt.initConfig({
 
-        //��ȡpackage.json�����ݣ��γɸ�json���
+        //读取package.json的内容，形成个json数据
         pkg: grunt.file.readJSON('package.json'),
         clean: ["dist"],
-        //ѹ��js
+        //压缩js
         uglify: {
-            //�ļ�ͷ�������Ϣ
+            //文件头部输出信息
             options: {
                 banner: '/*! <%= pkg.name %> QL <%= grunt.template.today("yyyy-mm-dd HH:mm:ss") %> */\n'
             },
@@ -155,12 +156,12 @@ module.exports = function (grunt) {
                 ]
             }
         },
-        //ѹ��css
+        //压缩css
         cssmin: {
-            //�ļ�ͷ�������Ϣ
+            //文件头部输出信息
             options: {
                 banner: '/*! <%= pkg.name %> QL <%= grunt.template.today("yyyy-mm-dd HH:mm:ss") %> */\n',
-                //��������
+                //美化代码
                 beautify: {
                    
                     ascii_only: true
@@ -249,6 +250,23 @@ module.exports = function (grunt) {
 		  
 		  
 		},
+		
+		
+		 replace: {
+            inner: {
+                src: ['dist/assets/**/*.js'],             // source files array (supports minimatch)
+                overwrite: true,
+                replacements: [{
+                    from: '../../assets/img/',
+                    to: '../assets/img/'
+                }
+                
+                ]
+            },
+		 
+			 
+        },
+ 
 		 
     });
 	
@@ -274,7 +292,7 @@ module.exports = function (grunt) {
  
   
 //	grunt.registerTask('default', ['common4Num']);
-grunt.registerTask('default', ["clean",'htmlmin','concathtml','bable4getFiles','babel','bable4delmap',"copy",'common4Num']);
+grunt.registerTask('default', ["clean",'htmlmin','concathtml','bable4getFiles','babel','bable4delmap',"copy",'common4Num',"replace"]);
  
 
  

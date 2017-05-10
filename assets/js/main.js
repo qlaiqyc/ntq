@@ -34,7 +34,8 @@ PageInfo.register({"type":"Start","info":function(){
 		"name":"ntq"       //项目名称
 	};
 	 
-	Start.Pub = {
+	Start.Pub =function(){
+		
 	};
  	
  	return Start;

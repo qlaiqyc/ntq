@@ -650,9 +650,7 @@
 		
 	};
 	
-	FunUtil.common4Pub     = function(data){
-		FunUtil.Global.API = data;
-	};
+	 
 	
 	FunUtil.common4Global  = function(data){
 		FunUtil.Global.id = data.id;
@@ -695,11 +693,18 @@
 			
 			Promise.all(list).then(values => { 
 				  
-				for(var i =0 ;i<len;i++)  keys[i] = values[i];
+				
 				
 				FunUtil.common4Global(param.Global);
 				FunUtil.common4Router(param.Router);
-				FunUtil.common4Pub(param.Pub);
+				
+				
+				var func=new function(){
+					   		
+					for(var i =0 ;i<len;i++)  this[keys[i]] = values[i];
+				};
+				param.Pub.call(func,"var");
+				
 			});
 		};
 		
