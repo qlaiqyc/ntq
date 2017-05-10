@@ -540,19 +540,49 @@
 	/**
 	 * 
 	 * 按需加载异步请求js
-	
+	 * 判断是否缓存 根据打包值
 	 * 
 	 */
 	FunUtil.common4GetJS =   function(data){
-		var script	= document.createElement("script");
-		script.type	= "text/javascript";
-		script.src	= data.url;
-		String.HasText(data.async) ? data.async: (script.async="async");
-		if(String.HasText(data.type) && data.type == "head") {
-			document.head.appendChild(script);
-		}else{
-			document.body.appendChild(script);
-		}
+		
+		var request = function(callback){
+			var xmlhttp = null ;
+			
+			if (window.XMLHttpRequest){
+				xmlhttp=new XMLHttpRequest();
+			}else if(window.ActiveXObject){
+				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			}
+		 
+			if (xmlhttp === null)  {alert("不支持咯"); return}; 
+			 
+			xmlhttp.onreadystatechange = function(){
+				 if (xmlhttp.readyState==4 && xmlhttp.status==200){
+				 	console.log(xmlhttp);
+				 	callback();
+				 }
+			};
+				
+			xmlhttp.open("GET",data.url,true);//代表请求是否异步处理
+			xmlhttp.send(null);
+			
+		};
+		
+		
+		
+		/* */
+		 var callback = function(){
+		 	
+		 	var script	= document.createElement("script");
+			script.type	= "text/javascript";
+			script.src	= data.url;
+			String.HasText(data.async) ? data.async: (script.async="async");
+			if(String.HasText(data.type) && data.type == "head") {
+				document.head.appendChild(script);
+			}else{
+				document.body.appendChild(script);
+			}
+			
 	　　　　if(script.readyState){ 
 	　　　　　　script.onreadystatechange=function(){
 	　　　　　　　　if(script.readyState=='complete'||script.readyState=='loaded'){
@@ -567,6 +597,11 @@
 					script.remove();
 				}
 	　　　　};
+		 	
+		 	
+		 };
+		
+		request(callback);
 	};
 	
 	FunUtil.common4require = function(str){

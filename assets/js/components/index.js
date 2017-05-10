@@ -19,10 +19,6 @@ PageInfo.register({"type":"Obj","info":function(){
 			 
 			var request = this.api;
 			
-			//request.
-			
-			 
-				 
 			var $btn4apply	= $("div.ntq-index-apply-btn");
 			var $btn4employ = $("div.ntq-index-employ-btn");
 			
@@ -33,7 +29,6 @@ PageInfo.register({"type":"Obj","info":function(){
 			$btn4employ.unbind("click").bind("click",function(){
 				PageInfo.FunUtil.common4openUrl({"url":'employ/index'});
 			});
-			 
 		
 		};
 		
