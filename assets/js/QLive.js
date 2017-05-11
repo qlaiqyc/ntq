@@ -196,16 +196,29 @@
 	
 	FunUtil.common4cache = function(data){
 		var  execuFun = {};
-		var key = data.key;
-		var value = data.value;
+		var key 	= data.key;
+		var value 	= data.value;
+		var model	= data.model;
+		
+		if(!String.HasText(model)) model = "";
+		
 		execuFun.setItem = function(){
+			if(model == "lo"){
+				localStorage.setItem(key,value);
+			}else{
+				sessionStorage.setItem(key,value);
+			}
 			
-			sessionStorage.setItem(key,value);
 		};
 		
 		
 		execuFun.getItem = function(){
-			var str = sessionStorage.getItem(key);
+			var str  ="";
+			if(model == "lo"){
+				str = localStorage.getItem(key);
+			}else{
+				str = sessionStorage.getItem(key);
+			}
 			if(String.HasText(str)) str = JSON.parse(str);
 			return	str;
 		};
@@ -536,6 +549,8 @@
  
 	};
 	
+	
+	
 	/**
 	 * 
 	 * 按需加载异步请求js
@@ -543,6 +558,15 @@
 	 * 
 	 */
 	FunUtil.common4GetJS =   function(data){
+		
+		
+		var vnum = "0000";
+		try{
+			vnum = v4num;
+		}catch(e){
+			 vnum = "0000";
+		}
+					
 		
 		var request = function(callback){
 			var xmlhttp = null ;
@@ -557,7 +581,7 @@
 			 
 			xmlhttp.onreadystatechange = function(){
 				 if (xmlhttp.readyState==4 && xmlhttp.status==200){
-				 	console.log(xmlhttp);
+					FunUtil.common4cache({"type":"set","key":xmlhttp.responseURL,"value":JSON.stringify({"vnum":vnum,"js":xmlhttp.responseText}),"model":"lo"});
 				 	callback();
 				 }
 			};
@@ -566,7 +590,6 @@
 			xmlhttp.send(null);
 			
 		};
-		
 		
 		
 		/* */
@@ -599,6 +622,28 @@
 		 	
 		 	
 		 };
+		
+		
+		if(String.HasText(FunUtil.Global.Router)) {
+			
+			
+			var ljs = FunUtil.common4cache({"type":"get","key":data.url,"model":"lo"});
+		
+			if(String.HasText(ljs) && data.url.indexOf("layui") < 0 ){
+				
+				
+				if(ljs.vnum == vnum) {
+					
+					eval(ljs.js);
+					data.callback();
+					
+					
+					return;
+				}
+			}
+			
+		}
+		
 		
 		request(callback);
 	};
