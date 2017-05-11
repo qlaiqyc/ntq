@@ -392,15 +392,14 @@
 						
 						Promise.all(list).then(values => { 
 							  
-							for(var i =0 ;i<len;i++)  keys[i] = values[i];
+							for(var i =0 ;i<len;i++) FunUtil.Global.Page.require[keys[i]] = values[i];
 							
-							delete FunUtil.Global.Page.require;
+							//delete FunUtil.Global.Page.require;
 						
 							var Router = param;
 							
 							FunUtil.Global.Router[nid].page = Router;
 							FunUtil.Global.Router[nid].state = "show";
-							
 							
 							$main.append('<div class="'+id+'">'+Router.data().HtmUtil.layout()+'</div').show();
 							console.log(FunUtil.Global.Router[nid].jid);
