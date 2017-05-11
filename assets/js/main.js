@@ -17,15 +17,15 @@ PageInfo.register({"type":"Start","info":function(){
 	Start.Router ={
 	 	flag:"hash",
 	 	list:{
-	 		 "index"		:"/assets/js/components/index",
-			 "admin/handle"	:"/assets/js/components/admin/handle",
-			 "admin/add"	:"/assets/js/components/admin/add",
-			 "apply/job"	:"/assets/js/components/apply/job",
-			 "apply/add"	:"/assets/js/components/apply/add",
-			 "apply/index"	:"/assets/js/components/apply/index",
-			 "employ/job"	:"/assets/js/components/employ/job",
-			 "employ/add"	:"/assets/js/components/employ/add",
-			 "employ/index"	:"/assets/js/components/employ/index"
+	 		 "index"		:"assets/js/components/index",
+			 "admin/handle"	:"assets/js/components/admin/handle",
+			 "admin/add"	:"assets/js/components/admin/add",
+			 "apply/job"	:"assets/js/components/apply/job",
+			 "apply/add"	:"assets/js/components/apply/add",
+			 "apply/index"	:"assets/js/components/apply/index",
+			 "employ/job"	:"assets/js/components/employ/job",
+			 "employ/add"	:"assets/js/components/employ/add",
+			 "employ/index"	:"assets/js/components/employ/index"
 			}
 	 };
 	
