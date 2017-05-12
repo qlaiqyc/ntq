@@ -32,7 +32,9 @@
 		 		<form class="layui-form" action="">                                                                                                                                   
 		 			<div class="layui-form-item">                                                                                                                                     
 		 				<div class="layui-inline"> <label class="layui-form-label">职位名称</label>                                                                                   
-		 					<div class="layui-input-inline"> <input type="text" name="positionName" lay-verify="required" autocomplete="off" class="layui-input"> </div>             
+		 					<div class="layui-input-inline"> <input type="text" name="positionName"   autocomplete="off" class="layui-input"> </div>             
+		 				<!--	<div class="layui-input-inline"> <input type="text" name="positionName" lay-verify="required" autocomplete="off" class="layui-input"> </div>             
+		 				-->
 		 				</div>                                                                                                                                                        
 		 				<!--<div class="layui-inline"> <label class="layui-form-label">发布日期</label>                                                                                   
 		 					<div class="layui-input-inline"> <input type="text" name="publishTime" id="date" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off"  class="layui-input" onclick="layui.laydate({elem: this})"> </div>  
@@ -40,8 +42,8 @@
 		 				<div class="layui-inline"> <label class="layui-form-label">处理状态</label>                                                                                   
 		 					<div class="layui-input-inline">                                                                                                                          
 		 						<select name="postionStatus" lay-filter="aihao">                                                                                                           
-		 							<option value="1">待审核</option>                                                                                                                   
-		 							<option value="2" selected="">已发布</option>                                                                                                       
+		 							<option value="1" selected="">待审核</option>                                                                                                                   
+		 							<option value="2" >已发布</option>                                                                                                       
 		 							<option value="3">拒绝</option>                                                                                                                   
 		 							<option value="4">已下架</option>                                                                                                                   
 		 							<option value="5">待下架</option>                                                                                                                   

@@ -12,6 +12,8 @@ body{background-color:#f3f3f3}
 #ntq-employ-job-num{margin-top:-11px}
 #ntq-employ-job-update{padding-top:15px}
 .ntq-employ-job-condition-num{color:#1E9FFF;text-decoration:underline;cursor:pointer}
+
+.ntq-employ-job-condition-po{color:#1E9FFF;text-decoration:underline;cursor:pointer}
 .ntq-employ-add{display:table;margin:40px auto 0}
 
 /*===招聘===*/
