@@ -401,8 +401,8 @@
 							
 							FunUtil.Global.Router[nid].page = Router;
 							FunUtil.Global.Router[nid].state = "show";
-							
-							$main.append('<div class="'+id+'">'+Router.data().HtmUtil.layout()+'</div').show();
+							$main.hide()
+							$main.append('<div class="'+id+'">'+Router.data().HtmUtil.layout()+'</div').fadeIn();
 							console.log(FunUtil.Global.Router[nid].jid);
 							
 							Router.init();
@@ -433,7 +433,7 @@
 					Npage.state = "show";
 					FunUtil.Global.Router[nid] = Npage;
 					
-					$main.find("div."+id).show();
+					$main.find("div."+id).fadeIn();
 				}else{
 					execuFun.pub();				
 				}
@@ -460,7 +460,7 @@
 					FunUtil.Global.Router[nid] = Npage;
 					
 					
-					$main.find("div."+Npage.jid).show();
+					$main.find("div."+Npage.jid).fadeIn();
 				}else{
 				  	execuFun.pub();		
 				}
