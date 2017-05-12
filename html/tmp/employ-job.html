@@ -34,12 +34,12 @@
 		 				<div class="layui-inline"> <label class="layui-form-label">职位名称</label>                                                                                   
 		 					<div class="layui-input-inline"> <input type="text" name="positionName" lay-verify="required" autocomplete="off" class="layui-input"> </div>             
 		 				</div>                                                                                                                                                        
-		 				<div class="layui-inline"> <label class="layui-form-label">发布日期</label>                                                                                   
+		 				<!--<div class="layui-inline"> <label class="layui-form-label">发布日期</label>                                                                                   
 		 					<div class="layui-input-inline"> <input type="text" name="publishTime" id="date" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off"  class="layui-input" onclick="layui.laydate({elem: this})"> </div>  
-		 				</div>                                                                                                                                                        
+		 				</div>  -->                                                                                                                                                      
 		 				<div class="layui-inline"> <label class="layui-form-label">处理状态</label>                                                                                   
 		 					<div class="layui-input-inline">                                                                                                                          
-		 						<select name="interest" lay-filter="aihao">                                                                                                           
+		 						<select name="postionStatus" lay-filter="aihao">                                                                                                           
 		 							<option value="1">待审核</option>                                                                                                                   
 		 							<option value="2" selected="">已发布</option>                                                                                                       
 		 							<option value="3">拒绝</option>                                                                                                                   
@@ -63,51 +63,12 @@
 		 					<th>职位名称</th>                                                                                                                                         
 		 					<th>创建时间</th>                                                                                                                                         
 		 					<th>求职投放数量</th>                                                                                                                                     
-		 					<th>状态</th>                                                                                                                                             
+		 					<!--<th>状态</th>           -->                                                                                                                                  
 		 					<th>发布时间</th>                                                                                                                                         
 		 				</tr>                                                                                                                                                         
 		 			</thead>                                                                                                                                                          
-		 			<tbody>                                                                                                                                                           
-		 				<tr>                                                                                                                                                          
-		 					<td>1000110</td>                                                                                                                                          
-		 					<td>高级JAVA</td>                                                                                                                                         
-		 					<td>20170301</td>                                                                                                                                         
-		 					<td><span class="ntq-employ-job-condition-num">20</span></td>                                                                                                    
-		 					<td>待审核</td>                                                                                                                                           
-		 					<td>20170301</td>                                                                                                                                         
-		 				</tr>                                                                                                                                                         
-		 				<tr>                                                                                                                                                          
-		 					<td>1000110</td>                                                                                                                                          
-		 					<td>高级JAVA</td>                                                                                                                                         
-		 					<td>20170301</td>                                                                                                                                         
-		 					<td><span class="ntq-employ-job-condition-num">20</span></td>                                                                                                    
-		 					<td>待审核</td>                                                                                                                                           
-		 					<td>20170301</td>                                                                                                                                         
-		 				</tr>                                                                                                                                                         
-		 				<tr>                                                                                                                                                          
-		 					<td>1000110</td>                                                                                                                                          
-		 					<td>高级JAVA</td>                                                                                                                                         
-		 					<td>20170301</td>                                                                                                                                         
-		 					<td><span class="ntq-employ-job-condition-num">20</span></td>                                                                                                    
-		 					<td>待审核</td>                                                                                                                                           
-		 					<td>20170301</td>                                                                                                                                         
-		 				</tr>                                                                                                                                                         
-		 				<tr>                                                                                                                                                          
-		 					<td>1000110</td>                                                                                                                                          
-		 					<td>高级JAVA</td>                                                                                                                                         
-		 					<td>20170301</td>                                                                                                                                         
-		 					<td><span class="ntq-employ-job-condition-num">20</span></td>                                                                                                    
-		 					<td>待审核</td>                                                                                                                                           
-		 					<td>20170301</td>                                                                                                                                         
-		 				</tr>                                                                                                                                                         
-		 				<tr>                                                                                                                                                          
-		 					<td>1000110</td>                                                                                                                                          
-		 					<td>高级JAVA</td>                                                                                                                                         
-		 					<td>20170301</td>                                                                                                                                         
-		 					<td><span class="ntq-employ-job-condition-num">20</span></td>                                                                                                    
-		 					<td>待审核</td>                                                                                                                                           
-		 					<td>20170301</td>                                                                                                                                         
-		 				</tr>                                                                                                                                                         
+		 			<tbody id="ntq-employ-job-condition-table">                                                                                                                                                           
+		 				                                                                                                                            
 		 			</tbody>                                                                                                                                                          
 		 		</table>                                                                                                                                                              
 		 		<div id="ntq-employ-job-condition-pag"></div>                                                                                                                                

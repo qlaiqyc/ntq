@@ -153,27 +153,72 @@ PageInfo.register({"type":"Obj","info":function(){
 		
 	};
 	
-	FunUtil.Global = {
-		"pageNo":1,
-		"pageSize":15
-	};
+		FunUtil.Global = {
+			"pageNo":1,
+			"pageSize":2
+		};
+		
+		HtmUtil.common4list = function(data){
+			
+			var buf = [];
+			var len = data.length;
+			
+			for (var i =0;i<len;i++) {
+				
+				
+				var obj = data[i];
+				buf.push('<tr>      ');                                                                                                                                                    
+				buf.push('	<td>'+obj.positionNo+'</td>   ');                                                                                                                                       
+				buf.push('	<td>'+obj.positionName+'</td>  ');                                                                                                                                       
+				buf.push('	<td>'+FunUtil.common4time({"type":"model1","str":obj.serverCreateDate})+'</td>   ');                                                                                                                                      
+				buf.push('	<td><span class="ntq-employ-job-condition-num">'+(String.HasText(obj.resumeCount) ? obj.resumeCount : 0)+'</span></td>  ');                                                                                                  
+				buf.push('	<td>'+FunUtil.common4time({"type":"model1","str":obj.publishTime})+'</td> ');                                                                                                                                        
+				buf.push('</tr>        ');                
+			}
+			
+			return buf.join("");
+		}
 	
-	FunUtil.common4search = function(data){
-		
-		var param = {};
-		var execuFun = {};
-		
-		execuFun.init = function(){
-			FunUtil.Global.pageNo = 1;
-			FunUtil.Global.pageSize = 15;
+		FunUtil.common4search = function(data){
+			
+			var param = {};
+			var execuFun = {};
+			
+			execuFun.init = function(){
+				FunUtil.Global.pageNo = 1;
+				FunUtil.Global.pageSize = 2;
+			};
+			execuFun.next = function(){
+				FunUtil.Global.pageNo += 1;
+				FunUtil.Global.pageSize = 2;
+			};
+			
+			execuFun[data.type]();
 		};
-		execuFun.next = function(){
-			FunUtil.Global.pageNo += 1;
-			FunUtil.Global.pageSize = 15;
-		};
 		
-		execuFun[data.type]();
-	};
+		FunUtil.common4time = function(data){
+			
+			/* *
+			 *  格式
+			 * model 1 : yyyy/MM/dd
+			 * 
+			 * 
+			 * */
+			
+			if(!String.HasText(data.str)) return "无";
+			
+			var execuFun	= {};
+			var result		= ""; 
+			execuFun.model1 = function(){
+				var d = new Date(data.str);
+				
+				result = d.getFullYear() +"/"+(d.getMonth()+1)+"/"+d.getDate();
+			}
+			
+			execuFun[data.type]();
+			
+			return  result;
+		};
 		
 		Page.show = function(){
 			 var request = this.api.rq();
@@ -197,6 +242,8 @@ PageInfo.register({"type":"Obj","info":function(){
 				form.on('submit(ntq-employ-job-condition-sbtn)', function(data) {
 					FunUtil.common4search({"type":"init"});
 					var obj = data.field;	 
+					var $table = $("#ntq-employ-job-condition-table");
+					
 					var param =  {
 							      "pageNo": FunUtil.Global.pageNo,
 							      "pageSize": FunUtil.Global.pageSize,
@@ -209,20 +256,19 @@ PageInfo.register({"type":"Obj","info":function(){
 					
 					var Fun4Help =function(type){
 						request.queryCompanyPositionInfoListByCondition(JSON.stringify(param),function(cdata){
-						 	cdata.totalPage = 20;
-							var pages = cdata.totalPage;
-								pages = parseInt(pages/15) + (pages%15 > 0 ? 1:0);
+							var pages = cdata.totalRecord;
+								pages = parseInt(pages/2) + (pages%2 > 0 ? 1:0);
+							
+							$table.html(HtmUtil.common4list(cdata.results));
 							
 							if(type == "init") {
 								laypage({ cont: 'ntq-employ-job-condition-pag' ,pages: pages  ,jump: 
 									function(obj, first){
-										
-										if(obj.curr > 1){
+										if(!first){
 											FunUtil.Global.pageNo = obj.curr;
 											param.pageNo = obj.curr;;
 											Fun4Help("next");
 										}
-										
 									}
 								});
 							}
