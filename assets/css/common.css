@@ -1,41 +1,71 @@
 body{background-color:#f3f3f3}
-#qlive-body{display:table; background-color:#f3f3f3;width:100%}
+#qlive-body{display:table;margin:0 auto;padding-top:40px;background-color:#f3f3f3;width:1080px}
 .layui-input-block{width:87%}
-.common-box{
-	    border: 1px solid #c9c9c9;
-    border-radius: 1px;
-    box-shadow: 0 1px 2px #d3d3d3;
-    background-color: #fcfcfc;
-    margin: 0 auto;
+.common-l-btn{background-color:#1E9FFF;float:left;width:200px;height:100px;border-radius:2px;margin:20px;text-align:center;color:white;font-size:20px;line-height:95px;cursor:pointer}
+.common-box{border:1px solid #c9c9c9;border-radius:1px;box-shadow:0 1px 2px #d3d3d3;background-color:#fcfcfc}
+/*===招聘===*/
+#ntq-employ-index{display:table;margin:50px auto}
+#ntq-employ-index-form{overflow:hidden;margin-top:20px}
+#ntq-employ-index-form-code{font-size:12px;color:#1E9FFF;padding:0;line-height:38px;text-align:left}
+#ntq-employ-job-condition{padding:25px}
+#ntq-employ-job-search{margin:20px auto;padding-top:21px}
+#ntq-employ-job-num{margin-top:-11px}
+#ntq-employ-job-update{padding-top:15px}
+.ntq-employ-job-condition-num{color:#1E9FFF;text-decoration:underline;cursor:pointer}
+
+.ntq-employ-job-condition-po{color:#1E9FFF;text-decoration:underline;cursor:pointer}
+.ntq-employ-add{display:table;margin:40px auto 0}
+
+/*===招聘===*/
+#ntq-apply-index{display:table;margin:50px auto}
+#ntq-apply-index-form{overflow:hidden;margin-top:20px}
+#ntq-apply-index-form-code{font-size:12px;color:#1E9FFF;padding:0;line-height:38px;text-align:left}
+#ntq-apply-job-condition{padding:25px}
+#ntq-apply-job-search{margin:20px auto;padding-top:21px}
+#ntq-apply-job-num{margin-top:-11px}
+#ntq-apply-job-update{padding-top:15px}
+.ntq-apply-job-condition-num{color:#1E9FFF;text-decoration:underline;cursor:pointer}
+.ntq-apply-add{display:table;margin:40px auto 0}
+
+
+/*===主页=== */
+#ntq-index{background:url("../../assets/img/ntq-icon-bg.png") no-repeat;width:100%;min-width:1190px;height:560px;background-size:cover;background-position:center center}
+.ntq-index-apply{width:50%;color:white;text-align:center;float:left}
+.ntq-index-employ{width:50%;color:white;text-align:center;float:right}
+.ntq-index-employ-btn:hover{opacity:0.7}
+.ntq-index-employ-btn{width:200px;height:200px;margin:0 auto;line-height:200px;border-radius:50%;background-color:#000;color:white;font-size:35px;margin-top:150px;cursor:pointer}
+.ntq-index-apply-btn:hover{opacity:0.7}
+.ntq-index-apply-btn{width:200px;cursor:pointer;height:200px;margin:0 auto;line-height:200px;border-radius:50%;background-color:white;color:#000;font-size:35px;margin-top:150px}
+
+
+/*======== */
+#ntq-apply-add {
+	padding-top: 40px;
+}
+#ntq-apply-add .layui-upload-button{
+width: 190px;	
+}
+#ntq-apply-add-subline{
+	    padding-top: 40px;
+    border-top: 1px solid #e3e3e3;
+    margin-top: 46px;
+}
+#ntq-apply-job-condition{
+	padding-top: 0;
+}
+#ntq-admin-index{
+	padding: 25px;
+}
+#ntq-admin-index-search .layui-form-mid {
+    float: left;
     display: block;
-    width: 1010px;
-    margin-left: 245px;
-    margin-top: 45px;
+    padding: 9px 0;
+    margin-right: 7px;
+    margin-left: -4px;
 }
-
-.layui-border-box-js{
-    width: 100%;
-    border: none;
-    padding: 10px;
-    resize: none;
-    font-size: 12px;
-    background-color: #F7FBFF;
-    color: #881280;
-    display: table;
-    font-family: Courier New;    min-height: 100px;
+#ntq-handle-index{
+	padding: 25px;
 }
-
-.layui-code-view{
-	padding-bottom: 10px;
-}
-
-.layui-code-view .layui-code-ol li {
-    position: relative;
-    margin-left: 45px;
-    line-height: 12px !important;
-    padding: 0 5px;
-    border-left: 1px solid #ddd;
-    list-style-type: decimal-leading-zero;
-    background-color: #fff;
-    font-size: 12px !important;
+#ntq-employ-add{
+	padding: 25px;margin-bottom: 100px;
 }

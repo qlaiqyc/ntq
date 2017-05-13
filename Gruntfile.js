@@ -147,9 +147,9 @@ module.exports = function (grunt) {
                 files: [
                     {
                         expand: true,
-						cwd:FunUtil.Global.dist+ '/tmp/',
-						src: '**/*.js',
-						dest: FunUtil.Global.dist+'/build/assets/js'
+						cwd:FunUtil.Global.dist+ '/assets/js/',
+						src: 'QLive.js',
+						dest: FunUtil.Global.dist+ '/assets/js/'
 						
 						 
                     }
@@ -258,7 +258,7 @@ module.exports = function (grunt) {
                 overwrite: true,
                 replacements: [{
                     from: '../../assets/img/',
-                    to: '../assets/img/'
+                    to: 'assets/img/'
                 }
                 
                 ]
@@ -292,7 +292,7 @@ module.exports = function (grunt) {
  
   
 //	grunt.registerTask('default', ['common4Num']);
-grunt.registerTask('default', ["clean",'htmlmin','concathtml','bable4getFiles','babel','bable4delmap',"copy",'common4Num',"replace"]);
+grunt.registerTask('default', ["clean",'htmlmin','concathtml','bable4getFiles','babel','bable4delmap',"copy",'common4Num',"replace","uglify"]);
  
 
  

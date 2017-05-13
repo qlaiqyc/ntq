@@ -1,38 +1,40 @@
-"use strict";
+PageInfo.register({"type":"Obj","info":function(){
+	
+    var PageObj = {};
+	
+	
+	PageObj.require = {
+		"$":"jquery",
+		"layui":"layui",
+	};
+	
+	PageObj.page = function(){
+		
+		var FunUtil = {};
+	    var HtmUtil = {};
+    	var Page 	= {};
+		
+		Page.show = function(){
+			 
+			 console.log(123123);
+			
+			var $btn4apply	= $("div.ntq-index-apply-btn");
+			var $btn4employ = $("div.ntq-index-employ-btn");
+			
+			$btn4apply.unbind("click").bind("click",function(){
+				PageInfo.FunUtil.common4openUrl({"url":'apply/index?uuid=123'});
+			});
+			
+			$btn4employ.unbind("click").bind("click",function(){
+				PageInfo.FunUtil.common4openUrl({"url":'employ/index'});
+			});
+		
+		};
+		
+		return Page;
+		
+	};
+	
+	return PageObj;
+}});
 
-PageInfo.register({
-		"type": "Obj",
-		"info": function info() {
-
-				var PageObj = {};
-
-				PageObj.require = {
-						"$": "jquery",
-						"layui": "layui"
-				};
-
-				PageObj.page = function () {
-
-						var FunUtil = {};
-						var HtmUtil = {};
-						var Page = {};
-
-						HtmUtil.layout = function () {
-								var result = '<div id="doc-index" class="common-box"><p class="layui-elem-quote">结构目录</p><img src="assets/img/icon-start.png"><fieldset class="layui-elem-field"><legend>示例：</legend><div class="layui-field-box"><img src="assets/img/icon-demo.png"></div></fieldset></div>';return result;
-						};
-
-						Page.data = function () {
-								var param = {};param.HtmUtil = HtmUtil;return param;
-						};
-
-						Page.show = function () {
-								console.log(1213);
-						};
-
-						return Page;
-				};
-
-				return PageObj;
-		}
-});
-//# sourceMappingURL=index.js.map

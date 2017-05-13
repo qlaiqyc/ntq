@@ -47,7 +47,6 @@ PageInfo.register({"type":"Obj","info":function(){
 			var obj = data.data;
 			var buf = [];
 		 	buf.push('<div id="ntq-employ-job-update">');
-		 	
 			buf.push('<form class="layui-form"  >');
 			if(data.type == "update") buf.push('<div class="layui-form-item"> <label class="layui-form-label">职位编号</label> <div class="layui-input-inline"> <input type="text" disabled="" name="positionNo" lay-verify="title" autocomplete="off" value="'+obj.positionNo+'" class="layui-input"></div> </div>');
 			buf.push('    <div class="layui-form-item">                                                                                                                                                            ' );
@@ -73,7 +72,7 @@ PageInfo.register({"type":"Obj","info":function(){
 			buf.push('                <input type="text" name="highSalary" placeholder="￥" value="'+obj.highSalary+'" autocomplete="off" class="layui-input">                                                                                 ' );
 			buf.push('            </div>                                                                                                                                                                           ' );
 			buf.push('            <div class="layui-input-inline" style="width: 32px;">                                                                                                                            ' );
-			buf.push('                <input type="checkbox" name="isDiscussPersonally" title="面议">                                                                                                                      ' );
+			buf.push('                <input type="checkbox" name="isDiscussPersonally" title="面议" '+(obj.isDiscussPersonally == 1 ?"checked":"")+'>                                                                                                                      ' );
 			buf.push('            </div>                                                                                                                                                                           ' );
 			buf.push('        </div>                                                                                                                                                                               ' );
 			buf.push('    </div>                                                                                                                                                                                   ' );
@@ -249,6 +248,41 @@ PageInfo.register({"type":"Obj","info":function(){
 								  	
 										form.on('submit(ntq-employ-job-btn)', function(data) {
 									  		console.log(data);
+									  		
+									  		var obj = data.filed;
+									  		
+									  		
+									  		/*var param  = {
+														  "companyInfosId": obj.companyInfosId,
+														    "positionNo":  obj.positionNo,
+														    "positionName":  obj.positionName,
+														    "highSalary": obj.highSalary,
+														    "lowSalary":  obj.lowSalary,
+														    "positionType":  obj.positionType,
+														    "qualificationsType": obj.qualificationsType,
+														    "lowWorkingLife": obj.lowWorkingLife,
+														    "highWorkingLife":  obj.highWorkingLife,
+														    "workAddress":  obj.workAddress,
+														    "isDiscussPersonally": obj.isDiscussPersonally,
+														    "postionStatus": obj.postionStatus,
+														    "positionDesc":  obj.positionDesc,
+														    "positionRequirements":  obj.positionRequirements
+													};*/
+									  		
+									  		
+									  		
+									  		
+									  	 	request.updateOrInsertCompanyPositionInfo(JSON.stringify(param),function(ddata){
+									  			
+									  			console.log(ddata);
+									  			
+									  			
+									  			return false;
+									  			
+									  		}); 
+									  		
+									  		
+									  		
 									  		return false;
 									  	});
 								  	
