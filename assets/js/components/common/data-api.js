@@ -151,7 +151,7 @@ PageInfo.register({
 				},
 
 				'getCompanyPositionInfoById': function(data, success) {
-					FunUtil.common4get({
+					FunUtil.common4post({
 						url: (burl + "companyInfo/getCompanyPositionInfoById.action"),
 						"param": data
 					}, success);

@@ -18,16 +18,14 @@ PageInfo.register({
 						var Page = {};
 
 						HtmUtil.layout = function () {
-								var result = '<div id="doc-index" class="common-box"><p class="layui-elem-quote">结构目录</p><img src="assets/img/icon-start.png"><fieldset class="layui-elem-field"><legend>示例：</legend><div class="layui-field-box"><img src="assets/img/icon-demo.png"></div></fieldset></div>';return result;
+								var result = '<div id="doc-index" class="common-box"><p class="layui-elem-quote">规范事项</p><fieldset class="layui-elem-field"><legend>命名规范</legend><div class="layui-field-box"></div></fieldset></div>';return result;
 						};
 
 						Page.data = function () {
 								var param = {};param.HtmUtil = HtmUtil;return param;
 						};
 
-						Page.show = function () {
-								console.log(1213);
-						};
+						Page.show = function () {};
 
 						return Page;
 				};
@@ -35,4 +33,4 @@ PageInfo.register({
 				return PageObj;
 		}
 });
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=role.js.map
