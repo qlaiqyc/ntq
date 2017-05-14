@@ -525,13 +525,10 @@ PageInfo.register({"type":"Obj","info":function(){
 						 
 					});
 			
-			$("#ntq-admin-job-condition-down").unbind("click").bind("click",function(){
+			$("#ntq-admin-job-condition-reject").unbind("click").bind("click",function(){
 				
-				var param = {
-					"positionId":2
-				};
-				request.withDrawCompanyPositionInfo(param,function(cdata){
-						console.log(cdata);
+				request.rejectPositionRelease({"positionId":3,"message":123},function(cdata){
+					console.log(cdata);
 				});
 			});
 			

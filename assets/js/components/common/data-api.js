@@ -242,6 +242,15 @@ PageInfo.register({
 						"param": data
 					}, success);
 				},
+				
+				'rejectPositionRelease': function(data, success) {
+					FunUtil.common4get({
+						url: (burl + "ntqCompanyPositionDealController/rejectPositionRelease.action"),
+						"param": data
+					}, success);
+				},
+
+
 
 			};
 
