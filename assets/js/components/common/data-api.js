@@ -36,6 +36,8 @@ PageInfo.register({
 
 				contentType = "application/json";
 				if(!String.HasText(data.method)) return;
+				
+				if(data.url.indexOf("addJobSeekerInfoAndResume") > 0) contentType = "multipart/form-data";
 
 				$.ajax({
 					type: data.method,
@@ -193,6 +195,30 @@ PageInfo.register({
 						"param": data
 					}, success);
 				},
+				
+				'queryJobSeekerPositionVoList': function(data, success) {
+					FunUtil.common4post({
+						url: (burl + "jobSeekerInfo/queryJobSeekerPositionVoList.action"),
+						"param": data
+					}, success);
+				},
+				
+				'getCompanyPositionInfoById': function(data, success) {
+					FunUtil.common4get({
+						url: (burl + "jobSeekerInfo/getCompanyPositionInfoById.action"),
+						"param": data
+					}, success);
+				},
+				
+				'getCompanyInfoById': function(data, success) {
+					FunUtil.common4get({
+						url: (burl + "jobSeekerInfo/getCompanyInfoById.action"),
+						"param": data
+					}, success);
+				},
+				
+				
+				
 				'getPosition': function(data, success) {
 					FunUtil.common4post({
 						url: (burl + "companyInfo/getPosition.action"),

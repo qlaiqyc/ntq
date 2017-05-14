@@ -23,58 +23,53 @@
 		                 <div class="layui-inline">                                                                                                                                                      
 		                     <label class="layui-form-label">职位编号</label>                                                                                                                            
 		                     <div class="layui-input-inline">                                                                                                                                            
-		                         <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input"> </div>                                              
+		                         <input type="text" name="positionNo" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input"> </div>                                              
 		                 </div>                                                                                                                                                                          
 		                 <div class="layui-inline">                                                                                                                                                      
 		                     <label class="layui-form-label">职位名称</label>                                                                                                                            
 		                     <div class="layui-input-inline">                                                                                                                                            
-		                         <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input"> </div>                                              
+		                         <input type="text" name="positionName" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input"> </div>                                              
 		                 </div>                                                                                                                                                                          
 		                 <div class="layui-inline">                                                                                                                                                      
 		                     <label class="layui-form-label">公司名称</label>                                                                                                                            
 		                     <div class="layui-input-inline">                                                                                                                                            
-		                         <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input"> </div>                                              
+		                         <input type="text" name="companyName" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input"> </div>                                              
 		                 </div>                                                                                                                                                                          
 		             </div>                                                                                                                                                                              
 		             <div class="layui-form-item">                                                                                                                                                       
 		                 <div class="layui-inline">                                                                                                                                                      
 		                     <label class="layui-form-label">投递时间</label>                                                                                                                            
 		                     <div class="layui-input-inline">                                                                                                                                            
-		                         <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})"> </div 
+		                         <input type="text" name="serverCreateDate" id="date" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})"> </div 
 		                 </div>                                                                                                                                                                           
 		                 <div class="layui-inline">                                                                                                                                                       
 		                     <label class="layui-form-label">状态</label>                                                                                                                                 
-		                     <div class="layui-input-inline">                                                                                                                                             
-		                         <select name="interest" lay-filter="aihao">                                                                                                                              
-		                             <option value=""></option>                                                                                                                                           
-		                             <option value="0">写作</option>                                                                                                                                      
-		                             <option value="1" selected="">阅读</option>                                                                                                                          
-		                             <option value="2">游戏</option>                                                                                                                                      
-		                             <option value="3">音乐</option>                                                                                                                                      
-		                             <option value="4">旅行</option>                                                                                                                                      
+		                     <div class="layui-input-inline"> 
+		                     	
+		                     	
+		                         <select name="dealStatus" lay-filter="aihao">                                                                                                                              
+		                             <option value="1" selected="">待处理</option>                                                                                                                          
+		                             <option value="2">内推圈简历筛选未通过</option>                                                                                                                                      
+		                             <option value="3">已投递至企业</option>                                                                                                                                      
+		                             <option value="4">企业筛选未通过</option>    
+		                             <option value="5">企业筛选通过</option>    
+		                             <option value="6">面试未通过</option> 
+		                             <option value="7">面试成功</option> 
 		                         </select>                                                                                                                                                                
-		                         <div class="layui-unselect layui-form-select">                                                                                                                           
-		                             <div class="layui-select-title">                                                                                                                                     
-		                                 <input type="text" placeholder="请选择" value="阅读" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i></div>                             
-		                             <dl class="layui-anim layui-anim-upbit">                                                                                                                             
-		                                 <dd lay-value="0" class="">写作</dd>                                                                                                                             
-		                                 <dd lay-value="1" class="layui-this">阅读</dd>                                                                                                                   
-		                                 <dd lay-value="2" class="">游戏</dd>                                                                                                                             
-		                                 <dd lay-value="3" class="">音乐</dd>                                                                                                                             
-		                                 <dd lay-value="4" class="">旅行</dd>                                                                                                                             
-		                             </dl>                                                                                                                                                                
-		                         </div>                                                                                                                                                                   
-		                     </div>                                                                                                                                                                       
+		                      </div>                                                                                                                                                                       
 		                 </div>                                                                                                                                                                           
 		                 <div class="layui-inline">                                                                                                                                                       
 		                     <label class="layui-form-label">                                                                                                                                             
-		                         <button class="layui-btn" lay-submit="" lay-filter="demo1">搜索</button>                                                                                                 
+		                         <button class="layui-btn" lay-submit="" lay-filter="ntq-apply-job-condition-sbtn">搜索</button>                                                                                                 
 		                     </label>                                                                                                                                                                     
 		                     <div class="layui-input-inline"> </div>                                                                                                                                      
 		                 </div>                                                                                                                                                                           
 		             </div>                                                                                                                                                                               
-		         </form>                                                                                                                                                                                  
-		     </div>                                                                                                                                                                                       
+		         </form>     
+		         
+		     </div>
+		     
+		     <!-- ces-->
 		     <div id="ntq-apply-job-condition">                                                                                                                                                           
 		         <table class="layui-table" lay-even="" lay-skin="row">                                                                                                                                   
 		             <colgroup>                                                                                                                                                                           
@@ -92,49 +87,9 @@
 		                     <th>投递时间</th>                                                                                                                                                            
 		                 </tr>                                                                                                                                                                            
 		             </thead>                                                                                                                                                                             
-		             <tbody>                                                                                                                                                                              
-		                 <tr>                                                                                                                                                                             
-		                     <td>1000110</td>                                                                                                                                                             
-		                     <td>1000110</td>                                                                                                                                                             
-		                     <td>1000110</td>                                                                                                                                                             
-		                     <td>1000110</td>                                                                                                                                                             
-		                     <td>1000110</td>                                                                                                                                                             
-		                 </tr>                                                                                                                                                                            
-		                 <tr>                                                                                                                                                                             
-		                     <td>1000110</td>                                                                                                                                                             
-		                     <td>1000110</td>                                                                                                                                                             
-		                     <td>1000110</td>                                                                                                                                                             
-		                     <td>1000110</td>                                                                                                                                                             
-		                     <td>1000110</td>                                                                                                                                                             
-		                 </tr>                                                                                                                                                                            
-		                 <tr>                                                                                                                                                                             
-		                     <td>1000110</td>                                                                                                                                                             
-		                     <td>1000110</td>                                                                                                                                                             
-		                     <td>1000110</td>                                                                                                                                                             
-		                     <td>1000110</td>                                                                                                                                                             
-		                     <td>1000110</td>                                                                                                                                                             
-		                 </tr>                                                                                                                                                                            
-		                 <tr>                                                                                                                                                                             
-		                     <td>1000110</td>                                                                                                                                                             
-		                     <td>1000110</td>                                                                                                                                                             
-		                     <td>1000110</td>                                                                                                                                                             
-		                     <td>1000110</td>                                                                                                                                                             
-		                     <td>1000110</td>                                                                                                                                                             
-		                 </tr>                                                                                                                                                                            
-		                 <tr>                                                                                                                                                                             
-		                     <td>1000110</td>                                                                                                                                                             
-		                     <td>1000110</td>                                                                                                                                                             
-		                     <td>1000110</td>                                                                                                                                                             
-		                     <td>1000110</td>                                                                                                                                                             
-		                     <td>1000110</td>                                                                                                                                                             
-		                 </tr>                                                                                                                                                                            
-		                 <tr>                                                                                                                                                                             
-		                     <td>1000110</td>                                                                                                                                                             
-		                     <td>1000110</td>                                                                                                                                                             
-		                     <td>1000110</td>                                                                                                                                                             
-		                     <td>1000110</td>                                                                                                                                                             
-		                     <td>1000110</td>                                                                                                                                                             
-		                 </tr>                                                                                                                                                                            
+		             <tbody id="ntq-apply-job-condition-table">                                                                                                                                                                              
+		                                                                                                                                                                                      
+		                                                                                                                                                                                
 		             </tbody>                                                                                                                                                                             
 		         </table>                                                                                                                                                                                 
 		         <div id="ntq-apply-job-condition-pag">                                                                                                                                                   
@@ -150,7 +105,7 @@
   	<script type="text/javascript" src="../../assets/js/QLive.js"></script>
   	<script type="text/javascript" src="../../assets/js/QLive-config.js"></script>
 	 
-	<script src="../../assets/js/components/apply/index.js"></script>
+	<script src="../../assets/js/components/apply/job.js"></script>
 	 
  
 </html>

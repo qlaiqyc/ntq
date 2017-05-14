@@ -27,6 +27,10 @@ body{background-color:#f3f3f3}
 .ntq-apply-job-condition-num{color:#1E9FFF;text-decoration:underline;cursor:pointer}
 .ntq-apply-add{display:table;margin:40px auto 0}
 
+.ntq-apply-job-condition-num{color:#1E9FFF;text-decoration:underline;cursor:pointer}
+.ntq-apply-job-condition-compy{color:#1E9FFF;text-decoration:underline;cursor:pointer}
+.ntq-apply-job-condition-po{color:#1E9FFF;text-decoration:underline;cursor:pointer}
+
 
 /*===主页=== */
 #ntq-index{background:url("../../assets/img/ntq-icon-bg.png") no-repeat;width:100%;min-width:1190px;height:560px;background-size:cover;background-position:center center}

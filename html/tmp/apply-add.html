@@ -93,7 +93,7 @@
 		             <div class="layui-inline">                                                                                                                            
 		                 <label class="layui-form-label">毕业时间</label>                                                                                                  
 		                 <div class="layui-input-inline">                                                                                                                  
-		                     <input type="tel" name="graduateDate" lay-verify="phone" autocomplete="off" class="layui-input"> </div>                                              
+		                     <input type="tel" name="graduateDate" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})"> </div>                                              
 		             </div>                                                                                                                                                
 		             <div class="layui-inline">                                                                                                                            
 		                 <label class="layui-form-label">职位编码</label>                                                                                                  
@@ -118,7 +118,7 @@
 		             <div class="layui-inline">                                                                                                                            
 		                 <label class="layui-form-label"> </label>                                                                                                         
 		                 <div class="layui-input-inline">                                                                                                                  
-		                     <button class="layui-btn" lay-submit="" lay-filter="formDemo">提交信息</button>                                                               
+		                     <button class="layui-btn" lay-submit="" lay-filter="apply-add-btn">提交信息</button>                                                               
 		                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>                                                                        
 		                 </div>                                                                                                                                            
 		             </div>                                                                                                                                                
