@@ -172,7 +172,7 @@ PageInfo.register({
 				},
 
 				'withDrawCompanyPositionInfo': function(data, success) {
-					FunUtil.common4post({
+					FunUtil.common4get({
 						url: (burl + "companyInfo/withDrawCompanyPositionInfo.action"),
 						"param": data
 					}, success);

@@ -555,7 +555,7 @@
 			 
 			xmlhttp.onreadystatechange = function(){
 				 if (xmlhttp.readyState==4 && xmlhttp.status==200){
-					FunUtil.common4cache({"type":"set","key":xmlhttp.responseURL,"value":JSON.stringify({"vnum":vnum,"js":xmlhttp.responseText}),"model":"lo"});
+					//FunUtil.common4cache({"type":"set","key":xmlhttp.responseURL,"value":JSON.stringify({"vnum":vnum,"js":xmlhttp.responseText}),"model":"lo"});
 				 	callback();
 				 }
 			};

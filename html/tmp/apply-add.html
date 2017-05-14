@@ -55,7 +55,7 @@
 		             <div class="layui-inline">                                                                                                                            
 		                 <label class="layui-form-label"></label>                                                                                                          
 		                 <div class="layui-input-inline">       <!--isAddNtqweixin-->                                                                                                           
-		                     <input type="checkbox" name="like1[write]" lay-skin="primary" title="是否添加组织者微信" checked=""> </div>                                   
+		                     <input type="checkbox" name="isAddNtqweixin" lay-skin="primary" title="是否添加组织者微信" checked=""> </div>                                   
 		             </div>                                                                                                                                                
 		             <div class="layui-inline">                                                                                                                            
 		                 <label class="layui-form-label">上传简历</label>                                                                                                  
@@ -67,7 +67,7 @@
 		             <div class="layui-inline">                                                                                                                            
 		                 <label class="layui-form-label">毕业院校</label>                                                                                                  
 		                 <div class="layui-input-inline">                                                                                                                  
-		                     <input type="tel" name="graduateSchool" lay-verify="phone" autocomplete="off" class="layui-input"> </div>                                              
+		                     <input type="tel" name="graduateSchool"   autocomplete="off" class="layui-input"> </div>                                              
 		             </div>                                                                                                                                                
 		             <div class="layui-inline">                                                                                                                            
 		                 <label class="layui-form-label">专业</label>                                                                                                      
@@ -77,14 +77,15 @@
 		             <div class="layui-inline">                                                                                                                            
 		                 <label class="layui-form-label">学历</label>                                                                                                      
 		                 <div class="layui-input-inline">                                                                                                                  
-		                     <select name="recordOfFormalSchooling" lay-filter="aihao">                                                                                                   
-		                         <option value=""></option>                                                                                                                
-		                         <option value="0">写作</option>                                                                                                           
-		                         <option value="1" selected="">阅读</option>                                                                                               
-		                         <option value="2">游戏</option>                                                                                                           
-		                         <option value="3">音乐</option>                                                                                                           
-		                         <option value="4">旅行</option>                                                                                                           
-		                     </select>                                                                                                                                     
+		                     <select name="recordOfFormalSchooling" lay-filter="aihao">                                                                                                                               
+							      <option value="1"  >高中</option>                                                                                                                      
+							      <option value="2"  >高中</option>                                                                                                                                       
+							      <option value="3"  >本科</option>                                                                                                                                       
+							      <option value="4"  >硕士</option>                                                                                                                                       
+							      <option value="5"  >博士</option>                                                                                                                                       
+							      <option value="6"  >其他</option>                                                                                                                                       
+							      <option value="7"  >不限</option>                                                                                                                                       
+							  </select>                                                                                                                                                      
 		                 </div>                                                                                                                                            
 		             </div>                                                                                                                                                
 		         </div>                                                                                                                                                    

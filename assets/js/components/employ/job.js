@@ -15,8 +15,10 @@ PageInfo.register({"type":"Obj","info":function(){
 	    var HtmUtil = {};
     	var Page 	= {};
 	
-		HtmUtil.common4num = function(){
+		HtmUtil.common4num = function(data){
 			var buf = [];
+			data = data.results;
+			var len = data.length;
 			buf.push('<div id="ntq-employ-job-num">');
 			
 			buf.push('<table class="layui-table" lay-even="" lay-skin="row">');
@@ -29,12 +31,19 @@ PageInfo.register({"type":"Obj","info":function(){
 			buf.push('		</tr>');
 			buf.push('	</thead>');
 			buf.push('	<tbody>');
-			buf.push('		<tr>');
-			buf.push('			<td>1000110</td>');
-			buf.push('			<td>高级JAVA</td>');
-			buf.push('			<td>20170301</td>');
-			buf.push('			<td>20170301</td>');
-			buf.push('		</tr>');
+			
+			for (var i =0 ;i<len;i++) {
+				var obj = data[i];
+ 
+				buf.push('		<tr>');
+				buf.push('			<td>'+obj.jobSeekerName+'</td>');
+				buf.push('			<td>高级JAVA</td>');
+				buf.push('			<td>'+obj.jobSeekerPhone+'</td>');
+				buf.push('			<td>'+obj.recordOfFormalSchooling+'</td>');
+				buf.push('		</tr>');
+			}
+			
+			
 			buf.push('	 </tbody>');
 			buf.push('</table>');
 			buf.push('</div>')
@@ -48,7 +57,7 @@ PageInfo.register({"type":"Obj","info":function(){
 			var buf = [];
 		 	buf.push('<div id="ntq-employ-job-update">');
 			buf.push('<form class="layui-form"  >');
-			if(data.type == "update") buf.push('<div class="layui-form-item"> <label class="layui-form-label">职位编号</label> <div class="layui-input-inline"> <input type="text" disabled="" name="positionNo" lay-verify="title" autocomplete="off" value="'+obj.positionNo+'" class="layui-input"></div> </div>');
+			buf.push('<div class="layui-form-item"> <label class="layui-form-label">职位编号</label> <div class="layui-input-inline"> <input type="text" disabled="" name="positionNo" lay-verify="title" autocomplete="off" value="'+obj.positionNo+'" class="layui-input"></div> </div>');
 			buf.push('    <div class="layui-form-item">                                                                                                                                                            ' );
 			buf.push('        <div class="layui-inline">                                                                                                                                                           ' );
 			buf.push('            <label class="layui-form-label">有效期</label>                                                                                                                                   ' );
@@ -150,9 +159,115 @@ PageInfo.register({"type":"Obj","info":function(){
 		
 	};
 	
+	HtmUtil.common4add  = function(){
+			var buf = [];
+		 	buf.push('<div id="ntq-employ-job-update">');
+			buf.push('<form class="layui-form"  >');
+			buf.push('    <div class="layui-form-item">                                                                                                                                                            ' );
+			buf.push('        <div class="layui-inline">                                                                                                                                                           ' );
+			buf.push('            <label class="layui-form-label">有效期</label>                                                                                                                                   ' );
+			buf.push('            <div class="layui-input-inline">                                                                                                                                                 ' );
+			buf.push('                <input type="text" name="deadline" id="date" lay-verify="date"   placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">            ' );
+			buf.push('            </div>                                                                                                                                                                           ' );
+			buf.push('        </div>                                                                                                                                                                               ' );
+			buf.push('        <div class="layui-inline">                                                                                                                                                           ' );
+			buf.push('            <label class="layui-form-label">职位名称</label>                                                                                                                                 ' );
+			buf.push('            <div class="layui-input-inline">                                                                                                                                                 ' );
+			buf.push('                <input type="text" name="positionName" lay-verify="title" autocomplete="off"   placeholder="请输入标题" class="layui-input">                                                          ' );
+			buf.push('            </div>                                                                                                                                                                           ' );
+			buf.push('        </div>                                                                                                                                                                               ' );
+			buf.push('        <div class="layui-inline">                                                                                                                                                           ' );
+			buf.push('            <label class="layui-form-label">薪水范围(k)</label>                                                                                                                                 ' );
+			buf.push('            <div class="layui-input-inline" style="width: 32px;">                                                                                                                            ' );
+			buf.push('                <input type="text" name="lowSalary" placeholder="￥"    autocomplete="off" class="layui-input">                                                                                 ' );
+			buf.push('            </div>                                                                                                                                                                           ' );
+			buf.push('            <div class="layui-form-mid">-</div>                                                                                                                                              ' );
+			buf.push('            <div class="layui-input-inline" style="width: 32px;">                                                                                                                            ' );
+			buf.push('                <input type="text" name="highSalary" placeholder="￥"   autocomplete="off" class="layui-input">                                                                                 ' );
+			buf.push('            </div>                                                                                                                                                                           ' );
+			buf.push('            <div class="layui-input-inline" style="width: 32px;">                                                                                                                            ' );
+			buf.push('                <input type="checkbox" name="isDiscussPersonally" title="面议" >                                                                                                                      ' );
+			buf.push('            </div>                                                                                                                                                                           ' );
+			buf.push('        </div>                                                                                                                                                                               ' );
+			buf.push('    </div>                                                                                                                                                                                   ' );
+			buf.push('                                                                                                                                                                                             ' );
+			buf.push('    <div class="layui-form-item">                                                                                                                                                            ' );
+			buf.push('        <div class="layui-inline">                                                                                                                                                           ' );
+			buf.push('            <label class="layui-form-label">学历要求</label>                                                                                                                                 ' );
+			buf.push('            <div class="layui-input-inline">                                                                                                                                                 ' );
+			buf.push('<select name="qualificationsType" lay-filter="aihao">   ');                                                                                                                              
+			buf.push('     <option value="1"  >高中</option>        ');                                                                                                                     
+			buf.push('     <option value="2"  >高中</option>                    ');                                                                                                                     
+			buf.push('     <option value="3"  >本科</option>                    ');                                                                                                                     
+			buf.push('     <option value="4"  >硕士</option>                    ');                                                                                                                     
+			buf.push('     <option value="5"  >博士</option>                    ');                                                                                                                     
+			buf.push('     <option value="6"  >其他</option>                    ');                                                                                                                     
+			buf.push('     <option value="7"  >不限</option>                    ');                                                                                                                     
+			buf.push(' </select>                                              ');
+			buf.push('            </div>                                                                                                                                                                           ' );
+			buf.push('        </div>                                                                                                                                                                               ' );
+			buf.push('        <div class="layui-inline">                                                                                                                                                           ' );
+			buf.push('            <label class="layui-form-label">职位性质</label>                                                                                                                                 ' );
+			buf.push('            <div class="layui-input-inline">                                                                                                                                                 ' );
+			buf.push('                <select name="positionType" lay-filter="aihao">                                                                                                                                  ' );
+			buf.push('                    <option value="1"  >全职</option>    ' );
+			buf.push('                    <option value="2"  >兼职</option>  		' );
+			buf.push('                    <option value="3"  >实习</option>  			' );
+			buf.push('                </select>                                                                                                                                                                    ' );
+			buf.push('            </div>                                                                                                                                                                           ' );
+			buf.push('        </div>                                                                                                                                                                               ' );
+			buf.push('<div class="layui-inline">                                                                                      ');                                                                     
+			buf.push('    <label class="layui-form-label">工作经验(年)</label>                                                        ');                                                                         
+			buf.push('     <div class="layui-input-inline" style="width: 75px;">                                                      ');                                                                      
+			buf.push('        <input type="number" name="lowWorkingLife"  placeholder="最低" autocomplete="off" class="layui-input">   ');                                                                              
+			buf.push('    </div>                                                                                                      ');                                                                     
+			buf.push('    <div class="layui-form-mid">-</div>                                                                         ');                                                                     
+			buf.push('    <div class="layui-input-inline" style="width: 75px;">                                                       ');                                                                     
+			buf.push('        <input type="number" name="highWorkingLife"   placeholder="最高" autocomplete="off" class="layui-input">  ');                                                                               
+			buf.push('    </div>                                                                                                      ');                                                                   
+			buf.push('</div>'); 		 
+					 
+			 
+			buf.push('    </div>                                                                                                                                                                                   ' );
+			buf.push('                                                                                                                                                                                             ' );
+			buf.push('    <div class="layui-form-item">                                                                                                                                                            ' );
+			buf.push('        <label class="layui-form-label">工作地址</label>                                                                                                                                     ' );
+			buf.push('        <div class="layui-input-block">                                                                                                                                                      ' );
+			buf.push('            <input type="text"   name="workAddress" lay-verify="title" autocomplete="off" placeholder="" class="layui-input">                                                              ' );
+			buf.push('        </div>                                                                                                                                                                               ' );
+			buf.push('    </div>                                                                                                                                                                                   ' );
+			buf.push('                                                                                                                                                                                             ' );
+			buf.push('    <div class="layui-form-item layui-form-text">                                                                                                                                            ' );
+			buf.push('        <label class="layui-form-label">职责描述</label>                                                                                                                                     ' );
+			buf.push('        <div class="layui-input-block">                                                                                                                                                      ' );
+			buf.push('            <textarea placeholder="" name="positionDesc" class="layui-textarea"></textarea>                                                                                                               ' );
+			buf.push('        </div>                                                                                                                                                                               ' );
+			buf.push('    </div>                                                                                                                                                                                   ' );
+			buf.push('    <div class="layui-form-item layui-form-text">                                                                                                                                            ' );
+			buf.push('        <label class="layui-form-label">任职要求</label>                                                                                                                                     ' );
+			buf.push('        <div class="layui-input-block">                                                                                                                                                      ' );
+			buf.push('           <textarea placeholder=" " name="positionRequirements" class="layui-textarea"></textarea>                                                                                                         ' );
+			buf.push('        </div>                                                                                                                                                                               ' );
+			buf.push('    </div>                                                                                                                                                                                   ' );
+			buf.push('                                                                                                                                                                                             ' );
+			
+			buf.push('    <div class="layui-form-item">                                                                                                                                                            ');
+			buf.push('      <div class="layui-input-block">                                                                                                                                                        ');
+			buf.push('        <button class="layui-btn" lay-submit lay-filter="ntq-employ-job-btn">立即提交</button>                                                                                                         ');
+			buf.push('        <button type="reset" class="layui-btn layui-btn-primary">重置</button>                                                                                                               ');
+			buf.push('      </div>                                                                                                                                                                                 ');
+			buf.push('    </div>                                                                                                                                                                                   ');
+			buf.push('</form>																																														');	
+			buf.push('</div>');
+			
+			return buf.join("");
+		
+	};
+	
 		FunUtil.Global = {
 			"pageNo":1,
-			"pageSize":2
+			"pageSize":2,
+			"type":0
 		};
 		
 		HtmUtil.common4list = function(data){
@@ -164,7 +279,10 @@ PageInfo.register({"type":"Obj","info":function(){
 				
 				
 				var obj = data[i];
-				buf.push('<tr>      ');                                                                                                                                                    
+				buf.push('<tr>      ');   
+				
+				
+				buf.push('  <th><input class="ntq-employ-job-condition-checked" type="checkbox" name="" title="" lay-skin="primary" data-po="'+obj.id+'" ></th>');
 				buf.push('	<td><span class="ntq-employ-job-condition-po" data-po="'+obj.id+'">'+obj.positionNo+'<span></td>   ');                                                                                                                                       
 				buf.push('	<td>'+obj.positionName+'</td>  ');                                                                                                                                       
 				buf.push('	<td>'+FunUtil.common4time({"type":"model1","str":obj.serverCreateDate})+'</td>   ');                                                                                                                                      
@@ -219,14 +337,37 @@ PageInfo.register({"type":"Obj","info":function(){
 		
 		FunUtil.update4evet = function(request){
 			
-			$("span.ntq-employ-job-condition-num").unbind("click").bind("click",function(){
+				var $inputs = $("input.ntq-employ-job-condition-checked");
+				
+				$("span.ntq-employ-job-condition-num").unbind("click").bind("click",function(){
+					
+					var callback = function(data){
+						
+						
+						layer.open({
+							type: 1,
+							skin: 'layui-layer-demo',
+							area: ['420px', '240px'], //宽高
+							content: HtmUtil.common4num(data),
+							success:function(){
+								
+							}
+						});
 			
-					layer.open({
-						type: 1,
-						skin: 'layui-layer-demo',
-						area: ['420px', '240px'], //宽高
-						content: HtmUtil.common4num()
-					});
+					};
+					
+					var param =   {
+					      "pageNo": 1,
+					      "pageSize": 15,
+					      "params": {
+					       "positionId": 13
+					      }
+					  }
+					
+					request.queryJobSeekerInfoVoList(JSON.stringify(param), callback);
+			
+			
+				
 				});
 				
 				$("span.ntq-employ-job-condition-po").unbind("click").bind("click",function(){
@@ -237,7 +378,7 @@ PageInfo.register({"type":"Obj","info":function(){
 						
 						layer.open({
 						  type: 1,
-						  content: HtmUtil.common4update({"type":"update","data":cdata.data}),
+						  content: HtmUtil.common4update({"data":cdata.data}),
 						  area: ['1080px', '578px'], //宽高
 						  skin: 'layui-layer-demo',
 						  success:function(){
@@ -249,39 +390,17 @@ PageInfo.register({"type":"Obj","info":function(){
 										form.on('submit(ntq-employ-job-btn)', function(data) {
 									  		console.log(data);
 									  		
-									  		var obj = data.filed;
+									  		var obj = data.field;
+									  		delete obj.deadline;
 									  		
+									  		obj.isDiscussPersonally = ((obj.isDiscussPersonally == "on") ? 1 :2);
+									  		obj.postionStatus = FunUtil.Global.type;
 									  		
-									  		/*var param  = {
-														  "companyInfosId": obj.companyInfosId,
-														    "positionNo":  obj.positionNo,
-														    "positionName":  obj.positionName,
-														    "highSalary": obj.highSalary,
-														    "lowSalary":  obj.lowSalary,
-														    "positionType":  obj.positionType,
-														    "qualificationsType": obj.qualificationsType,
-														    "lowWorkingLife": obj.lowWorkingLife,
-														    "highWorkingLife":  obj.highWorkingLife,
-														    "workAddress":  obj.workAddress,
-														    "isDiscussPersonally": obj.isDiscussPersonally,
-														    "postionStatus": obj.postionStatus,
-														    "positionDesc":  obj.positionDesc,
-														    "positionRequirements":  obj.positionRequirements
-													};*/
-									  		
-									  		
-									  		
-									  		
-									  	 	request.updateOrInsertCompanyPositionInfo(JSON.stringify(param),function(ddata){
-									  			
+									  	 	request.updateOrInsertCompanyPositionInfo(JSON.stringify(obj),function(ddata){
 									  			console.log(ddata);
 									  			
-									  			
 									  			return false;
-									  			
 									  		}); 
-									  		
-									  		
 									  		
 									  		return false;
 									  	});
@@ -297,8 +416,20 @@ PageInfo.register({"type":"Obj","info":function(){
 						
 					});
 				});
-			
-		
+				
+				 
+				
+				$inputs.unbind("click").bind("click",function(){
+					var $this = $(this);
+					
+					$inputs.each(function(){
+						$(this).attr('checked',true);
+					});
+					
+					/*var isChecked = $this.attr("checked");
+					$this.attr('checked',true);*/
+					
+				});
 		
 		};
 		
@@ -314,7 +445,7 @@ PageInfo.register({"type":"Obj","info":function(){
 			 	form.on('submit(ntq-employ-job-btn)', function(data) {
 					var param = data.field;
 						param.isDiscussPersonally = ((data.field.isDiscussPersonally == "on") ? 1 :2);
-					
+						
 					request.addCompanyPositionInfo(JSON.stringify(data.field),function(cdata){
 						
 					});
@@ -328,7 +459,7 @@ PageInfo.register({"type":"Obj","info":function(){
 					FunUtil.common4search({"type":"init"});
 					var obj = data.field;	 
 					var $table = $("#ntq-employ-job-condition-table");
-					 obj.positionName ="高级"
+					 obj.positionName ="a"
 					
 					var param =  {
 							      "pageNo": FunUtil.Global.pageNo,
@@ -339,6 +470,7 @@ PageInfo.register({"type":"Obj","info":function(){
 							       		"postionStatus":obj.postionStatus
 							      	}
 							 	};
+					FunUtil.Global.type = obj.postionStatus;	 	
 					
 					var Fun4Help =function(type){
 						request.queryCompanyPositionInfoListByCondition(JSON.stringify(param),function(cdata){
@@ -347,6 +479,8 @@ PageInfo.register({"type":"Obj","info":function(){
 							
 							$table.html(HtmUtil.common4list(cdata.results));
 							FunUtil.update4evet(request);
+							
+							 
 							
 							if(type == "init") {
 								laypage({ cont: 'ntq-employ-job-condition-pag' ,pages: pages  ,jump: 
@@ -375,7 +509,7 @@ PageInfo.register({"type":"Obj","info":function(){
 		
 					  layer.open({
 						  type: 1,
-						  content: HtmUtil.common4update({"type":"add"}),
+						  content: HtmUtil.common4add(),
 						  area: ['1080px', '511px'], //宽高
 						  skin: 'layui-layer-demo',
 						  success:function(){
@@ -387,7 +521,6 @@ PageInfo.register({"type":"Obj","info":function(){
 									console.log(data.field);
 									var param = data.field;
 										param.isDiscussPersonally = ((data.field.isDiscussPersonally == "on") ? 1 :2);
-									
 							  		request.addCompanyPositionInfo(JSON.stringify(data.field),function(cdata){
 							  			console.log(cdata);
 							  		});
@@ -401,7 +534,18 @@ PageInfo.register({"type":"Obj","info":function(){
 						});
 						 
 					});
-					
+			
+			$("#ntq-employ-job-condition-down").unbind("click").bind("click",function(){
+				
+				var param = {
+					"positionId":2
+				};
+				request.withDrawCompanyPositionInfo(param,function(cdata){
+						console.log(cdata);
+				});
+			});
+			
+			
 		};
 		
 		return Page;
