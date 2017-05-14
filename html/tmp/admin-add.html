@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta name="author" content="">
+		<title></title>
+		<link rel="stylesheet" href="../../assets/js/plug/layui/css/layui.css" />
+		<link rel="stylesheet" type="text/css" href="../../assets/css/common.css"/>
+		
+		<style type="text/css">
+			.common-box {
+				padding-top: 40px;
+				display: table;
+				margin: 0 auto;
+				margin-top: 94px;
+				width: 1080px;
+			}
+		</style>
+	</head>
+
+	<body>
+ 
+		 
+	 	 <div id="ntq-admin-add" class="common-box">                                                                                                                                                                   
+		     <div id="ntq-admin-add-search">                                                                                                                                                                           
+		         <form class="layui-form" action="">                                                                                                                                                                     
+		             <div class="layui-form-item">                                                                                                                                                                       
+		                 <div class="layui-inline">                                                                                                                                                                      
+		                     <label class="layui-form-label">公司名称</label>                                                                                                                                            
+		                     <div class="layui-input-inline">                                                                                                                                                            
+		                         <input type="text" name="companyName" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">                                                                     
+		                     </div>                                                                                                                                                                                      
+		                 </div>                                                                                                                                                                                          
+		                 <div class="layui-inline">                                                                                                                                                                      
+		                     <label class="layui-form-label">职位名称</label>                                                                                                                                            
+		                     <div class="layui-input-inline">                                                                                                                                                            
+		                         <input type="text" name="positionName" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">                                                                     
+		                     </div>                                                                                                                                                                                      
+		                 </div>                                                                                                                                                                                          
+		                                                                                                                                                                                                                 
+		                 <div class="layui-inline">                                                                                                                                                                      
+		                     <label class="layui-form-label">处理状态</label>                                                                                                                                            
+		                     <div class="layui-input-inline">                                                                                                                                                            
+		                        <select name="postionStatus" lay-filter="aihao">                                                                                                           
+		 							<option value="1" selected="">待审核</option>                                                                                                                   
+		 							<option value="2" >已发布</option>                                                                                                       
+		 							<option value="3">拒绝</option>                                                                                                                   
+		 							<option value="4">已下架</option>                                                                                                                   
+		 							<option value="5">待下架</option>                                                                                                                   
+		 						</select>                                                                                                                                                                        
+		                     </div>                                                                                                                                                                                      
+		                 </div>                                                                                                                                                                                          
+		             </div>                                                                                                                                                                                              
+		                                                                                                                                                                                                                 
+		             <div class="layui-form-item">                                                                                                                                                                       
+		                                                                                                                                                                                                                 
+		                 <div class="layui-inline">                                                                                                                                                                      
+		                     <label class="layui-form-label">发布时间</label>                                                                                                                                            
+		                     <div class="layui-input-inline" style="width: 85px;">                                                                                                                                       
+		                         <input type="text" name="date" id="date" style="padding: 3px;"   placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})"> 
+		                     </div>                                                                                                                                                                                      
+		                     <div class="layui-form-mid">-</div>                                                                                                                                                         
+		                     <div class="layui-input-inline" style="width: 85px;">                                                                                                                                       
+		                         <input type="text" name="date" id="date" style="padding: 3px;"   placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})"> 
+		                     </div>                                                                                                                                                                                      
+		                 </div>                                                                                                                                                                                          
+		                                                                                                                                                                                                                 
+		                 <div class="layui-inline">                                                                                                                                                                      
+		                     <label class="layui-form-label">创建时间</label>                                                                                                                                            
+		                     <div class="layui-input-inline" style="width: 85px;">                                                                                                                                       
+		                         <input type="text" name="date" id="date" style="padding: 3px;"   placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})"> 
+		                                                                                                                                                                                                                 
+		                     </div>                                                                                                                                                                                      
+		                     <div class="layui-form-mid">-</div>                                                                                                                                                         
+		                     <div class="layui-input-inline" style="width: 85px;">                                                                                                                                       
+		                         <input type="text" name="date" id="date" style="padding: 3px;"   placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})"> 
+		                                                                                                                                                                                                                 
+		                     </div>                                                                                                                                                                                      
+		                 </div>                                                                                                                                                                                          
+		                 <div class="layui-inline">                                                                                                                                                                      
+		                     <label class="layui-form-label">                                                                                                                                                            
+		                         <button class="layui-btn" lay-submit="" lay-filter="ntq-admin-job-condition-sbtn">搜索</button>                                                                                                                
+		                     </label>                                                                                                                                                                                    
+		                     <div class="layui-input-inline">                                                                                                                                                            
+		                                                                                                                                                                                                                 
+		                     </div>                                                                                                                                                                                      
+		                 </div>                                                                                                                                                                                          
+		                                                                                                                                                                                                                 
+		             </div>                                                                                                                                                                                              
+		         </form>                                                                                                                                                                                                 
+		     </div>                                                                                                                                                                                                      
+		     <div id="ntq-admin-add-condition">                                                                                                                                                                        
+		                                                                                                                                                                                                                 
+		         <button class="layui-btn layui-btn-normal" id="ntq-admin-job-condition-add">导出</button>                                                                                                               
+		         <button class="layui-btn layui-btn-warm" id="ntq-admin-job-condition-update">发布</button>                                                                                                              
+		         <button class="layui-btn layui-btn-danger">拒绝</button>                                                                                                                                                
+		                                                                                                                                                                                                                 
+		         <div class="layui-form">                                                                                                                                                                                
+		             <table class="layui-table">                                                                                                                                                                         
+		                 <colgroup>                                                                                                                                                                                      
+		                     <col width="50">                                                                                                                                                                            
+		                         <col width="150">                                                                                                                                                                       
+		                             <col width="150">                                                                                                                                                                   
+		                                 <col width="200">                                                                                                                                                               
+		                                     <col>                                                                                                                                                                       
+		                 </colgroup>                                                                                                                                                                                     
+		                 <thead>                                                                                                                                                                                         
+		                     <tr>                                                                                                                                                                                        
+		                         <th>                                                                                                                                                                                    
+		                             <input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose">                                                                                                           
+		                         </th>                                                                                                                                                                                   
+		                         <th>公司名称</th>                                                                                                                                                                       
+		                         <th>职位名称</th>                                                                                                                                                                       
+		                         <th>职位编号</th>                                                                                                                                                                       
+		                         <th>处理状态</th>                                                                                                                                                                       
+		                         <th>备注</th>                                                                                                                                                                           
+		                         <th>创建时间</th>                                                                                                                                                                       
+		                         <th>发布时间</th>                                                                                                                                                                       
+		                     </tr>                                                                                                                                                                                       
+		                 </thead>                                                                                                                                                                                        
+		                 <tbody id="ntq-admin-job-condition-table">                                                                                                                                                                                         
+		                                                                                                                                                                                                      
+		                                                                                                                                                                                                       
+		                 </tbody>                                                                                                                                                                                        
+		             </table>                                                                                                                                                                                            
+		             <div id="ntq-admin-add-condition-pag">                                                                                                                                                            
+		             </div>                                                                                                                                                                                              
+		         </div>                                                                                                                                                                                                  
+		     </div>                                                                                                                                                                                                      
+		 </div>	
+		
+ 
+	</body>
+ 
+  	<script type="text/javascript" src="../../assets/js/QLive.js"></script>
+  	<script type="text/javascript" src="../../assets/js/QLive-config.js"></script>
+	 
+	<script src="../../assets/js/components/admin/add.js"></script>
+	 
+ 
+</html>

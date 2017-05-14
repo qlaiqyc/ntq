@@ -14,6 +14,7 @@ body{background-color:#f3f3f3}
 .ntq-employ-job-condition-num{color:#1E9FFF;text-decoration:underline;cursor:pointer}
 
 .ntq-employ-job-condition-po{color:#1E9FFF;text-decoration:underline;cursor:pointer}
+
 .ntq-employ-add{display:table;margin:40px auto 0}
 
 /*===招聘===*/
@@ -57,10 +58,10 @@ width: 190px;
 #ntq-apply-job-condition{
 	padding-top: 0;
 }
-#ntq-admin-index{
+#ntq-admin-add{
 	padding: 25px;
 }
-#ntq-admin-index-search .layui-form-mid {
+#ntq-admin-add-search .layui-form-mid {
     float: left;
     display: block;
     padding: 9px 0;
@@ -73,3 +74,7 @@ width: 190px;
 #ntq-employ-add{
 	padding: 25px;margin-bottom: 100px;
 }
+
+.ntq-admin-job-condition-num{color:#1E9FFF;text-decoration:underline;cursor:pointer}
+
+.ntq-admin-job-condition-po{color:#1E9FFF;text-decoration:underline;cursor:pointer}

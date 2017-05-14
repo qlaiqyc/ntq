@@ -219,9 +219,26 @@ PageInfo.register({
 				
 				
 				
-				'getPosition': function(data, success) {
+				
+				/* ==admin==*/
+				
+				
+				'ntq4getCompanyInfoById': function(data, success) {
+					FunUtil.common4get({
+						url: (burl + "ntqCompanyPositionDealController/getCompanyInfoById.action"),
+						"param": data
+					}, success);
+				},
+				'positionRelease': function(data, success) {
+					FunUtil.common4get({
+						url: (burl + "ntqCompanyPositionDealController/positionRelease.action"),
+						"param": data
+					}, success);
+				},
+				
+				'queryCompanyPositionInfoVoListByCondition': function(data, success) {
 					FunUtil.common4post({
-						url: (burl + "companyInfo/getPosition.action"),
+						url: (burl + "ntqCompanyPositionDealController/queryCompanyPositionInfoVoListByCondition.action"),
 						"param": data
 					}, success);
 				},
