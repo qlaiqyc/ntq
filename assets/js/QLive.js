@@ -555,8 +555,9 @@
 			 
 			xmlhttp.onreadystatechange = function(){
 				 if (xmlhttp.readyState==4 && xmlhttp.status==200){
-					//FunUtil.common4cache({"type":"set","key":xmlhttp.responseURL,"value":JSON.stringify({"vnum":vnum,"js":xmlhttp.responseText}),"model":"lo"});
-				 	callback();
+					FunUtil.common4cache({"type":"set","key":xmlhttp.responseURL,"value":JSON.stringify({"vnum":vnum,"js":xmlhttp.responseText}),"model":"lo"});
+				 	eval(xmlhttp.responseText);
+					data.callback();
 				 }
 			};
 				
@@ -565,36 +566,7 @@
 			
 		};
 		/* */
-		var callback = function(){
-		 	
-		 	var script	= document.createElement("script");
-			script.type	= "text/javascript";
-			script.src	= data.url;
-			String.HasText(data.async) ? data.async: (script.async="async");
-			if(String.HasText(data.type) && data.type == "head") {
-				document.head.appendChild(script);
-			}else{
-				document.body.appendChild(script);
-			}
-			
-	　　　　if(script.readyState){ 
-	　　　　　　script.onreadystatechange=function(){
-	　　　　　　　　if(script.readyState=='complete'||script.readyState=='loaded'){
-	　　　　　　　　　　	script.onreadystatechange=null;
-	　　　　　　　　　　	data.callback();
-					script.remove();
-	　　　　　　　　}
-	　　　　　　}
-	　　　　}else{     
-	　　　　　　 script.onload=function(){
-					data.callback();
-					script.remove();
-				}
-	　　　　};
-		 	
-		 	
-		 };
-		
+	 	
 		if(String.HasText(FunUtil.Global.Router)) {
 			
 			
@@ -607,15 +579,13 @@
 					
 					eval(ljs.js);
 					data.callback();
-					
-					
 					return;
 				}
 			}
 			
 		}
 		
-		request(callback);
+		request();
 	};
 	
 	FunUtil.common4require = function(str){
