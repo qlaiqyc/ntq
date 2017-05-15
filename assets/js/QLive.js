@@ -331,10 +331,15 @@
 				 * */
 				var param 	= FunUtil.Global.Page;
 				var require = param.require;
-				var keys 	= Object.keys(require);
-				var vals 	= Object.values(require);
+				var keys 	= []
+				var vals 	= []
 				var len 	= keys.length;
 				var list 	= [];
+				
+				for(var p in require){
+					keys.push(p);
+					vals.push(require[p]);
+				};
 				
 				for(var i =0 ;i<len;i++) list.push(FunUtil.common4require(vals[i]));
 				 
@@ -377,15 +382,18 @@
 					 * 第一步加载所需JS  成功后 输出对象  require 加载， 然后执行 相应方法
 					 * */
 				 Promise.resolve(FunUtil.common4require(url)).then(function(param) {
-						
 						 
 						var require = param.require;
-						var keys = Object.keys(require);
-						var vals = Object.values(require);
+						var keys = [];
+						var vals = [];
 						var len = keys.length;
 						
 						var list = [];
 						
+						for(var p in require){
+							keys.push(p);
+							vals.push(require[p]);
+						};
 						
 						eval('var '+keys.join(",") +";");// 这个实在是没有办法
 						
@@ -572,7 +580,7 @@
 			
 			var ljs = FunUtil.common4cache({"type":"get","key":data.url,"model":"lo"});
 		
-			if(String.HasText(ljs) && data.url.indexOf("layui") < 0 ){
+			if(String.HasText(ljs)){
 				
 				
 				if(ljs.vnum == vnum) {
