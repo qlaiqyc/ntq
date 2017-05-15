@@ -333,7 +333,7 @@
 				var require = param.require;
 				var keys 	= []
 				var vals 	= []
-				var len 	= keys.length;
+				
 				var list 	= [];
 				
 				for(var p in require){
@@ -341,6 +341,7 @@
 					vals.push(require[p]);
 				};
 				
+				var len 	= keys.length;
 				for(var i =0 ;i<len;i++) list.push(FunUtil.common4require(vals[i]));
 				 
 				Promise.all(list).then(values => { 
@@ -386,7 +387,7 @@
 						var require = param.require;
 						var keys = [];
 						var vals = [];
-						var len = keys.length;
+						
 						
 						var list = [];
 						
@@ -394,7 +395,7 @@
 							keys.push(p);
 							vals.push(require[p]);
 						};
-						
+						var len = keys.length;
 						eval('var '+keys.join(",") +";");// 这个实在是没有办法
 						
 						for(var i =0 ;i<len;i++) list.push(FunUtil.common4require(vals[i]));
@@ -648,11 +649,15 @@
 		//初始化 设置路由 信息
 		var router	= data;
 		var flag	= router.flag;
-		var keys	= Object.keys(router.list);
-		var valus	= Object.values(router.list);
-		var len		= keys.length;
+		var keys	= [];
+		var valus	= [];
+		
 		var nlist	= [];
 		
+		for(var p in router.list) {
+			keys.push(p);valus.push(router.list[p]);
+		}
+		var len		= keys.length;
 		if(flag == "hash"){
 			for (var  i =0 ;i<len;i++) nlist.push({"id":FunUtil.common4hash({"type":"encode","key":(keys[i])}),"jid":FunUtil.common4hash({"type":"encode","key":("#"+valus[i])}), "page":"","state":""});
 		}
@@ -689,10 +694,17 @@
 	 	
 		futil.getJs =  function(param){
 			var require	= param.require;
-			var keys	= Object.keys(require);
-			var vals	= Object.values(require);
-			var len		= keys.length;
+			var keys	= [];
+			var vals	= [];
+			
 			var list	= [];
+			
+			for (var p in require) {
+				keys.push(p);
+				vals.push(require[p]);
+			}
+			
+			var len		= keys.length;
 			
 			for(var i =0 ;i<len;i++) list.push(FunUtil.common4require(vals[i]));
 			
