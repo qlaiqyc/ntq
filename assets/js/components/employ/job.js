@@ -439,69 +439,70 @@ PageInfo.register({"type":"Obj","info":function(){
 		Page.show = function(){
 			 var request = this.api.rq();
 			 
-			 layui.use(['form', 'layedit', 'laydate','laypage', 'layer'], function(){ var form = layui.form() ,layer = layui.layer ,layedit = layui.layedit ,laydate = layui.laydate, laypage = layui.laypage ,layer = layui.layer;
-			 	form.render(''); 
+			 	layui.use(['form', 'layedit', 'laydate','laypage', 'layer'], function(){ var form = layui.form() ,layer = layui.layer ,layedit = layui.layedit ,laydate = layui.laydate, laypage = layui.laypage ,layer = layui.layer;
+			 		form.render(''); 
 			 	
-			 	form.on('submit(ntq-employ-job-btn)', function(data) {
-					var param = data.field;
-						param.isDiscussPersonally = ((data.field.isDiscussPersonally == "on") ? 1 :2);
+			 	
+				 	form.on('submit(ntq-employ-job-btn)', function(data) {
+						var param = data.field;
+							param.isDiscussPersonally = ((data.field.isDiscussPersonally == "on") ? 1 :2);
+							
+						request.addCompanyPositionInfo(JSON.stringify(data.field),function(cdata){
+							
+						});
 						
-					request.addCompanyPositionInfo(JSON.stringify(data.field),function(cdata){
 						
+						return false;
 					});
 					
-					
-					return false;
-				});
 				
-				
-				form.on('submit(ntq-employ-job-condition-sbtn)', function(data) {
-					FunUtil.common4search({"type":"init"});
-					var obj = data.field;	 
-					var $table = $("#ntq-employ-job-condition-table");
-					 obj.positionName ="a"
-					
-					var param =  {
-							      "pageNo": FunUtil.Global.pageNo,
-							      "pageSize": FunUtil.Global.pageSize,
-							      "params": {
-							       		"positionName": obj.positionName,
-							       		"publishTime":obj.publishTime,
-							       		"postionStatus":obj.postionStatus
-							      	}
-							 	};
-					FunUtil.Global.type = obj.postionStatus;	 	
-					
-					var Fun4Help =function(type){
-						request.queryCompanyPositionInfoListByCondition(JSON.stringify(param),function(cdata){
-							var pages = cdata.totalRecord;
-								pages = parseInt(pages/2) + (pages%2 > 0 ? 1:0);
-							
-							$table.html(HtmUtil.common4list(cdata.results));
-							FunUtil.update4evet(request);
-							
-							 
-							
-							if(type == "init") {
-								laypage({ cont: 'ntq-employ-job-condition-pag' ,pages: pages  ,jump: 
-									function(obj, first){
-										if(!first){
-											FunUtil.Global.pageNo = obj.curr;
-											param.pageNo = obj.curr;;
-											Fun4Help("next");
+					form.on('submit(ntq-employ-job-condition-sbtn)', function(data) {
+						FunUtil.common4search({"type":"init"});
+						var obj = data.field;	 
+						var $table = $("#ntq-employ-job-condition-table");
+						 obj.positionName ="a"
+						
+						var param =  {
+								      "pageNo": FunUtil.Global.pageNo,
+								      "pageSize": FunUtil.Global.pageSize,
+								      "params": {
+								       		"positionName": obj.positionName,
+								       		"publishTime":obj.publishTime,
+								       		"postionStatus":obj.postionStatus
+								      	}
+								 	};
+						FunUtil.Global.type = obj.postionStatus;	 	
+						
+						var Fun4Help =function(type){
+							request.queryCompanyPositionInfoListByCondition(JSON.stringify(param),function(cdata){
+								var pages = cdata.totalRecord;
+									pages = parseInt(pages/2) + (pages%2 > 0 ? 1:0);
+								
+								$table.html(HtmUtil.common4list(cdata.results));
+								FunUtil.update4evet(request);
+								
+									form.render(''); 
+								
+								if(type == "init") {
+									laypage({ cont: 'ntq-employ-job-condition-pag' ,pages: pages  ,jump: 
+										function(obj, first){
+											if(!first){
+												FunUtil.Global.pageNo = obj.curr;
+												param.pageNo = obj.curr;;
+												Fun4Help("next");
+											}
 										}
-									}
-								});
-							}
-						});
-					};
-					
-					Fun4Help("init");
-					
-					return false;
-				});
-			 	
-			 	
+									});
+								}
+							});
+						};
+						
+						Fun4Help("init");
+						
+						return false;
+					});
+				 	
+				 	
 			 });
 					
 			
