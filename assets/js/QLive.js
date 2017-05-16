@@ -578,11 +578,9 @@
 	 	
 		if(String.HasText(FunUtil.Global.Router)) {
 			
-			
 			var ljs = FunUtil.common4cache({"type":"get","key":data.url,"model":"lo"});
 		
 			if(String.HasText(ljs)){
-				
 				
 				if(ljs.vnum == vnum) {
 					

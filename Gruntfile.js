@@ -292,7 +292,7 @@ module.exports = function (grunt) {
  
   
 //	grunt.registerTask('default', ['common4Num']);
-grunt.registerTask('default', ["clean",'htmlmin','concathtml','bable4getFiles','babel','bable4delmap',"copy",'common4Num',"replace","uglify"]);
+	grunt.registerTask('default', ["clean",'htmlmin','concathtml','bable4getFiles','babel','bable4delmap',"copy",'common4Num',"replace","uglify"]);
  
 
  
