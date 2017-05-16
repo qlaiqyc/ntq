@@ -564,7 +564,7 @@
 			 
 			xmlhttp.onreadystatechange = function(){
 				 if (xmlhttp.readyState==4 && xmlhttp.status==200){
-					FunUtil.common4cache({"type":"set","key":xmlhttp.responseURL,"value":JSON.stringify({"vnum":vnum,"js":xmlhttp.responseText}),"model":"lo"});
+					if(String.HasText(FunUtil.Global.Router) && FunUtil.Global.debug == false){	FunUtil.common4cache({"type":"set","key":xmlhttp.responseURL,"value":JSON.stringify({"vnum":vnum,"js":xmlhttp.responseText}),"model":"lo"});}
 				 	eval(xmlhttp.responseText);
 					data.callback();
 				 }
@@ -651,26 +651,26 @@
 		var flag	= router.flag;
 		var keys	= [];
 		var valus	= [];
-		
 		var nlist	= [];
 		
-		for(var p in router.list) {
-			keys.push(p);valus.push(router.list[p]);
-		}
+		for(var p in router.list) { keys.push(p);valus.push(router.list[p]); }
+		
 		var len		= keys.length;
+		
 		if(flag == "hash"){
 			for (var  i =0 ;i<len;i++) nlist.push({"id":FunUtil.common4hash({"type":"encode","key":(keys[i])}),"jid":FunUtil.common4hash({"type":"encode","key":("#"+valus[i])}), "page":"","state":""});
 		}
 		
 		FunUtil.Global.Router = nlist;
 		FunUtil.Global.Jids	  = router.list;
-		
 		FunUtil.register4Evet({"type":flag});
 	};
 	
 	FunUtil.common4Global  = function(data){
-		FunUtil.Global.id = data.id;
-		FunUtil.Global.name = data.name;
+		
+		FunUtil.Global.id		= data.id;
+		FunUtil.Global.name 	= data.name;
+		FunUtil.Global.debug 	= data.debug;
 	};
 	
 	PageInfo.init4plug = function(data){
@@ -696,7 +696,6 @@
 			var require	= param.require;
 			var keys	= [];
 			var vals	= [];
-			
 			var list	= [];
 			
 			for (var p in require) {

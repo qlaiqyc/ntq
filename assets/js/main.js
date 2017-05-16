@@ -31,7 +31,8 @@ PageInfo.register({"type":"Start","info":function(){
 	
 	Start.Global = {
 		"id":"qlive-body",  //所有 主DIV
-		"name":"ntq"       //项目名称
+		"name":"ntq",       //项目名称
+		"debug":true
 	};
 	 
 	Start.Pub =function(){
