@@ -657,6 +657,10 @@
 		
 		var len		= keys.length;
 		
+		for(var p in router.list) {
+			keys.push(p);valus.push(router.list[p]);
+		}
+		var len		= keys.length;
 		if(flag == "hash"){
 			for (var  i =0 ;i<len;i++) nlist.push({"id":FunUtil.common4hash({"type":"encode","key":(keys[i])}),"jid":FunUtil.common4hash({"type":"encode","key":("#"+valus[i])}), "page":"","state":""});
 		}
