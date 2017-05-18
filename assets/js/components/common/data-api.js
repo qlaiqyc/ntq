@@ -1,8 +1,15 @@
-PageInfo.register({
-	"type": "plug",
-	"info": (function() {
-
-		var FunUtil = {};
+PageInfo.register({"type": "plug","info": function() {
+		
+	// 和注册对象一样的操作
+	var PageObj = {};
+	
+	PageObj.require = {
+		"$":"jquery" 
+	};
+	
+	PageObj.Obj = function(){
+		
+		 var FunUtil = {};
 
 		FunUtil.common4init = function() {
 
@@ -256,7 +263,10 @@ PageInfo.register({
 
 		};
 
-		return FunUtil
-
-	})()
-});
+		return FunUtil;
+		
+	};
+		
+		
+	return PageObj;	
+}});

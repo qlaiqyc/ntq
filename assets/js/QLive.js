@@ -346,6 +346,11 @@
 				 
 				Promise.all(list).then(values => { 
 					
+					//+ 二次处理  处理 plug 中引用的 require 
+					
+					
+					
+					
 					FunUtil.Global.Page.require = {};
 				
 				 	var Router = param;
@@ -676,6 +681,7 @@
 	};
 	
 	PageInfo.init4plug = function(data){
+		//+ add 处理  require
 		FunUtil.Global.plug = data.info; 
 	};
 	
