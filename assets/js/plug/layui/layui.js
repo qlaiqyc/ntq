@@ -199,6 +199,7 @@ Lay.fn.link = function(href, fn, cssname){
   var id = link.id = 'layuicss-'+app, timeout = 0;
   
   href = href.split("components")[0]+"plug/layui/css/modules"+href.split("css\/modules")[1];
+ //  href = href.split("assets\/js")[0]+"/assets/js/plug/layui/"+href.split("assets\/js")[1];
   
   link.rel = 'stylesheet';
   link.href = href + (config.debug ? '?v='+new Date().getTime() : '');

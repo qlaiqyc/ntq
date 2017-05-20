@@ -656,8 +656,8 @@
 							if(snewList.length == 0){
 								var Router = param;
 								
-								console.log('===============')
-								console.log(plug4list);
+							//	console.log('===============')
+							//	console.log(plug4list);
 								
 								//执行plug
 								
@@ -697,9 +697,7 @@
 							FunUtil.Global.Page.require[keys[i]] = nval();
 						}else{
 							plug4list.push({"k":keys[i],"v":nval});
-							
 							needsPlug.push(keys[i]);
-							
 							FunUtil.Global.plug4list = dep;
 							firstlList = firstlList.concat(dep);
 							//FunUtil.Global.Page.require[keys[i]] = values[i];
@@ -752,9 +750,10 @@
 						var require = param.require;
 						var keys = [];
 						var vals = [];
-						
-						
 						var list = [];
+						var needsPlug = [];//第一步有 deps 的插件
+						var plug4list = [];// 所有 needs 的模块
+				
 						
 						for(var p in require){
 							keys.push(p);
@@ -763,8 +762,6 @@
 						var len = keys.length;
 						
 						for(var i =0 ;i<len;i++) list.push(FunUtil.common4require(vals[i]));
-						
-						var plug4list = [];
 				
 				
 						var fun4require = function(key){
@@ -817,18 +814,24 @@
 									}
 									
 									if(snewList.length == 0){
-										console.log(plug4list);
+										var Router = param;
+								 
+										//console.log(plug4list);
 										
 										//执行plug
+										
 										var plen = plug4list.length-1;
+										
+										
 										for (var i =plen;i>-1;i--) {
 											var obj = plug4list[i];
 											plug4list[i].v = obj.v(fun4require); 
 											//console.log(plug4list[i].v);
 										}
-										for(var k=0;k<keys.length;k++) FunUtil.Global.Page.require[keys[k]] = plug4list[k].v;
+									
+										for(var k=0;k<needsPlug.length;k++) FunUtil.Global.Page.require[needsPlug[k]] = plug4list[k].v;
 										
-										var Router = param;
+										
 										FunUtil.Global.Router[nid].page = Router;
 										FunUtil.Global.Router[nid].state = "show";
 										
@@ -837,6 +840,11 @@
 										
 										Router.init();
 										Router.show();
+										
+										
+										
+										
+										
 										
 									}else{
 										
@@ -851,6 +859,7 @@
 							for(var i =0 ;i<len;i++){
 						
 								var nval = values[i];
+								if(!String.HasText(nval)) continue;
 								
 								var dep = FunUtil.model4dep(nval.toString());
 								var dlen = dep.length;
@@ -858,10 +867,12 @@
 								if(dlen == 0){
 									FunUtil.Global.Page.require[keys[i]] = nval;
 								}else{
-									plug4list.push({"k":keys[i],"v":nval});
 									
+									plug4list.push({"k":keys[i],"v":nval});
+									needsPlug.push(keys[i]);
 									FunUtil.Global.plug4list = dep;
 									firstlList = firstlList.concat(dep);
+									
 									//FunUtil.Global.Page.require[keys[i]] = values[i];
 								}
 							}
@@ -1158,8 +1169,6 @@
 		    	
 		    	script.onload = script.onreadystatechange = function(){
 		    	    if(  ! this.readyState || this.readyState=='loaded' || this.readyState=='complete'){
-		    	    	
-		    	    	console.log("==="+data.url)
 				         resolve("");
 				    }
 				};
@@ -1242,12 +1251,11 @@
 			for(var i =0 ;i<len;i++) list.push(FunUtil.common4require(vals[i]));
 			
 			Promise.all(list).then(values => { 
-				
+				values[0]();
 				FunUtil.common4Global(param.Global);
 				FunUtil.common4Router(param.Router);
 				
 				var func=new function(){
-					   		
 					for(var i =0 ;i<len;i++)  this[keys[i]] = values[i];
 				};
 				param.Pub.call(func,"var");
