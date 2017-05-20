@@ -27,7 +27,8 @@ PageInfo.register({"type":"Obj","info":function(){
 			  //创建一个编辑器
 			 
 			    layui.upload({
-				    url: '', //上传接口
+				    url: request.addJobSeekerResume()+"?positionNo=22", //上传接口
+				    "method":"post",
 				    success: function(res){ //上传成功后的回调
 				      
 				      console.log(res);

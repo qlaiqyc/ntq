@@ -1,5 +1,5 @@
 
-PageInfo.register({"type":"plug","info":(function(){
+PageInfo.register({"type": "plug","info": function(require) {
 	
 	 
 
@@ -10252,4 +10252,4 @@ if ( !noGlobal ) {
 
 return jQuery;
 
-})()});
+}});

@@ -6,6 +6,7 @@ PageInfo.register({"type":"Obj","info":function(){
 	PageObj.require = {
 		"$":"jquery",
 		"layui":"layui",
+		"api": "/assets/js/components/common/data-api",
 	};
 	
 	PageObj.page = function(){
@@ -15,9 +16,7 @@ PageInfo.register({"type":"Obj","info":function(){
     	var Page 	= {};
 		
 		Page.show = function(){
-			 
-			 console.log(123123);
-			
+			console.log(this);
 			var $btn4apply	= $("div.ntq-index-apply-btn");
 			var $btn4employ = $("div.ntq-index-employ-btn");
 			

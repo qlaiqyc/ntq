@@ -153,6 +153,246 @@
 		
 	};
 	
+	
+	FunUtil.model4dep = function(s){
+		
+
+  function readch() {
+    peek = s.charAt(index++)
+  }
+  function isBlank() {
+    return /\s/.test(peek)
+  }
+  function isQuote() {
+    return peek == '"' || peek == "'"
+  }
+  function dealQuote() {
+    var start = index
+    var c = peek
+    var end = s.indexOf(c, start)
+    if(end == -1) {
+      index = length
+    }
+    else if(s.charAt(end - 1) != '\\') {
+      index = end + 1
+    }
+    else {
+      while(index < length) {
+        readch()
+        if(peek == '\\') {
+          index++
+        }
+        else if(peek == c) {
+          break
+        }
+      }
+    }
+    if(modName) {
+      //maybe substring is faster  than slice .
+      res.push(s.substring(start, index - 1))
+      modName = 0
+    }
+  }
+  function dealReg() {
+    index--
+    while(index < length) {
+      readch()
+      if(peek == '\\') {
+        index++
+      }
+      else if(peek == '/') {
+        break
+      }
+      else if(peek == '[') {
+        while(index < length) {
+          readch()
+          if(peek == '\\') {
+            index++
+          }
+          else if(peek == ']') {
+            break
+          }
+        }
+      }
+    }
+  }
+  function isWord() {
+    return /[a-z_$]/i.test(peek)
+  }
+  function dealWord() {
+    var s2 = s.slice(index - 1)
+    var r = /^[\w$]+/.exec(s2)[0]
+    parentheseState = {
+      'if': 1,
+      'for': 1,
+      'while': 1,
+      'with': 1
+    }[r]
+    isReg = {
+      'break': 1,
+      'case': 1,
+      'continue': 1,
+      'debugger': 1,
+      'delete': 1,
+      'do': 1,
+      'else': 1,
+      'false': 1,
+      'if': 1,
+      'in': 1,
+      'instanceof': 1,
+      'return': 1,
+      'typeof': 1,
+      'void': 1
+    }[r]
+    isReturn = r == 'return'
+    braceState = {
+      'instanceof': 1,
+      'delete': 1,
+      'void': 1,
+      'typeof': 1,
+      'return': 1
+    }.hasOwnProperty(r)
+    modName = /^require\s*(?:\/\*[\s\S]*?\*\/\s*)?\(\s*(['"]).+?\1\s*[),]/.test(s2)
+    if(modName) {
+      r = /^require\s*(?:\/\*[\s\S]*?\*\/\s*)?\(\s*['"]/.exec(s2)[0]
+      index += r.length - 2
+    }
+    else {
+      index += /^[\w$]+(?:\s*\.\s*[\w$]+)*/.exec(s2)[0].length - 1
+    }
+  }
+  function isNumber() {
+    return /\d/.test(peek)
+      || peek == '.' && /\d/.test(s.charAt(index))
+  }
+  function dealNumber() {
+    var s2 = s.slice(index - 1)
+    var r
+    if(peek == '.') {
+      r = /^\.\d+(?:E[+-]?\d*)?\s*/i.exec(s2)[0]
+    }
+    else if(/^0x[\da-f]*/i.test(s2)) {
+      r = /^0x[\da-f]*\s*/i.exec(s2)[0]
+    }
+    else {
+      r = /^\d+\.?\d*(?:E[+-]?\d*)?\s*/i.exec(s2)[0]
+    }
+    index += r.length - 1
+    isReg = 0
+  }
+ 
+ 
+ 
+   if(s.indexOf('require') == -1) {
+    return []
+  }
+  var index = 0, peek, length = s.length, isReg = 1, modName = 0, res = []
+  var parentheseState = 0, parentheseStack = []
+  var braceState, braceStack = [], isReturn
+  while(index < length) {
+    readch()
+    if(isBlank()) {
+      if(isReturn && (peek == '\n' || peek == '\r')) {
+        braceState = 0
+        isReturn = 0
+      }
+    }
+    else if(isQuote()) {
+      dealQuote()
+      isReg = 1
+      isReturn = 0
+      braceState = 0
+    }
+    else if(peek == '/') {
+      readch()
+      if(peek == '/') {
+        index = s.indexOf('\n', index)
+        if(index == -1) {
+          index = s.length
+        }
+      }
+      else if(peek == '*') {
+        var i = s.indexOf('\n', index)
+        index = s.indexOf('*/', index)
+        if(index == -1) {
+          index = length
+        }
+        else {
+          index += 2
+        }
+        if(isReturn && i != -1 && i < index) {
+          braceState = 0
+          isReturn = 0
+        }
+      }
+      else if(isReg) {
+        dealReg()
+        isReg = 0
+        isReturn = 0
+        braceState = 0
+      }
+      else {
+        index--
+        isReg = 1
+        isReturn = 0
+        braceState = 1
+      }
+    }
+    else if(isWord()) {
+      dealWord()
+    }
+    else if(isNumber()) {
+      dealNumber()
+      isReturn = 0
+      braceState = 0
+    }
+    else if(peek == '(') {
+      parentheseStack.push(parentheseState)
+      isReg = 1
+      isReturn = 0
+      braceState = 1
+    }
+    else if(peek == ')') {
+      isReg = parentheseStack.pop()
+      isReturn = 0
+      braceState = 0
+    }
+    else if(peek == '{') {
+      if(isReturn) {
+        braceState = 1
+      }
+      braceStack.push(braceState)
+      isReturn = 0
+      isReg = 1
+    }
+    else if(peek == '}') {
+      braceState = braceStack.pop()
+      isReg = !braceState
+      isReturn = 0
+    }
+    else {
+      var next = s.charAt(index)
+      if(peek == ';') {
+        braceState = 0
+      }
+      else if(peek == '-' && next == '-'
+        || peek == '+' && next == '+'
+        || peek == '=' && next == '>') {
+        braceState = 0
+        index++
+      }
+      else {
+        braceState = 1
+      }
+      isReg = peek != ']'
+      isReturn = 0
+    }
+  }
+  return res
+
+		
+	};
+	
 	FunUtil.common4openUrl   = function(data){
  		var url = data.url;
  		
@@ -252,7 +492,9 @@
 	  } 
 	});*/
 	
-	FunUtil.Global = {};
+	FunUtil.Global = {
+		"plug4require":[]
+	};
 	/*   测试 */
 	
 	 
@@ -316,6 +558,7 @@
 	 * 3.
 	 * 
 	 * */
+	
 	FunUtil.common4Page = function(data){
 		
 		var fun4help = {
@@ -324,17 +567,31 @@
 			}
 		};
 		
+		fun4help.common4getJS = function(){
+			
+		};
+		
+		
+		
 		fun4help.single = function(){
 			
-			/**
-				 * 第一步加载所需JS  成功后 输出对象  require 加载， 然后执行 相应方法
+				/**
+				 * 第一步加OBJ  成功后 输出对象  require plug 加载
+				 
+				 * 递归迭代 plug 中嵌套加载后：
+				 * 
+				 * 第一步： 获取所依赖的包  递归循环 由主 到次 依次Push 到 FunUtil.Global.plug4require象中， 当所有子孙节点 length == 0 时 停止循环
+				 * 第二步： 由次到主，依次执行 执行这些节点， update  FunUtil.Global.plug4require 中的 value值
+		 		 * 第三步：resolve 最终对象
+				 * 
 				 * */
 				var param 	= FunUtil.Global.Page;
 				var require = param.require;
 				var keys 	= []
 				var vals 	= []
-				
 				var list 	= [];
+				var needsPlug = [];//第一步有 deps 的插件
+				var plug4list = [];// 所有 needs 的模块
 				
 				for(var p in require){
 					keys.push(p);
@@ -342,22 +599,125 @@
 				};
 				
 				var len 	= keys.length;
-				for(var i =0 ;i<len;i++) list.push(FunUtil.common4require(vals[i]));
-				 
-				Promise.all(list).then(values => { 
-					
-					//+ 二次处理  处理 plug 中引用的 require 
-					
-					
-					
-					
-					FunUtil.Global.Page.require = {};
 				
-				 	var Router = param;
-					for(var i =0 ;i<len;i++)   	FunUtil.Global.Page.require[keys[i]] = values[i];
+				for(var i =0 ;i<len;i++) list.push(FunUtil.common4require(vals[i]));
+				
+				var fun4require = function(key){
+					var len = plug4list.length-1;
+					var result = {};
 					
-					Router.init();
-					Router.show();
+					for (var i =len;i>-1;i--) {
+						var obj = plug4list[i];
+						if(obj.k == key || typeof(obj.k)=="undefined"){
+							
+							result = obj.v; 
+						}
+					}
+					
+					return result;
+				};
+				
+				Promise.all(list).then(values => {
+		 
+					FunUtil.Global.Page.require = {};
+					var firstlList = [];
+					
+					
+					var plug4tree = function(data){
+						var name = data.name;
+						var deps = data.info;
+						var dlen = deps.length;
+			 
+						var loadlist = []
+					  	for (var i=0;i<dlen;i++) loadlist.push(FunUtil.common4require(deps[i]));  					
+						
+						Promise.all(loadlist).then(plugs => {
+							
+							var dlen = plugs.length;
+							
+							var snewList = [];
+							
+							
+							for (var i=0;i<dlen;i++) {
+								
+								plug4list.push({"k":FunUtil.Global.plug4list[i],"v":plugs[i]});
+								//检测递归判断
+								var deps = FunUtil.model4dep(plugs[i].toString());
+								var ndeps =  deps.length;
+								
+								if(deps.length == 0) {
+									plug4list.push({"k":deps[i],"v":plugs[i]});
+								}else{
+									//next 需要加载的数组
+									snewList = snewList.concat(deps);		
+								}
+							}
+							
+							if(snewList.length == 0){
+								var Router = param;
+								
+								console.log('===============')
+								console.log(plug4list);
+								
+								//执行plug
+								
+								var plen = plug4list.length-1;
+								
+								
+								for (var i =plen;i>-1;i--) {
+									var obj = plug4list[i];
+									plug4list[i].v = obj.v(fun4require); 
+									//console.log(plug4list[i].v);
+								}
+							
+								for(var k=0;k<needsPlug.length;k++) FunUtil.Global.Page.require[needsPlug[k]] = plug4list[k].v;
+								Router.init();
+								Router.show();
+								
+							}else{
+								
+								FunUtil.Global.plug4list = snewList;
+							
+								plug4tree({"name":"","info":snewList})
+							}
+						});
+						
+					};
+					
+					for(var i =0 ;i<len;i++){
+						
+						var nval = values[i];
+						
+						if(!String.HasText(nval)) continue;
+						
+						var dep = FunUtil.model4dep(nval.toString());
+						var dlen = dep.length;
+						
+						if(dlen == 0){
+							FunUtil.Global.Page.require[keys[i]] = nval();
+						}else{
+							plug4list.push({"k":keys[i],"v":nval});
+							
+							needsPlug.push(keys[i]);
+							
+							FunUtil.Global.plug4list = dep;
+							firstlList = firstlList.concat(dep);
+							//FunUtil.Global.Page.require[keys[i]] = values[i];
+						}
+					}
+					
+					if(firstlList.length == 0){
+						var Router = param;
+						Router.init();
+						Router.show();
+						
+						console.log(firstlList);
+					}else{
+						
+						FunUtil.Global.plug4list = firstlList;
+					
+						plug4tree({"name":"","info":firstlList})
+					} 
 				});
 		};
 		
@@ -401,29 +761,131 @@
 							vals.push(require[p]);
 						};
 						var len = keys.length;
-						eval('var '+keys.join(",") +";");// 这个实在是没有办法
 						
 						for(var i =0 ;i<len;i++) list.push(FunUtil.common4require(vals[i]));
 						
-						Promise.all(list).then(values => { 
-							  
-							for(var i =0 ;i<len;i++) FunUtil.Global.Page.require[keys[i]] = values[i];
+						var plug4list = [];
+				
+				
+						var fun4require = function(key){
+							var len = plug4list.length-1;
+							var result = {};
 							
-							//delete FunUtil.Global.Page.require;
+							for (var i =len;i>-1;i--) {
+								var obj = plug4list[i];
+								if(obj.k == key || typeof(obj.k)=="undefined"){
+									result = obj.v; 
+								}
+							}
+							return result;
+						};
+				
 						
-							var Router = param;
+						
+						
+						Promise.all(list).then(values => {
 							
-							FunUtil.Global.Router[nid].page = Router;
-							FunUtil.Global.Router[nid].state = "show";
+							var firstlList = [];
+							var plug4tree = function(data){
+								var name = data.name;
+								var deps = data.info;
+								var dlen = deps.length;
+					 
+								var loadlist = []
+							  	for (var i=0;i<dlen;i++) loadlist.push(FunUtil.common4require(deps[i]));  					
+								
+								Promise.all(loadlist).then(plugs => {
+									
+									var dlen = plugs.length;
+									
+									var snewList = [];
+									
+									
+									for (var i=0;i<dlen;i++) {
+										
+										plug4list.push({"k":FunUtil.Global.plug4list[i],"v":plugs[i]});
+										//检测递归判断
+										var deps = FunUtil.model4dep(plugs[i].toString());
+										var ndeps =  deps.length;
+										
+										if(deps.length == 0) {
+											plug4list.push({"k":deps[i],"v":plugs[i]});
+										}else{
+											//next 需要加载的数组
+											snewList = snewList.concat(deps);		
+										}
+									}
+									
+									if(snewList.length == 0){
+										console.log(plug4list);
+										
+										//执行plug
+										var plen = plug4list.length-1;
+										for (var i =plen;i>-1;i--) {
+											var obj = plug4list[i];
+											plug4list[i].v = obj.v(fun4require); 
+											//console.log(plug4list[i].v);
+										}
+										for(var k=0;k<keys.length;k++) FunUtil.Global.Page.require[keys[k]] = plug4list[k].v;
+										
+										var Router = param;
+										FunUtil.Global.Router[nid].page = Router;
+										FunUtil.Global.Router[nid].state = "show";
+										
+										$main.append('<div class="'+id+'">'+Router.data().HtmUtil.layout()+'</div').show();
+										console.log(FunUtil.Global.Router[nid].jid);
+										
+										Router.init();
+										Router.show();
+										
+									}else{
+										
+										FunUtil.Global.plug4list = snewList;
+									
+										plug4tree({"name":"","info":snewList})
+									}
+								});
+								
+							};
 							
-							$main.append('<div class="'+id+'">'+Router.data().HtmUtil.layout()+'</div').show();
-							console.log(FunUtil.Global.Router[nid].jid);
+							for(var i =0 ;i<len;i++){
+						
+								var nval = values[i];
+								
+								var dep = FunUtil.model4dep(nval.toString());
+								var dlen = dep.length;
+								
+								if(dlen == 0){
+									FunUtil.Global.Page.require[keys[i]] = nval;
+								}else{
+									plug4list.push({"k":keys[i],"v":nval});
+									
+									FunUtil.Global.plug4list = dep;
+									firstlList = firstlList.concat(dep);
+									//FunUtil.Global.Page.require[keys[i]] = values[i];
+								}
+							}
 							
-							Router.init();
-							Router.show();
+							if(firstlList.length == 0){
+								var Router = param;
+							
+								FunUtil.Global.Router[nid].page = Router;
+								FunUtil.Global.Router[nid].state = "show";
+								
+								$main.append('<div class="'+id+'">'+Router.data().HtmUtil.layout()+'</div').show();
+								console.log(FunUtil.Global.Router[nid].jid);
+								
+								Router.init();
+								Router.show();
+								
+								console.log(firstlList);
+							}else{
+								
+								FunUtil.Global.plug4list = firstlList;
+							
+								plug4tree({"name":"","info":firstlList})
+							} 	
 						});
-						
-						
 						
 					}, function(value) {
 					  // 不会被调用
@@ -599,7 +1061,49 @@
 		
 		request();
 	};
+	/* 
+		 * 第一步： 获取所依赖的包  递归循环 由主 到次 依次Push 到 FunUtil.Global.plug4require象中， 当所有子孙节点 length == 0 时 停止循环
+		 * 第二步： 由次到主，依次执行 执行这些节点， update  FunUtil.Global.plug4require 中的 value值
+		 * 第三步：resolve 最终对象
+		 * */
+	/*FunUtil.common4requirePlug = function(data){
+		
+		
+		
+		
+		var deps = FunUtil.model4dep(data.info.toString());
+		console.log(deps);
+		
+		var help4dep = function(str){
+			
+			
+			var path	= FunUtil.Global.config().paths;
+			var other	= FunUtil.Global.config().other;
+			
+			var type	= "foot";
+			var loadJS	= location.origin+"/"+location.pathname.split("/")[1]+str+".js";
+			var execuFun= {};
+			
+		     
+		    var data = {"url":loadJS};
+		    
+			FunUtil.common4GetJS({"url":loadJS,"async":"async","callback":function(data){
+				
+				if(loadJS.indexOf("common") >= 0 || loadJS.indexOf("plug") >= 0){
+					
+					resolve(FunUtil.Global.plug);
+				}else{
+					
+					resolve(FunUtil.Global.Page);
+				}
+			}});
+			
+		};
+		
+		
+	};
 	
+	*/
 	FunUtil.common4require = function(str){
 		/**
 		 *思路:
@@ -607,30 +1111,36 @@
 		 *002  判断是否是/开始,若是者引用当前模块 项目上下的的 js  底部
 		 *003: 是否同时并发异步 加载请求 多个 各自无强相关的js （适用于 各级不关的JS）
 	 	 *004: 是否同步 单线程 加载（适用于 各级相关的JS） (占时单个进行)
+	 	 * 
+	 	 * =================核心重点==============005
+	 	 * 判断 是否是Obj 当前 限定 指定plug
+	 	 * 
+	 	 * type: obj  对象需要， plug 插件需要   
+	 	 * 
+	 	 * :暂时这个模块是OBJ 需要
  		 *
 		 */
+		
+		
 		
 		var result = new Promise(resolve => {
 		     
 		    var path	= FunUtil.Global.config().paths;
-			var type	= "foot";
+		    var other	= FunUtil.Global.config().other;
+			var type	= "normal";
 			var loadJS	= location.origin+"/"+location.pathname.split("/")[1]+str+".js";
-			var execuFun= {};
 			
-			if(FunUtil.common4Prop({"type":"isIN","in":str,"obj":path}))  {loadJS = path[str]; type="head"}
+			if(FunUtil.common4Prop({"type":"isIN","in":str,"obj":path}))  {loadJS = path[str]; }
+			if(FunUtil.common4Prop({"type":"isIN","in":str,"obj":other})) {loadJS = other[str];type="other" }
 		     
 		    var data = {"url":loadJS};
 		    
-			execuFun.head =   function(){
-				FunUtil.common4GetJS({"url":loadJS,"async":"async","callback":function(data){
-					resolve(FunUtil.Global.plug);
-				}});
-			};
-			
-			execuFun.foot = function(){
-				FunUtil.common4GetJS({"url":loadJS,"async":"async","callback":function(data){
+		    if(type == "normal"){
+		    	
+		    	FunUtil.common4GetJS({"url":loadJS,"async":"async","callback":function(data){
 					
-					if(loadJS.indexOf("common") >= 0){
+					if(loadJS.indexOf("common") >= 0 || loadJS.indexOf("plug") >= 0){
+						//FunUtil.common4requirePlug({"info":FunUtil.Global.plug,"callback":resolve});
 						
 						resolve(FunUtil.Global.plug);
 					}else{
@@ -638,10 +1148,24 @@
 						resolve(FunUtil.Global.Page);
 					}
 				}});
-			};
-			  
-			  
-			execuFun[type]();
+		    }else{
+		    	var script = document.createElement("script");
+		    	script.type = "text/javascript";
+		    	script.src = data.url;
+		    	script.async = String.HasText(data.async) ? data.async : "async";
+		    	
+		    	document.head.appendChild(script);
+		    	
+		    	script.onload = script.onreadystatechange = function(){
+		    	    if(  ! this.readyState || this.readyState=='loaded' || this.readyState=='complete'){
+		    	    	
+		    	    	console.log("==="+data.url)
+				         resolve("");
+				    }
+				};
+		    	
+		    }
+		    
 		});
 		
 		
@@ -682,6 +1206,8 @@
 	
 	PageInfo.init4plug = function(data){
 		//+ add 处理  require
+ 
+		
 		FunUtil.Global.plug = data.info; 
 	};
 	
