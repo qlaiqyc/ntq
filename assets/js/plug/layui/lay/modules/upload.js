@@ -40,7 +40,7 @@ layui.define('layer' , function(exports){
     
     return elem.each(function(index, item){
       item = $(item);
-      var form = '<form target="'+ elemIframe +'" method="'+ (options.method||'post') +'" key="set-mine" enctype="multipart/form-data" action="'+ (options.url||'') +'"></form>';
+      var form = '<form class="ntq-uplad-file" target="'+ elemIframe +'" method="'+ (options.method||'post') +'" key="set-mine" enctype="multipart/form-data" action="'+ (options.url||'') +'"></form>';
       
       var type = item.attr('lay-type') || options.type; //获取文件类型
 
@@ -80,7 +80,8 @@ layui.define('layer' , function(exports){
       
       //触发上传
       item.off('change').on('change', function(){
-        that.action(this, type);
+      	$("form.ntq-uplad-file").submit();
+        //that.action(this, type);
       });
     });
   };

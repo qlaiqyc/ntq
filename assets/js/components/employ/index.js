@@ -51,6 +51,8 @@ PageInfo.register({
 					};
 
 					Page.show = function() {
+						console.log(this)
+						
 						var request = this.api.rq();
 						var $no = $("#ntq-employ-index-btn-no");
 						var $has = $("#ntq-employ-index-btn-has");
