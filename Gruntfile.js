@@ -141,18 +141,40 @@ module.exports = function (grunt) {
         uglify: {
             //文件头部输出信息
             options: {
-                banner: '/*! <%= pkg.name %> QL <%= grunt.template.today("yyyy-mm-dd HH:mm:ss") %> */\n'
-            },
-            my_target: {
+                banner: '/*! <%= pkg.name %> QL <%= grunt.template.today("yyyy-mm-dd HH:mm:ss") %> */\n' ,
+			},
+			my_target: {
+				 options: {
+				  mangle: {
+					reserved: ['require']
+				  }
+				},
                 files: [
                     {
                         expand: true,
 						cwd:FunUtil.Global.dist+ '/assets/js/',
-						src: 'QLive.js',
+						src: ['QLive.js',"main.js","QLive-config.js"],
 						dest: FunUtil.Global.dist+ '/assets/js/'
 						
 						 
                     }
+                ]
+            },
+			'components': {
+				 options: {
+				  mangle: {
+					reserved: ['require']
+				  }
+				},
+                files: [
+                   {
+                       expand: true,
+					 	cwd:FunUtil.Global.dist+ '/assets/js/components/',
+					 	src: ["**/*.js","*.js"],
+					 	dest: FunUtil.Global.dist+ '/assets/js/components/'
+					 	
+					 	 
+                   }
                 ]
             }
         },
@@ -180,6 +202,17 @@ module.exports = function (grunt) {
                 ]
             }
         },
+//合并css		
+		 concat: {
+			options: {
+			  separator: ';',
+			},
+			dist: {
+	 
+			  src: ['assets/js/plug/**/*.css',"assets/js/plug/*.css"],
+			  dest: 'dist/built.css',
+			},
+		  },
  
 		 babel: {
 				options: {
@@ -290,9 +323,10 @@ module.exports = function (grunt) {
 	
     require('load-grunt-tasks')(grunt);
  
-  
-//	grunt.registerTask('default', ['common4Num']);
-	grunt.registerTask('default', ["clean",'htmlmin','concathtml','bable4getFiles','babel','bable4delmap',"copy",'common4Num',"replace","uglify"]);
+ // grunt.registerTask('default', ["clean",'htmlmin','concathtml','bable4getFiles','babel','bable4delmap',"copy",'common4Num',"replace","concat"]);
+
+	//grunt.registerTask('default', ["clean",'htmlmin','concathtml','bable4getFiles','babel','bable4delmap',"copy",'common4Num',"replace"]);//"uglify"
+ grunt.registerTask('default', ["clean",'htmlmin','concathtml','bable4getFiles','babel','bable4delmap',"copy",'common4Num',"replace","uglify"]);//""
  
 
  

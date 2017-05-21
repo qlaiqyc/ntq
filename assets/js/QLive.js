@@ -865,7 +865,7 @@
 								var dlen = dep.length;
 								
 								if(dlen == 0){
-									FunUtil.Global.Page.require[keys[i]] = nval;
+									FunUtil.Global.Page.require[keys[i]] = nval();
 								}else{
 									
 									plug4list.push({"k":keys[i],"v":nval});
