@@ -6,7 +6,7 @@ body{background-color:#f3f3f3}
 /*===招聘===*/
 #ntq-employ-index{display:table;margin:50px auto}
 #ntq-employ-index-form{overflow:hidden;margin-top:20px}
-#ntq-employ-index-form-code{font-size:12px;color:#1E9FFF;padding:0;line-height:38px;text-align:left}
+#ntq-employ-index-form-code{font-size:12px;color:white;padding:0 8px;line-height:38px;text-align:center;width: 99px;}
 #ntq-employ-job-condition{padding:25px}
 #ntq-employ-job-search{margin:20px auto;padding-top:21px}
 #ntq-employ-job-num{margin-top:-11px}

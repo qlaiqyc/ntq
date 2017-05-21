@@ -27,7 +27,7 @@ PageInfo.register({
 						buf.push('            <div class="layui-input-inline">')
 						buf.push('                <input type="tel" name="phoneNumber" lay-verify="phone" autocomplete="off" class="layui-input" id="ntq-employ-index-form-phone">')
 						buf.push('            </div>')
-						buf.push('            <label class="layui-form-label" id="ntq-employ-index-form-code">获取验证码</label>')
+						buf.push('            <label class=" layui-btn layui-btn-normal" id="ntq-employ-index-form-code">获取验证码</label>')
 						buf.push('        </div>')
 						buf.push('    </div>')
 						buf.push('    <div class="layui-form-item">')
@@ -74,17 +74,49 @@ PageInfo.register({
 												area: ['420px', '240px'], //宽高
 												content: HtmUtil.common4input(),
 												success: function() {
-													var $phone = $("#ntq-employ-index-form-phone");
+													var $phone	= $("#ntq-employ-index-form-phone");
+													var $code	= $("#ntq-employ-index-form-code");
+													var snum   = 90;
 													
+													var stime;
+													var anum = snum;
+													var isrequest = false;
 
-													$("#ntq-employ-index-form-code").unbind("click").bind("click", function() {
-															var phoneNumber = $phone.val();
+													$code.unbind("click").bind("click", function() {
+														var phoneNumber = $phone.val();
+														if(String.HasText(stime) ) return;
+														if(!String.HasText(phoneNumber)) {layer.msg("请填入手机号码"); return;	}
+														
+														stime = setInterval(function(){
 															
-															if(!String.HasText(phoneNumber)) return;
+															if(anum < 1 ) {
+																clearInterval(stime);
+																$code.html("重新获取验证码");
+																anum = snum;
+																stime="";
+																
+																$code.removeClass("layui-btn-disabled").css("color","white");
+																return;
+															};
 															
-															request.getMessageCode({"phoneNumber":phoneNumber},function(data){
-																if(!data.success) layer.msg(data.message);
-															});
+															$code.html(anum+"(s)");
+															
+															anum--;
+														},1000);
+														
+														$code.addClass("layui-btn-disabled").css("color","#1E9FFF").html(anum+"(s)");
+														
+														
+														
+														
+														request.getMessageCode({"phoneNumber":phoneNumber},function(data){
+															if(!data.success) layer.msg(data.message);
+														});
+														
+														
+														anum--;
+														 
+															
 													});
 
 													form.on('submit(ntq-employ-index-form-btn)', function(data) {

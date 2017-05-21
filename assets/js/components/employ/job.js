@@ -397,7 +397,9 @@ PageInfo.register({"type":"Obj","info":function(){
 									  		obj.postionStatus = FunUtil.Global.type;
 									  		
 									  	 	request.updateOrInsertCompanyPositionInfo(JSON.stringify(obj),function(ddata){
-									  			console.log(ddata);
+									  			layer.msg(ddata.message);
+									  			$("a.layui-layer-close").trigger("click");
+									  			//needs 请求当前分页 update
 									  			
 									  			return false;
 									  		}); 
@@ -522,8 +524,9 @@ PageInfo.register({"type":"Obj","info":function(){
 									console.log(data.field);
 									var param = data.field;
 										param.isDiscussPersonally = ((data.field.isDiscussPersonally == "on") ? 1 :2);
-							  		request.addCompanyPositionInfo(JSON.stringify(data.field),function(cdata){
-							  			console.log(cdata);
+							  		request.addCompanyPositionInfo(JSON.stringify(data.field),function(ddata){
+							  			layer.msg(ddata.message);
+									  	$("a.layui-layer-close").trigger("click");
 							  		});
 							  		
 							  		
