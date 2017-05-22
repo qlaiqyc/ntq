@@ -17,6 +17,8 @@ PageInfo.register({"type":"Obj","info":function(){
 		
 		Page.show = function(){
 			console.log(this);
+			
+			
 			var $btn4apply	= $("div.ntq-index-apply-btn");
 			var $btn4employ = $("div.ntq-index-employ-btn");
 			

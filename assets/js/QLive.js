@@ -745,8 +745,10 @@
 					/**
 					 * 第一步加载所需JS  成功后 输出对象  require 加载， 然后执行 相应方法
 					 * */
-				 Promise.resolve(FunUtil.common4require(url)).then(function(param) {
-						 
+					Promise.all([FunUtil.common4require(url)]).then(function (param) {
+					//	FunUtil.Global.Page.require = {};
+						
+						var param = FunUtil.Global.Page;
 						var require = param.require;
 						var keys = [];
 						var vals = [];
@@ -777,9 +779,6 @@
 							return result;
 						};
 				
-						
-						
-						
 						Promise.all(list).then(values => {
 							
 							var firstlList = [];
@@ -811,7 +810,7 @@
 											//next 需要加载的数组
 											snewList = snewList.concat(deps);		
 										}
-									}
+									};
 									
 									if(snewList.length == 0){
 										var Router = param;
@@ -840,11 +839,6 @@
 										
 										Router.init();
 										Router.show();
-										
-										
-										
-										
-										
 										
 									}else{
 										
@@ -1029,7 +1023,7 @@
 			 vnum = "0000";
 		}
 		
-		var request = function(callback){
+		/*var request = function(callback){
 			var xmlhttp = null ;
 			
 			if (window.XMLHttpRequest){
@@ -1052,7 +1046,7 @@
 			xmlhttp.send(null);
 			
 		};
-		/* */
+	 
 	 	
 		if(String.HasText(FunUtil.Global.Router)) {
 			
@@ -1068,9 +1062,35 @@
 				}
 			}
 			
-		}
+		}*/
 		
-		request();
+		
+		var script	= document.createElement("script");
+ 		script.type	= "text/javascript";
+ 		script.src	= data.url;
+ 		String.HasText(data.async) ? data.async: (script.async="async");
+ 		if(String.HasText(data.type) && data.type == "head") {
+ 			document.head.appendChild(script);
+ 		}else{
+ 			document.body.appendChild(script);
+ 		}
+ 	　　　　if(script.readyState){ 
+ 	　　　　　　script.onreadystatechange=function(){
+ 	　　　　　　　　if(script.readyState=='complete'||script.readyState=='loaded'){
+ 	　　　　　　　　　　	script.onreadystatechange=null;
+ 	　　　　　　　　　　	data.callback();
+ 					script.remove();
+ 	　　　　　　　　}
+ 	　　　　　　}
+ 	　　　　}else{     
+ 	　　　　　　 script.onload=function(){
+ 					data.callback();
+ 					script.remove();
+ 				}
+ 	　　　　};
+		
+		
+		//request();
 	};
 	/* 
 		 * 第一步： 获取所依赖的包  递归循环 由主 到次 依次Push 到 FunUtil.Global.plug4require象中， 当所有子孙节点 length == 0 时 停止循环

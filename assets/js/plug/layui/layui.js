@@ -133,7 +133,7 @@ Lay.fn.use = function(apps, callback, exports){
 
   //加载模块
   var node = doc.createElement('script');
- 	dir = dir.split("components")[0]+"/plug/layui/";
+ 	dir = dir.split("components")[0]+"plug/layui/";
   
   var url =  (
     modules[item] ? (dir + 'lay/') : (config.base || '')
@@ -198,7 +198,7 @@ Lay.fn.link = function(href, fn, cssname){
   var app = (cssname || href).replace(/\.|\//g, '');
   var id = link.id = 'layuicss-'+app, timeout = 0;
   if(String.HasText(PageInfo.FunUtil.Global.Router)){
-	href = href.split("assets\/js")[0]+"/assets/js/plug/layui/"+href.split("assets\/js")[1];
+	href = href.split("assets\/js")[0]+"/assets/js/plug/layui/css/"+href.split("\/css\/")[1];
   }else{
   	href = href.split("components")[0]+"plug/layui/css/modules"+href.split("css\/modules")[1];
   }
