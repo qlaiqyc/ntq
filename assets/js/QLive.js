@@ -606,13 +606,13 @@
 					var len = plug4list.length-1;
 					var result = {};
 					
-					for (var i =len;i>-1;i--) {
-						var obj = plug4list[i];
-						if(obj.k == key || typeof(obj.k)=="undefined"){
-							
-							result = obj.v; 
+						for (var i =len;i>-1;i--) {
+									var obj = plug4list[i];
+							if(obj.k == key ){//|| typeof(obj.k)=="undefined"
+								result = obj.v; 
+								break 
+							}
 						}
-					}
 					
 					return result;
 				};
@@ -663,7 +663,7 @@
 								
 								var plen = plug4list.length-1;
 								
-								
+							
 								for (var i =plen;i>-1;i--) {
 									var obj = plug4list[i];
 									plug4list[i].v = obj.v(fun4require); 
@@ -772,8 +772,9 @@
 							
 							for (var i =len;i>-1;i--) {
 								var obj = plug4list[i];
-								if(obj.k == key || typeof(obj.k)=="undefined"){
+								if(obj.k == key ){//|| typeof(obj.k)=="undefined"
 									result = obj.v; 
+									break;
 								}
 							}
 							return result;
