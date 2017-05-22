@@ -1023,7 +1023,7 @@
 			 vnum = "0000";
 		}
 		
-		/*var request = function(callback){
+		var request = function(callback){
 			var xmlhttp = null ;
 			
 			if (window.XMLHttpRequest){
@@ -1062,10 +1062,10 @@
 				}
 			}
 			
-		}*/
+		} 
 		
 		
-		var script	= document.createElement("script");
+		/*var script	= document.createElement("script");
  		script.type	= "text/javascript";
  		script.src	= data.url;
  		String.HasText(data.async) ? data.async: (script.async="async");
@@ -1087,10 +1087,10 @@
  					data.callback();
  					script.remove();
  				}
- 	　　　　};
+ 	　　　　};*/
 		
 		
-		//request();
+		request();
 	};
 	/* 
 		 * 第一步： 获取所依赖的包  递归循环 由主 到次 依次Push 到 FunUtil.Global.plug4require象中， 当所有子孙节点 length == 0 时 停止循环
@@ -1276,7 +1276,7 @@
 				FunUtil.common4Router(param.Router);
 				
 				var func=new function(){
-					for(var i =0 ;i<len;i++)  this[keys[i]] = values[i];
+					for(var i =0 ;i<len;i++)  this[keys[i]] = values[i]();
 				};
 				param.Pub.call(func,"var");
 				
