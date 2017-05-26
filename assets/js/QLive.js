@@ -31,6 +31,21 @@
 			if (str === '') return false;
 			return true;
 		};
+		
+		//數組去重
+		Array.prototype.unique = function(){
+		 var res = [];
+		 var json = {};
+		 for(var i = 0; i < this.length; i++){
+		  if(!json[this[i]]){
+		   res.push(this[i]);
+		   json[this[i]] = 1;
+		  }
+		 }
+		 return res;
+		}
+		
+		
 	};
 	
 	FunUtil.init();
@@ -408,7 +423,7 @@
  		var $this = $url.closest("a");
  		
  		if(FunUtil.Global.Router) {
- 			$this.attr("href","#/"+url).attr("target","_self");
+ 			$this.attr("href","#"+url).attr("target","_self");
  		}else{
  			url = url.replace(/\//g,"-");
  			var list = url.split("?");
@@ -548,6 +563,9 @@
 		return execuFun[data.type]();
 	};
 	
+	
+	
+	
 	/*
 	 * 通过hash 值或者 history 进行判断执行对象的生命周期
 	 * 
@@ -567,8 +585,35 @@
 			}
 		};
 		
-		fun4help.common4getJS = function(){
+		fun4help.common4isfun = function(data){
+			//判断数组中 的值是否为一个function 
+			var key 	= data.key;
+			var value	= data.val;
+			var list	= data.list;
+			var len		= list.length;
+			var result = 0;//0 不在数组中 1 在数组中是function  2 在数组中 是 Object
 			
+			
+			for (var i= 0;i<len;i++) {
+				var obj = list[i];
+				
+				if(obj.k == key){
+					if(typeof(obj.v)=="function"){
+						
+						obj.v = value;
+						
+						list[i] = obj;
+						result =1;
+					}else{
+						result =2;
+					}
+				}
+			 
+			}
+			
+			if(result == 0) list.push({"k":key,"v":value});
+			
+			return list;
 		};
 		
 		
@@ -793,23 +838,23 @@
 								
 								Promise.all(loadlist).then(plugs => {
 									
-									var dlen = plugs.length;
+									var dslen = plugs.length;
 									
 									var snewList = [];
 									
 									
-									for (var i=0;i<dlen;i++) {
-										
-										plug4list.push({"k":FunUtil.Global.plug4list[i],"v":plugs[i]});
+									for (var i=0;i<dslen;i++) {
+										 
 										//检测递归判断
-										var deps = FunUtil.model4dep(plugs[i].toString());
-										var ndeps =  deps.length;
+										var deps2 = FunUtil.model4dep(plugs[i].toString());
+										var ndeps =  deps2.length;
 										
-										if(deps.length == 0) {
-											plug4list.push({"k":deps[i],"v":plugs[i]});
+										if(deps2.length ==0) {
+											plug4list =fun4help.common4isfun({"key":deps[i],"val":plugs[i](),"list":plug4list}); 
 										}else{
+											plug4list =fun4help.common4isfun({"key":deps[i],"val":plugs[i],"list":plug4list}); 
 											//next 需要加载的数组
-											snewList = snewList.concat(deps);		
+											snewList = snewList.concat(deps2);
 										}
 									};
 									
@@ -819,30 +864,82 @@
 										//console.log(plug4list);
 										
 										//执行plug
-										
+										plug4list = plug4list;
 										var plen = plug4list.length-1;
 										
+										 /**
+										  * pliglist 需要安 执行顺序排序
+										  * 0： 没有引用的排最后面
+										  * 0： 有引用的 排在 自己引用最大值前面
+										  * */
+										 
+										var sortList = [];
+										var ssList	 =[];
+										 
+										 
+										for (var i =0;i<(plen+1);i++) {
+											var obj = plug4list[i];
+											var ssden = FunUtil.model4dep(obj.v.toString());
+											var sslen = ssden.length;
+											
+											if(sslen == 0){
+												ssList.push(obj);
+											}else{
+												sortList.unshift(obj);
+											}
+										} 
+										 //判断 自己子类中 有的 如果有排在，最前面
+										sortList.sort(function(a,b){
+											var result = true;
+											
+											var aden = FunUtil.model4dep(a.v.toString());
+											
+											for (var i =0;i<(aden.length);i++) {
+												
+												if(b.k == aden[i]) result = false;
+											} 
+											
+											return result;
+										});
+										sortList = sortList.concat(ssList);
+										plug4list = sortList;
 										
 										for (var i =plen;i>-1;i--) {
 											var obj = plug4list[i];
-											plug4list[i].v = obj.v(fun4require); 
+											var sslen = FunUtil.model4dep(obj.v.toString());
+											if(sslen.length > 0){
+												plug4list[i].v = obj.v(fun4require); 
+											}
+											
 											//console.log(plug4list[i].v);
 										}
-									
-										for(var k=0;k<needsPlug.length;k++) FunUtil.Global.Page.require[needsPlug[k]] = plug4list[k].v;
+										
+										//执行
+										for(var k=0;k<needsPlug.length;k++) {
+											
+											for (var i =plen;i>-1;i--) {
+												var obj = plug4list[i];
+												
+												if(needsPlug[k] == obj.k) FunUtil.Global.Page.require[needsPlug[k]] = obj.v;
+											}
+										}
 										
 										
 										FunUtil.Global.Router[nid].page = Router;
 										FunUtil.Global.Router[nid].state = "show";
+										FunUtil.Global.Router[nid].require = FunUtil.Global.Page.require;
 										
 										$main.append('<div class="'+id+'">'+Router.data().HtmUtil.layout()+'</div').show();
-										console.log(FunUtil.Global.Router[nid].jid);
-										
-										Router.init();
-										Router.show();
+										FunUtil.common4GetCSS({"url":"../assets/css/"+FunUtil.Global.Router[nid].id+".css","callback":function(){
+											
+											
+											Router.init();
+											Router.show();
+											
+										}});
 										
 									}else{
-										
+										snewList = snewList;
 										FunUtil.Global.plug4list = snewList;
 									
 										plug4tree({"name":"","info":snewList})
@@ -858,17 +955,13 @@
 								
 								var dep = FunUtil.model4dep(nval.toString());
 								var dlen = dep.length;
-								
+								needsPlug.push(keys[i]);
 								if(dlen == 0){
 									FunUtil.Global.Page.require[keys[i]] = nval();
+									plug4list.push({"k":keys[i],"v":nval()});
 								}else{
-									
 									plug4list.push({"k":keys[i],"v":nval});
-									needsPlug.push(keys[i]);
-									FunUtil.Global.plug4list = dep;
 									firstlList = firstlList.concat(dep);
-									
-									//FunUtil.Global.Page.require[keys[i]] = values[i];
 								}
 							}
 							
@@ -877,17 +970,22 @@
 							
 								FunUtil.Global.Router[nid].page = Router;
 								FunUtil.Global.Router[nid].state = "show";
+								FunUtil.Global.Router[nid].require = FunUtil.Global.Page.require;
 								
 								$main.append('<div class="'+id+'">'+Router.data().HtmUtil.layout()+'</div').show();
 								console.log(FunUtil.Global.Router[nid].jid);
+								FunUtil.common4GetCSS({"url":"../assets/css/"+FunUtil.Global.Router[nid].id+".css","callback":function(){
+									
+									Router.init();
+									Router.show();
+									
+								}});
 								
-								Router.init();
-								Router.show();
 								
 								console.log(firstlList);
 							}else{
-								
-								FunUtil.Global.plug4list = firstlList;
+								firstlList = firstlList;
+								/*FunUtil.Global.plug4list = firstlList;*/
 							
 								plug4tree({"name":"","info":firstlList})
 							} 	
@@ -911,6 +1009,7 @@
 			 
 				//判断对象是否加载，加载？ 执行 show : 请求JS 成功后回调 执行init
 				if(String.HasText(Npage.page)) {
+					FunUtil.Global.Page.require = Npage.require;
 					Npage.page.show();
 					Npage.state = "show";
 					FunUtil.Global.Router[nid] = Npage;
@@ -936,6 +1035,7 @@
 					
 					console.log(Npage.jid);
 					
+					FunUtil.Global.Page.require = Npage.require;
 					Npage.page.show();
 					Npage.state = "show";
 				//	Npage.page.data().FunUtil.Global.parent = Opage.page.data().FunUtil.Global.child;
@@ -984,7 +1084,7 @@
 					//判断是否合法  ？ 映射JS ,否，进入主页
 					var ids = hash.split("?")[0];
 				
-					ids = ids.substring(2);
+					ids = ids.replace("#","");
 					var jid = FunUtil.Global.Jids[ids];
 					
 					if(String.HasText(jid)) key = "#"+jid;
@@ -1008,12 +1108,36 @@
 		execuFun[data.type]();
 	};
 	
+	FunUtil.common4GetCSS = function(data){
+		
+		try{
+			var addheadfile	= document.createElement("link");
+			
+	 	  	addheadfile.type = "text/css";
+	        addheadfile.rel="stylesheet";
+	        addheadfile.rev = "stylesheet";
+	        addheadfile.media = "screen";
+	        addheadfile.href=data.url;
+	 		document.head.appendChild(addheadfile);
+	 		
+	 		data.callback();
+		}catch(e){
+			
+			console.log("加载CSS 失败===="+data.url);
+			data.callback();
+			//TODO handle the exception
+		}
+		
+		
+	};
+	
 	/**
 	 * 
 	 * 按需加载异步请求js
 	 * 判断是否缓存 根据打包值
 	 * 
 	 */
+	
 	FunUtil.common4GetJS =   function(data){
 		
 		
@@ -1176,6 +1300,7 @@
 						
 						resolve(FunUtil.Global.plug);
 					}else{
+						//对页面来说需要获取CSS
 						
 						resolve(FunUtil.Global.Page);
 					}
@@ -1213,11 +1338,7 @@
 		for(var p in router.list) { keys.push(p);valus.push(router.list[p]); }
 		
 		var len		= keys.length;
-		
-		for(var p in router.list) {
-			keys.push(p);valus.push(router.list[p]);
-		}
-		var len		= keys.length;
+		 
 		if(flag == "hash"){
 			for (var  i =0 ;i<len;i++) nlist.push({"id":FunUtil.common4hash({"type":"encode","key":(keys[i])}),"jid":FunUtil.common4hash({"type":"encode","key":("#"+valus[i])}), "page":"","state":""});
 		}
@@ -1311,6 +1432,7 @@
 	
 	
 	window.PageInfo = PageInfo;
+	window.SeaQ = {};
  
 	
 })(window);
